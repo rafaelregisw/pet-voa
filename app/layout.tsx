@@ -13,6 +13,14 @@ export const metadata: Metadata = {
   authors: [{ name: 'Pet Voa' }],
   creator: 'Pet Voa',
   publisher: 'Pet Voa',
+  icons: {
+    icon: [
+      { url: '/favicon-pv.svg', type: 'image/svg+xml' },
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+    ],
+    shortcut: '/favicon-pv.svg',
+    apple: '/favicon-pv.svg',
+  },
   viewport: {
     width: 'device-width',
     initialScale: 1,

@@ -43,7 +43,7 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-2 text-ice/60 text-sm">
                 <Mail className="w-4 h-4" />
-                contato@petvoa.com.br
+                contato@petvoa.com
               </li>
               <li className="flex items-center gap-2 text-ice/60 text-sm">
                 <MapPin className="w-4 h-4" />
