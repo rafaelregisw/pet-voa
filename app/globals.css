@@ -193,13 +193,39 @@
     }
     
     /* Ensure no overflow issues */
-    body {
+    html, body {
       overflow-x: hidden;
+      width: 100%;
+      max-width: 100vw;
+      position: relative;
     }
     
-    /* Hide complex animations on mobile */
+    /* Prevent horizontal scroll */
+    * {
+      max-width: 100vw !important;
+    }
+    
+    /* Fix fixed elements */
+    .fixed {
+      transform: translateZ(0);
+      -webkit-transform: translateZ(0);
+      will-change: transform;
+    }
+    
+    /* Disable heavy animations on mobile */
     .animate-pulse {
       animation: none;
+    }
+    
+    /* Disable blur effects on mobile for performance */
+    .blur-xl, .blur-2xl, .blur-3xl {
+      filter: none !important;
+      -webkit-filter: none !important;
+    }
+    
+    /* Simplify shadows on mobile */
+    .shadow-2xl, .shadow-xl {
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1) !important;
     }
   }
 }

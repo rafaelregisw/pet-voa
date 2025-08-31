@@ -13,6 +13,12 @@ export const metadata: Metadata = {
   authors: [{ name: 'Pet Voa' }],
   creator: 'Pet Voa',
   publisher: 'Pet Voa',
+  viewport: {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 1,
+    userScalable: false,
+  },
   formatDetection: {
     email: false,
     address: false,

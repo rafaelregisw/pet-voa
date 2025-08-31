@@ -43,7 +43,18 @@ export default function ChatBot() {
   const [inputValue, setInputValue] = useState('')
   const [isTyping, setIsTyping] = useState(false)
   const [hasNewMessage, setHasNewMessage] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
+
+  // Detectar se é mobile
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
 
   // Carregar dados salvos do localStorage
   useEffect(() => {
@@ -260,13 +271,13 @@ export default function ChatBot() {
   return (
     <>
       {/* Botão do Chat 3D Moderno */}
-      <div className="fixed bottom-8 right-8 z-40">
-        {/* Mensagem Chamativa */}
+      <div className="fixed bottom-4 right-4 md:bottom-8 md:right-8 z-40">
+        {/* Mensagem Chamativa - Apenas Desktop */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 3, duration: 0.5 }}
-          className="absolute -top-16 -left-20 bg-gradient-to-r from-purple-600 to-pink-600 text-white px-4 py-2 rounded-xl shadow-2xl whitespace-nowrap"
+          className="hidden md:block absolute -top-16 -left-20 bg-gradient-to-r from-purple-600 to-pink-600 text-white px-4 py-2 rounded-xl shadow-2xl whitespace-nowrap"
         >
           <div className="text-sm font-bold">Oi! 👋 Precisa de ajuda?</div>
           <div className="text-xs opacity-90">Clique para conversar!</div>
@@ -287,15 +298,15 @@ export default function ChatBot() {
           {/* Botão Principal */}
           <motion.div
             animate={{
-              rotateY: [0, 10, 0, -10, 0],
-              rotateX: [0, 5, 0, -5, 0],
+              rotateY: !isMobile ? [0, 10, 0, -10, 0] : 0,
+              rotateX: !isMobile ? [0, 5, 0, -5, 0] : 0,
             }}
             transition={{
               duration: 4,
               repeat: Infinity,
               ease: "easeInOut"
             }}
-            className="relative w-20 h-20 bg-gradient-to-br from-purple-500 via-pink-500 to-blue-500 rounded-full shadow-2xl flex items-center justify-center transform-gpu"
+            className="relative w-14 h-14 md:w-20 md:h-20 bg-gradient-to-br from-purple-500 via-pink-500 to-blue-500 rounded-full shadow-2xl flex items-center justify-center md:transform-gpu"
             style={{
               transformStyle: 'preserve-3d',
               boxShadow: '0 10px 40px rgba(168, 85, 247, 0.5), inset 0 2px 10px rgba(255,255,255,0.3)'
@@ -304,11 +315,11 @@ export default function ChatBot() {
             {/* Ícone de Headset Moderno */}
             <div className="relative">
               <svg
-                width="40"
-                height="40"
+                width="28"
+                height="28"
                 viewBox="0 0 24 24"
                 fill="none"
-                className="text-white drop-shadow-lg"
+                className="md:w-10 md:h-10 text-white drop-shadow-lg"
               >
                 <path
                   d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2Z"
@@ -339,11 +350,11 @@ export default function ChatBot() {
                 </defs>
               </svg>
               
-              {/* Anéis Orbitando */}
+              {/* Anéis Orbitando - Apenas Desktop */}
               <motion.div
                 animate={{ rotate: 360 }}
                 transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                className="absolute inset-0 flex items-center justify-center"
+                className="hidden md:flex absolute inset-0 items-center justify-center"
               >
                 <div className="absolute w-24 h-24 border-2 border-white/20 rounded-full" />
               </motion.div>
@@ -351,7 +362,7 @@ export default function ChatBot() {
               <motion.div
                 animate={{ rotate: -360 }}
                 transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-                className="absolute inset-0 flex items-center justify-center"
+                className="hidden md:flex absolute inset-0 items-center justify-center"
               >
                 <div className="absolute w-28 h-28 border border-white/10 rounded-full" />
               </motion.div>
@@ -386,11 +397,11 @@ export default function ChatBot() {
           </motion.div>
         </motion.button>
         
-        {/* Partículas Flutuantes */}
+        {/* Partículas Flutuantes - Apenas Desktop */}
         {[...Array(3)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute w-2 h-2 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full"
+            className="hidden md:block absolute w-2 h-2 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full"
             style={{
               left: `${20 + i * 20}px`,
               bottom: `${20 + i * 15}px`,
@@ -416,7 +427,7 @@ export default function ChatBot() {
             initial={{ opacity: 0, y: 20, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.9 }}
-            className="fixed bottom-8 right-8 z-50 w-96 h-[600px] bg-gradient-to-br from-slate-900/95 via-purple-900/95 to-pink-900/95 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/20 flex flex-col overflow-hidden"
+            className="fixed inset-0 md:inset-auto md:bottom-8 md:right-8 z-50 w-full md:w-96 h-full md:h-[600px] bg-gradient-to-br from-slate-900/95 via-purple-900/95 to-pink-900/95 backdrop-blur-xl md:rounded-3xl shadow-2xl border-0 md:border border-white/20 flex flex-col overflow-hidden"
           >
             {/* Header */}
             <div className="bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 p-4 flex items-center justify-between">
