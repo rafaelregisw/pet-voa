@@ -51,7 +51,7 @@ export default function Hero() {
               className="text-center mb-6"
             >
               <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-bold">
-                <span className="block">Seu Pet Viaja</span>
+                <span className="block text-gradient">Seu Pet Viaja</span>
                 <span className="block text-gradient">Com Segurança Total</span>
               </h1>
             </motion.div>

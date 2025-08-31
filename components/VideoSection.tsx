@@ -11,7 +11,7 @@ export default function VideoSection() {
   const videoUrl = "https://www.youtube.com/embed/mGdfrvruGzo"
   
   return (
-    <section id="video" className="relative overflow-hidden py-12 md:py-16 lg:py-20 flex items-center justify-center min-h-screen">
+    <section id="video" className="relative overflow-hidden py-8 md:py-16 lg:py-20 flex items-center justify-center md:min-h-screen">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-midnight via-midnight/95 to-midnight" />
       
@@ -20,7 +20,7 @@ export default function VideoSection() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-3"
+          className="text-center mb-2 md:mb-3"
         >
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-display font-bold mb-2">
             Veja Como <span className="text-gradient">Funciona na Prática</span>

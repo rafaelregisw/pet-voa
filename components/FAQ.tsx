@@ -41,7 +41,7 @@ export default function FAQ() {
   ]
 
   return (
-    <section id="faq" className="py-12 md:py-16 lg:py-20">
+    <section id="faq" className="py-8 md:py-16 lg:py-20">
       <div className="container mx-auto px-6">
         {/* Section Header */}
         <motion.div

@@ -14,35 +14,55 @@ export default function CuteBackground() {
     return () => window.removeEventListener('resize', checkMobile)
   }, [])
 
-  // No mobile, gradiente colorido mas sem animações
+  // Mobile: vibrant colors with subtle animations
   if (isMobile) {
     return (
       <div className="fixed inset-0 pointer-events-none overflow-hidden" style={{ zIndex: -1 }}>
-        {/* Base escura */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0f] via-[#050510] to-[#0a0a0f]" />
+        {/* Base escura com gradiente vibrante */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0f] via-[#0f0515] to-[#0a0a0f]" />
         
-        {/* Luzes coloridas estáticas mas bonitas */}
+        {/* Luzes mais vibrantes e coloridas */}
         <div 
-          className="absolute -top-20 -left-20 w-60 h-60"
+          className="absolute -top-20 -left-20 w-72 h-72"
           style={{
-            background: 'radial-gradient(circle, rgba(236, 72, 153, 0.2) 0%, transparent 70%)',
-            filter: 'blur(60px)'
+            background: 'radial-gradient(circle, rgba(236, 72, 153, 0.35) 0%, rgba(236, 72, 153, 0.15) 40%, transparent 70%)',
+            filter: 'blur(50px)',
+            animation: 'pulse 4s ease-in-out infinite'
           }}
         />
         
         <div 
-          className="absolute -top-20 -right-20 w-60 h-60"
+          className="absolute -top-20 -right-20 w-72 h-72"
           style={{
-            background: 'radial-gradient(circle, rgba(147, 51, 234, 0.2) 0%, transparent 70%)',
-            filter: 'blur(60px)'
+            background: 'radial-gradient(circle, rgba(147, 51, 234, 0.35) 0%, rgba(147, 51, 234, 0.15) 40%, transparent 70%)',
+            filter: 'blur(50px)',
+            animation: 'pulse 5s ease-in-out infinite'
           }}
         />
         
         <div 
-          className="absolute bottom-0 left-1/2 -translate-x-1/2 w-80 h-40"
+          className="absolute bottom-0 left-1/2 -translate-x-1/2 w-96 h-48"
           style={{
-            background: 'radial-gradient(ellipse, rgba(6, 182, 212, 0.15) 0%, transparent 70%)',
-            filter: 'blur(60px)'
+            background: 'radial-gradient(ellipse, rgba(6, 182, 212, 0.25) 0%, rgba(6, 182, 212, 0.1) 40%, transparent 70%)',
+            filter: 'blur(50px)',
+            animation: 'pulse 6s ease-in-out infinite'
+          }}
+        />
+        
+        {/* Extra mobile glow spots for vibrancy */}
+        <div 
+          className="absolute top-1/2 left-1/4 w-48 h-48"
+          style={{
+            background: 'radial-gradient(circle, rgba(244, 114, 182, 0.3) 0%, transparent 60%)',
+            filter: 'blur(40px)'
+          }}
+        />
+        
+        <div 
+          className="absolute top-1/3 right-1/4 w-48 h-48"
+          style={{
+            background: 'radial-gradient(circle, rgba(59, 130, 246, 0.3) 0%, transparent 60%)',
+            filter: 'blur(40px)'
           }}
         />
       </div>

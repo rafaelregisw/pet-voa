@@ -36,7 +36,7 @@ export default function TrustBadges() {
   ]
 
   return (
-    <section className="py-12 md:py-16 lg:py-20 relative overflow-hidden">
+    <section className="py-8 md:py-16 lg:py-20 relative overflow-hidden">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-r from-electric/5 via-transparent to-neon/5" />
       
@@ -45,7 +45,7 @@ export default function TrustBadges() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-6 md:mb-8"
+          className="text-center mb-4 md:mb-8"
         >
           <h3 className="text-2xl font-bold text-ice mb-2">
             Nossa Equipe Especializada

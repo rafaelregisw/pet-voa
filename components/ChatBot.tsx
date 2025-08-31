@@ -44,17 +44,37 @@ export default function ChatBot() {
   const [isTyping, setIsTyping] = useState(false)
   const [hasNewMessage, setHasNewMessage] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
+  const [keyboardHeight, setKeyboardHeight] = useState(0)
   const messagesEndRef = useRef<HTMLDivElement>(null)
+  const chatWindowRef = useRef<HTMLDivElement>(null)
 
-  // Detectar se é mobile
+  // Detectar se é mobile e altura do teclado
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768)
     }
     checkMobile()
     window.addEventListener('resize', checkMobile)
+    
+    // Detectar altura do teclado no mobile
+    if (window.visualViewport && isMobile) {
+      const handleViewportChange = () => {
+        const currentHeight = window.innerHeight - window.visualViewport.height
+        setKeyboardHeight(currentHeight)
+      }
+      
+      window.visualViewport.addEventListener('resize', handleViewportChange)
+      window.visualViewport.addEventListener('scroll', handleViewportChange)
+      
+      return () => {
+        window.removeEventListener('resize', checkMobile)
+        window.visualViewport?.removeEventListener('resize', handleViewportChange)
+        window.visualViewport?.removeEventListener('scroll', handleViewportChange)
+      }
+    }
+    
     return () => window.removeEventListener('resize', checkMobile)
-  }, [])
+  }, [isMobile])
 
   // Carregar dados salvos do localStorage
   useEffect(() => {
@@ -289,7 +309,14 @@ export default function ChatBot() {
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ delay: 2, type: 'spring', stiffness: 260, damping: 20 }}
-          onClick={() => setIsOpen(true)}
+          onClick={() => {
+            // No mobile, abrir em nova aba
+            if (isMobile) {
+              window.open('/chat', '_blank')
+            } else {
+              setIsOpen(true)
+            }
+          }}
           className="relative group"
         >
           {/* Camada de Fundo 3D */}
@@ -427,10 +454,12 @@ export default function ChatBot() {
             initial={{ opacity: 0, y: 20, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.9 }}
+            ref={chatWindowRef}
             className="fixed inset-0 md:inset-auto md:bottom-8 md:right-8 z-50 w-full md:w-96 h-full md:h-[600px] bg-gradient-to-br from-slate-900/95 via-purple-900/95 to-pink-900/95 backdrop-blur-md md:backdrop-blur-xl md:rounded-3xl shadow-2xl border-0 md:border border-white/20 flex flex-col overflow-hidden"
             style={{
-              height: isMobile ? 'calc(100vh - env(safe-area-inset-bottom))' : '600px',
-              paddingBottom: isMobile ? 'env(safe-area-inset-bottom)' : 0
+              height: isMobile ? `calc(100vh - ${keyboardHeight}px)` : '600px',
+              bottom: isMobile ? `${keyboardHeight}px` : 'auto',
+              transition: 'height 0.3s ease, bottom 0.3s ease'
             }}
           >
             {/* Header */}
@@ -627,8 +656,8 @@ export default function ChatBot() {
                   <div ref={messagesEndRef} />
                 </div>
 
-                {/* Input - Fix para teclado mobile */}
-                <div className="p-4 border-t border-white/10" style={{ paddingBottom: isMobile ? 'env(safe-area-inset-bottom, 16px)' : '16px' }}>
+                {/* Input Area */}
+                <div className="p-4 border-t border-white/10 bg-gradient-to-b from-transparent to-black/20">
                   <div className="flex gap-2">
                     <input
                       type="text"

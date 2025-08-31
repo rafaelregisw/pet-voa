@@ -38,7 +38,7 @@ export default function Process() {
   ]
 
   return (
-    <section id="how" className="py-12 md:py-16 lg:py-20 relative">
+    <section id="how" className="py-8 md:py-16 lg:py-20 relative">
       <div className="container mx-auto px-4 md:px-6">
         {/* Section Header */}
         <motion.div
@@ -57,8 +57,8 @@ export default function Process() {
 
         {/* Steps */}
         <div className="relative max-w-4xl mx-auto">
-          {/* Connection Line */}
-          <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-electric via-neon to-electric opacity-20" />
+          {/* Connection Line - Hidden on Mobile */}
+          <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-electric via-neon to-electric opacity-20" />
 
           {steps.map((step, index) => (
             <motion.div
@@ -67,15 +67,15 @@ export default function Process() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className={`relative flex items-center mb-6 ${
-                index % 2 === 0 ? 'justify-start' : 'justify-end'
-              }`}
+              className={`relative flex items-center mb-4 md:mb-6 ${
+                index % 2 === 0 ? 'md:justify-start' : 'md:justify-end'
+              } justify-start`}
             >
               {/* Step Content */}
               <motion.div
                 whileHover={{ scale: 1.05 }}
-                className={`glass rounded-2xl p-4 max-w-sm ${
-                  index % 2 === 0 ? 'mr-auto ml-0' : 'ml-auto mr-0'
+                className={`glass rounded-2xl p-4 w-full md:max-w-sm ${
+                  index % 2 === 0 ? 'md:mr-auto md:ml-0' : 'md:ml-auto md:mr-0'
                 }`}
               >
                 <div className="flex items-center gap-3 mb-3">
@@ -106,13 +106,13 @@ export default function Process() {
                 </p>
               </motion.div>
 
-              {/* Center Circle */}
+              {/* Center Circle - Hidden on Mobile */}
               <motion.div
                 initial={{ scale: 0 }}
                 whileInView={{ scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 + 0.2 }}
-                className="absolute left-1/2 transform -translate-x-1/2 w-3 h-3 bg-electric rounded-full border-2 border-midnight z-10"
+                className="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-3 h-3 bg-electric rounded-full border-2 border-midnight z-10"
               />
             </motion.div>
           ))}

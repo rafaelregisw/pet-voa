@@ -39,6 +39,8 @@
     @apply bg-gradient-to-r from-electric via-neon to-electric bg-clip-text text-transparent;
     background-size: 200% auto;
     animation: gradient-shift 3s ease infinite;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 
   @keyframes gradient-shift {
@@ -186,6 +188,62 @@
 
   /* Mobile specific fixes */
   @media (max-width: 768px) {
+    /* Force text gradients to work on mobile */
+    .text-gradient {
+      background: linear-gradient(to right, #00b4d8, #7209b7, #00b4d8) !important;
+      -webkit-background-clip: text !important;
+      -webkit-text-fill-color: transparent !important;
+      background-clip: text !important;
+      background-size: 200% auto !important;
+      animation: gradient-shift 3s ease infinite !important;
+    }
+    
+    /* Mobile: espaçamento mínimo entre seções */
+    section {
+      padding-top: 1.5rem !important;
+      padding-bottom: 1.5rem !important;
+    }
+    
+    .py-12, .py-16, .py-20 {
+      padding-top: 1.5rem !important;
+      padding-bottom: 1.5rem !important;
+    }
+    
+    .mb-4, .mb-6, .mb-8, .mb-12, .mb-16 {
+      margin-bottom: 0.75rem !important;
+    }
+    
+    .mt-8, .mt-12, .mt-16 {
+      margin-top: 1rem !important;
+    }
+    
+    .gap-6, .gap-8 {
+      gap: 0.75rem !important;
+    }
+    
+    .space-y-6 > :not([hidden]) ~ :not([hidden]),
+    .space-y-8 > :not([hidden]) ~ :not([hidden]),
+    .space-y-12 > :not([hidden]) ~ :not([hidden]) {
+      margin-top: 1rem !important;
+    }
+    
+    /* Remove TODAS as linhas e bolas do Process no mobile */
+    #how .absolute {
+      display: none !important;
+    }
+    
+    /* Alinhar todos items do Process à esquerda no mobile */
+    #how .relative.flex.items-center {
+      justify-content: flex-start !important;
+      margin-bottom: 1rem !important;
+    }
+    
+    #how .glass {
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+      max-width: 100% !important;
+      width: 100% !important;
+    }
     /* Remove any vertical lines or borders */
     .border-l-*, .border-r-* {
       border-left: none !important;
