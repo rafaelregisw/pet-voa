@@ -76,14 +76,14 @@ export default function Hero() {
                   >
                     🐕
                   </motion.div>
-                  {/* Corações flutuando */}
+                  {/* Corações flutuando - ajustados para não sobrepor texto */}
                   {[...Array(3)].map((_, i) => (
                     <motion.div
                       key={`dog-heart-${i}`}
-                      className="absolute text-pink-500"
+                      className="absolute text-pink-500 text-sm"
                       style={{ 
-                        left: `${-10 + i * 15}px`,
-                        top: `-${20 + i * 10}px`
+                        left: `${-20 - i * 10}px`,
+                        bottom: `${20 + i * 15}px`
                       }}
                       animate={{
                         y: [-20, -40, -20],
@@ -118,14 +118,14 @@ export default function Hero() {
                   >
                     🐈
                   </motion.div>
-                  {/* Patinhas */}
+                  {/* Patinhas - ajustadas */}
                   {[...Array(2)].map((_, i) => (
                     <motion.div
                       key={`cat-paw-${i}`}
-                      className="absolute text-purple-400"
+                      className="absolute text-purple-400 text-sm"
                       style={{ 
-                        right: `${-15 + i * 20}px`,
-                        top: `-${15 + i * 15}px`
+                        left: `${-15 - i * 10}px`,
+                        bottom: `${10 + i * 10}px`
                       }}
                       animate={{
                         y: [-10, -25, -10],
@@ -161,14 +161,14 @@ export default function Hero() {
                   >
                     🦜
                   </motion.div>
-                  {/* Notas musicais */}
+                  {/* Notas musicais - ajustadas */}
                   {[...Array(3)].map((_, i) => (
                     <motion.div
                       key={`parrot-note-${i}`}
-                      className="absolute text-green-400"
+                      className="absolute text-green-400 text-xs"
                       style={{ 
-                        left: `${10 + i * 12}px`,
-                        top: `-${10 + i * 8}px`
+                        right: `${-10 - i * 8}px`,
+                        bottom: `${15 + i * 10}px`
                       }}
                       animate={{
                         y: [-15, -35, -15],
@@ -204,14 +204,14 @@ export default function Hero() {
                   >
                     🐰
                   </motion.div>
-                  {/* Estrelas */}
+                  {/* Estrelas - ajustadas */}
                   {[...Array(3)].map((_, i) => (
                     <motion.div
                       key={`rabbit-star-${i}`}
-                      className="absolute text-yellow-400"
+                      className="absolute text-yellow-400 text-sm"
                       style={{ 
-                        right: `${-5 + i * 10}px`,
-                        top: `-${25 + i * 5}px`
+                        right: `${-15 - i * 8}px`,
+                        bottom: `${20 + i * 12}px`
                       }}
                       animate={{
                         rotate: [0, 360],
