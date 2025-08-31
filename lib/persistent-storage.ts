@@ -6,7 +6,12 @@
 import fs from 'fs/promises'
 import path from 'path'
 
-const DATA_DIR = process.env.DATA_DIR || '/tmp'
+// Use .next/cache for production persistence (survives builds)
+const DATA_DIR = process.env.DATA_DIR || (
+  process.env.NODE_ENV === 'production' 
+    ? path.join(process.cwd(), '.next', 'cache')
+    : '/tmp'
+)
 const DATA_FILE = path.join(DATA_DIR, 'petvoa-data.json')
 
 interface StorageData {
@@ -58,18 +63,27 @@ let lastSave = Date.now()
  * Carrega dados do arquivo
  */
 async function loadData(): Promise<StorageData> {
-  if (memoryData && (Date.now() - lastSave < 1000)) {
+  // Sempre retorna da memória se disponível (prioridade para performance)
+  if (memoryData) {
     return memoryData
   }
 
   try {
+    // Tenta criar o diretório se não existir
+    await fs.mkdir(DATA_DIR, { recursive: true })
+    
     const fileContent = await fs.readFile(DATA_FILE, 'utf-8')
     memoryData = JSON.parse(fileContent)
     return memoryData!
   } catch (error) {
-    // Arquivo não existe, criar com dados iniciais
+    // Arquivo não existe ou erro de leitura, usar dados iniciais
     memoryData = { ...initialData }
-    await saveData(memoryData)
+    // Tenta salvar mas não falha se não conseguir (produção pode ter read-only)
+    try {
+      await saveData(memoryData)
+    } catch (saveError) {
+      console.log('Cache running in memory-only mode')
+    }
     return memoryData
   }
 }
@@ -78,13 +92,18 @@ async function loadData(): Promise<StorageData> {
  * Salva dados no arquivo
  */
 async function saveData(data: StorageData): Promise<void> {
+  // Sempre atualiza a memória (mais importante)
+  data.lastUpdated = new Date().toISOString()
+  memoryData = data
+  lastSave = Date.now()
+  
+  // Tenta salvar em arquivo mas não falha se não conseguir
   try {
-    data.lastUpdated = new Date().toISOString()
+    await fs.mkdir(DATA_DIR, { recursive: true })
     await fs.writeFile(DATA_FILE, JSON.stringify(data, null, 2))
-    memoryData = data
-    lastSave = Date.now()
   } catch (error) {
-    console.error('Erro ao salvar dados:', error)
+    // Silently continue - memory cache is working
+    // console.log('File persistence skipped, using memory only')
   }
 }
 
