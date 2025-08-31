@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { ArrowRight, Star, Shield, Heart } from 'lucide-react'
+import { ArrowRight, Star, Shield, Heart, MapPin, Satellite } from 'lucide-react'
 import PetMascot from './PetMascot'
 import CatMascot from './CatMascot'
 import { openWhatsApp } from '@/lib/whatsapp'
@@ -54,6 +54,137 @@ export default function Hero() {
                 <span className="block text-gradient">Seu Pet Viaja</span>
                 <span className="block text-gradient">Com Segurança Total</span>
               </h1>
+            </motion.div>
+            
+            {/* 🐾 GPS TRACKER FOFO E LINDO! 🐾 */}
+            <motion.div
+              initial={{ scale: 0, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ 
+                type: "spring",
+                stiffness: 260,
+                damping: 20,
+                delay: 0.3 
+              }}
+              className="flex justify-center mb-6"
+            >
+              <div className="relative inline-flex">
+                {/* Corações flutuando */}
+                {[... Array(3)].map((_, i) => (
+                  <motion.div
+                    key={`heart-${i}`}
+                    className="absolute"
+                    style={{
+                      left: `${20 + i * 30}%`,
+                      top: '-20px'
+                    }}
+                    animate={{
+                      y: [-10, -30, -10],
+                      opacity: [0.5, 1, 0.5],
+                      scale: [1, 1.2, 1]
+                    }}
+                    transition={{
+                      duration: 3 + i,
+                      repeat: Infinity,
+                      delay: i * 0.5
+                    }}
+                  >
+                    <span className="text-pink-400">❤️</span>
+                  </motion.div>
+                ))}
+                
+                {/* Ondas de amor pulsando */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="w-full h-full bg-gradient-to-r from-pink-400 to-rose-400 rounded-full animate-ping opacity-10" />
+                </div>
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="w-full h-full bg-gradient-to-r from-pink-300 to-rose-300 rounded-full animate-ping opacity-5" style={{ animationDelay: '0.5s' }} />
+                </div>
+                
+                {/* Badge principal SUPER FOFO */}
+                <div className="relative bg-gradient-to-r from-pink-500 via-rose-400 to-pink-500 px-4 md:px-6 py-3 rounded-full shadow-2xl border-2 border-white/30 backdrop-blur-sm">
+                  <div className="flex items-center gap-2 md:gap-3">
+                    {/* Patinha animada */}
+                    <motion.div
+                      animate={{ 
+                        rotate: [-10, 10, -10],
+                        scale: [1, 1.1, 1]
+                      }}
+                      transition={{ 
+                        duration: 2,
+                        repeat: Infinity
+                      }}
+                      className="text-2xl"
+                    >
+                      🐾
+                    </motion.div>
+                    
+                    {/* Texto carinhoso */}
+                    <div className="flex flex-col">
+                      <span className="text-white font-bold text-sm md:text-base flex items-center gap-1">
+                        <motion.span
+                          animate={{ scale: [1, 1.2, 1] }}
+                          transition={{ duration: 1.5, repeat: Infinity }}
+                          className="inline-block"
+                        >
+                          🐶
+                        </motion.span>
+                        GPS COM AMOR 24H
+                        <motion.span
+                          animate={{ rotate: 360 }}
+                          transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                          className="hidden md:inline-block text-xs"
+                        >
+                          ✨
+                        </motion.span>
+                      </span>
+                      <span className="text-white/90 text-xs flex items-center gap-1">
+                        Acompanhe as patinhas em tempo real
+                        <span className="hidden md:inline">💕</span>
+                      </span>
+                    </div>
+                    
+                    {/* Coleira com GPS piscando */}
+                    <motion.div
+                      animate={{ 
+                        y: [-2, 2, -2]
+                      }}
+                      transition={{ duration: 1.5, repeat: Infinity }}
+                      className="hidden md:flex items-center"
+                    >
+                      <div className="relative">
+                        <span className="text-xl">🥰</span>
+                        <div className="absolute top-0 right-0">
+                          <span className="relative flex h-2 w-2">
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75" />
+                            <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500" />
+                          </span>
+                        </div>
+                      </div>
+                    </motion.div>
+                  </div>
+                </div>
+                
+                {/* Estrelinhas ao redor */}
+                <div className="absolute -top-1 -right-2">
+                  <motion.span
+                    animate={{ rotate: 360, scale: [1, 1.2, 1] }}
+                    transition={{ duration: 3, repeat: Infinity }}
+                    className="text-yellow-300 text-sm"
+                  >
+                    ✨
+                  </motion.span>
+                </div>
+                <div className="absolute -bottom-1 -left-2">
+                  <motion.span
+                    animate={{ rotate: -360, scale: [1, 1.3, 1] }}
+                    transition={{ duration: 4, repeat: Infinity }}
+                    className="text-yellow-300 text-xs"
+                  >
+                    ⭐
+                  </motion.span>
+                </div>
+              </div>
             </motion.div>
             
             {/* Mascots Container */}
@@ -159,23 +290,23 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8 max-w-4xl mx-auto px-2 md:px-0"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6 md:mb-8 max-w-6xl mx-auto px-2 md:px-0"
           >
             {/* Psicóloga Badge */}
             <motion.div
               whileHover={{ scale: 1.05, rotate: -2 }}
-              className="glass rounded-xl md:rounded-2xl p-4 md:p-5 border-2 border-neon/30 relative overflow-hidden group"
+              className="glass rounded-xl p-4 border-2 border-neon/30 relative overflow-hidden group"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-neon/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               <div className="relative z-10">
                 <div className="w-12 h-12 mx-auto mb-3 bg-gradient-to-br from-neon to-purple-600 rounded-full flex items-center justify-center shadow-lg">
-                  <span className="text-xl">🧠</span>
+                  <span className="text-xl">💜</span>
                 </div>
-                <h3 className="text-lg font-bold text-ice mb-2">
-                  <span className="text-neon">ACOMPANHAMENTO</span> PSICOLÓGICO
+                <h3 className="text-base font-bold text-ice mb-1">
+                  <span className="text-neon">PSICÓLOGA</span>
                 </h3>
-                <p className="text-sm text-ice/70">
-                  Seu pet nunca viaja sozinho. Cuidado especializado com amor durante todo o voo.
+                <p className="text-xs text-ice/70">
+                  Pet nunca viaja sozinho
                 </p>
               </div>
             </motion.div>
@@ -183,37 +314,70 @@ export default function Hero() {
             {/* Advogada Badge */}
             <motion.div
               whileHover={{ scale: 1.05, rotate: 2 }}
-              className="glass rounded-2xl p-5 border-2 border-amber-500/30 relative overflow-hidden group"
+              className="glass rounded-xl p-4 border-2 border-amber-500/30 relative overflow-hidden group"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-amber-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               <div className="relative z-10">
                 <div className="w-12 h-12 mx-auto mb-3 bg-gradient-to-br from-amber-400 to-amber-600 rounded-full flex items-center justify-center shadow-lg">
-                  <span className="text-xl">⚖️</span>
+                  <span className="text-xl">💛</span>
                 </div>
-                <h3 className="text-lg font-bold text-ice mb-2">
-                  <span className="text-amber-400">ESPECIALISTA</span> JURÍDICA
+                <h3 className="text-base font-bold text-ice mb-1">
+                  <span className="text-amber-400">JURÍDICO</span>
                 </h3>
-                <p className="text-sm text-ice/70">
-                  Formada em Direito, cuida de toda documentação legal. CDC, USDA, exames - tudo resolvido.
+                <p className="text-xs text-ice/70">
+                  Documentação completa
                 </p>
               </div>
             </motion.div>
 
-            {/* Tempo Real Badge */}
+            {/* GPS TRACKING Badge - REVOLUCIONÁRIO! */}
             <motion.div
               whileHover={{ scale: 1.05, rotate: -2 }}
-              className="glass rounded-2xl p-5 border-2 border-electric/30 relative overflow-hidden group"
+              className="glass rounded-xl p-4 border-2 border-red-500/30 relative overflow-hidden group"
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-electric/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="absolute inset-0 bg-gradient-to-br from-pink-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               <div className="relative z-10">
-                <div className="w-12 h-12 mx-auto mb-3 bg-gradient-to-br from-electric to-cyan-600 rounded-full flex items-center justify-center shadow-lg">
-                  <span className="text-xl">📸</span>
-                </div>
-                <h3 className="text-lg font-bold text-ice mb-2">
-                  <span className="text-electric">FOTOS</span> AO VIVO
+                <motion.div 
+                  animate={{ y: [-2, 2, -2] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                  className="w-12 h-12 mx-auto mb-3 bg-gradient-to-br from-pink-400 to-rose-500 rounded-full flex items-center justify-center shadow-lg relative"
+                >
+                  <span className="text-xl">🐾</span>
+                  {/* Coraçãozinho pulsando */}
+                  <div className="absolute -top-1 -right-1">
+                    <motion.span
+                      animate={{ scale: [1, 1.3, 1] }}
+                      transition={{ duration: 1, repeat: Infinity }}
+                      className="text-xs"
+                    >
+                      💕
+                    </motion.span>
+                  </div>
+                </motion.div>
+                <h3 className="text-base font-bold text-ice mb-1">
+                  <span className="text-pink-500">GPS 24H</span> 📍
                 </h3>
-                <p className="text-sm text-ice/70">
-                  Acompanhe cada momento com fotos e vídeos em tempo real via WhatsApp.
+                <p className="text-xs text-ice/70">
+                  Link rastreável exclusivo
+                </p>
+              </div>
+            </motion.div>
+            
+            {/* FOTOS E VÍDEOS AO VIVO Badge */}
+            <motion.div
+              whileHover={{ scale: 1.05, rotate: 2 }}
+              className="glass rounded-xl p-4 border-2 border-green-500/30 relative overflow-hidden group"
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-green-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="relative z-10">
+                <div className="w-12 h-12 mx-auto mb-3 bg-gradient-to-br from-green-500 to-emerald-600 rounded-full flex items-center justify-center shadow-lg">
+                  <span className="text-xl">💚</span>
+                </div>
+                <h3 className="text-base font-bold text-ice mb-1">
+                  <span className="text-green-500">FOTOS/VÍDEOS</span>
+                </h3>
+                <p className="text-xs text-ice/70">
+                  Ao vivo via WhatsApp
                 </p>
               </div>
             </motion.div>
