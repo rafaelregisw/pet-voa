@@ -1,0 +1,161 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Syne:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-midnight text-ice;
+    font-feature-settings: "cv11", "ss01";
+    min-height: 100vh;
+  }
+
+  ::selection {
+    @apply bg-electric text-midnight;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-midnight;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-electric/50 rounded-full;
+    transition: all 0.3s ease;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-electric;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-gradient-to-r from-electric via-neon to-electric bg-clip-text text-transparent;
+    background-size: 200% auto;
+    animation: gradient-shift 3s ease infinite;
+  }
+
+  @keyframes gradient-shift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  .glass {
+    @apply backdrop-blur-xl bg-white/5 border border-white/10 transition-all duration-500;
+    box-shadow: 
+      0 10px 40px rgba(0, 0, 0, 0.3),
+      0 0 60px rgba(0, 180, 216, 0.05),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+
+  .glass:hover {
+    @apply bg-white/10 border-electric/40;
+    box-shadow: 
+      0 20px 60px rgba(0, 0, 0, 0.4),
+      0 0 80px rgba(0, 180, 216, 0.3),
+      0 0 120px rgba(114, 9, 183, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transform: translateY(-4px) scale(1.02);
+  }
+
+  .glass-dark {
+    @apply backdrop-blur-xl bg-black/20 border border-white/5;
+  }
+
+  .button-primary {
+    @apply relative px-8 py-4 bg-electric text-midnight font-semibold rounded-lg overflow-hidden transition-all duration-300 hover:scale-105;
+    box-shadow: 
+      0 4px 15px rgba(0, 180, 216, 0.3),
+      0 0 30px rgba(0, 180, 216, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  }
+  
+  .button-primary:hover {
+    box-shadow: 
+      0 6px 20px rgba(0, 180, 216, 0.4),
+      0 0 60px rgba(0, 180, 216, 0.2),
+      0 0 100px rgba(0, 180, 216, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  }
+
+  .button-secondary {
+    @apply px-8 py-4 glass border border-electric/50 text-ice font-semibold rounded-lg transition-all duration-300 hover:bg-electric/10 hover:border-electric;
+    box-shadow: 
+      0 4px 15px rgba(0, 0, 0, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+  
+  .button-secondary:hover {
+    box-shadow: 
+      0 6px 25px rgba(0, 180, 216, 0.2),
+      0 0 50px rgba(0, 180, 216, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
+
+  .card-hover {
+    @apply transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl;
+  }
+
+  .text-neon {
+    text-shadow: 
+      0 0 10px currentColor,
+      0 0 20px currentColor,
+      0 0 40px currentColor;
+  }
+
+  .border-glow {
+    box-shadow: 
+      0 0 20px rgba(0, 180, 216, 0.3),
+      inset 0 0 20px rgba(0, 180, 216, 0.1);
+  }
+
+  .mesh-background {
+    background-image: 
+      radial-gradient(at 40% 20%, hsla(195, 100%, 50%, 0.1) 0px, transparent 50%),
+      radial-gradient(at 80% 0%, hsla(270, 100%, 50%, 0.1) 0px, transparent 50%),
+      radial-gradient(at 0% 50%, hsla(355, 100%, 50%, 0.1) 0px, transparent 50%);
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% {
+      box-shadow: 0 0 20px rgba(0, 180, 216, 0.5);
+    }
+    50% {
+      box-shadow: 0 0 40px rgba(0, 180, 216, 0.8), 0 0 60px rgba(114, 9, 183, 0.4);
+    }
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  /* Video Section Optimization */
+  #video {
+    scroll-margin-top: 4rem;
+  }
+  
+  @media (min-width: 768px) and (max-height: 800px) {
+    #video .aspect-video {
+      max-height: 50vh;
+    }
+  }
+
+
+
+}
