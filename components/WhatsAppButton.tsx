@@ -38,9 +38,9 @@ export default function WhatsAppButton() {
               repeat: Infinity,
               ease: "easeInOut",
             }}
-            className="relative w-12 h-12 bg-gradient-to-br from-green-400 via-green-500 to-green-600 rounded-full shadow-lg shadow-green-500/50 flex items-center justify-center"
+            className="relative w-10 h-10 bg-gradient-to-br from-green-400 via-green-500 to-green-600 rounded-full shadow-lg shadow-green-500/50 flex items-center justify-center"
           >
-            <MessageCircle className="w-6 h-6 text-white drop-shadow-lg" fill="white" />
+            <MessageCircle className="w-5 h-5 text-white drop-shadow-lg" fill="white" />
             
             {/* Online Status Badge - Pulsante */}
             <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-400 rounded-full animate-pulse" />
