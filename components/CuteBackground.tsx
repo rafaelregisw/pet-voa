@@ -2,7 +2,7 @@
 
 export default function CuteBackground() {
   return (
-    <div className="fixed inset-0 pointer-events-none overflow-hidden">
+    <div className="fixed inset-0 pointer-events-none overflow-hidden -z-10">
       {/* Camada de gradiente super sutil */}
       <div className="absolute inset-0 bg-gradient-to-br from-electric/3 via-transparent to-neon/3" />
       
