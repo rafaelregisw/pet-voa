@@ -5,6 +5,13 @@ import WhatsAppButton from '@/components/WhatsAppButton'
 
 const inter = Inter({ subsets: ['latin'] })
 
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+}
+
 export const metadata: Metadata = {
   metadataBase: new URL('https://petvoa.com'),
   title: 'Pet Voa - Transporte Premium de Pets para os EUA',
@@ -20,12 +27,6 @@ export const metadata: Metadata = {
     ],
     shortcut: '/favicon-pv.svg',
     apple: '/favicon-pv.svg',
-  },
-  viewport: {
-    width: 'device-width',
-    initialScale: 1,
-    maximumScale: 1,
-    userScalable: false,
   },
   formatDetection: {
     email: false,
