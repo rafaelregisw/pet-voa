@@ -218,7 +218,7 @@ export default function ChatPage() {
   }
 
   return (
-    <div className="h-screen flex flex-col bg-gradient-to-br from-slate-900 via-purple-900 to-pink-900" style={{ height: '100dvh' }}>
+    <div className="fixed inset-0 flex flex-col bg-gradient-to-br from-slate-900 via-purple-900 to-pink-900">
       {/* Header Fixo */}
       <div className="shrink-0 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 p-4 flex items-center justify-between shadow-lg">
         <div className="flex items-center gap-3">
@@ -405,7 +405,7 @@ export default function ChatPage() {
           </div>
 
           {/* Input Area - Sempre visível */}
-          <div className="shrink-0 p-4 border-t border-white/10 bg-black/30 backdrop-blur-md">
+          <div className="shrink-0 p-4 border-t border-white/10 bg-black/30 backdrop-blur-md safe-area-bottom">
             <div className="flex gap-2 max-w-4xl mx-auto">
               <input
                 type="text"

@@ -35,6 +35,11 @@
 }
 
 @layer utilities {
+  /* Suporte para safe area no iOS */
+  .safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom, 1rem);
+  }
+  
   .text-gradient {
     @apply bg-gradient-to-r from-electric via-neon to-electric bg-clip-text text-transparent;
     background-size: 200% auto;
