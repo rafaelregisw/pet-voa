@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { getRedisClient } from '@/lib/redis'
 import { getMemoryCache } from '@/lib/memory-cache'
+import { getStats, getAllData } from '@/lib/persistent-storage'
 
 export async function GET() {
   try {
@@ -66,35 +67,25 @@ export async function GET() {
       }
     }
     
-    // Memory cache stats
+    // Sistema de persistência sempre ativo
+    const allData = await getAllData()
     const memoryStats = {
-      size: memCache.size(),
-      active: !redisStatus.connected,
-      mode: redisStatus.connected ? 'Redis (Produção)' : 'Memória (Desenvolvimento)'
+      size: Object.keys(allData.cache).length,
+      active: true,
+      mode: 'Persistência em Arquivo (Produção)',
+      totalCounters: Object.keys(allData.counters).length,
+      lastUpdated: allData.lastUpdated
     }
     
-    // Contadores
+    // Obter estatísticas do sistema de persistência
+    const persistentStats = await getStats()
+    
+    // Usar dados persistentes que funcionam sempre
     const stats = {
-      totalViews: 0,
-      todayViews: 0,
-      activeUsers: 0
-    }
-    
-    if (client && redisStatus.connected) {
-      try {
-        const totalViews = await client.get('counter:total_views')
-        const todayKey = `counter:views:${new Date().toISOString().split('T')[0]}`
-        const todayViews = await client.get(todayKey)
-        
-        stats.totalViews = parseInt(totalViews || '0')
-        stats.todayViews = parseInt(todayViews || '0')
-        
-        // Contar usuários ativos (últimos 5 minutos)
-        const rateLimitKeys = await client.keys('rate_limit:*')
-        stats.activeUsers = rateLimitKeys.length
-      } catch (error) {
-        console.error('Error getting stats:', error)
-      }
+      totalViews: persistentStats.totalViews,
+      todayViews: persistentStats.todayViews,
+      activeUsers: persistentStats.activeUsers,
+      topPages: persistentStats.topPages
     }
     
     return NextResponse.json({

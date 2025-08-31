@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import WhatsAppButton from '@/components/WhatsAppButton'
+import PageTracker from '@/components/PageTracker'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -79,6 +80,7 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
       </head>
       <body className={`${inter.className} bg-midnight text-ice antialiased overflow-x-hidden`} style={{ width: '100vw', maxWidth: '100vw', position: 'relative' }}>
+        <PageTracker />
         <div className="min-h-screen w-full overflow-x-hidden" style={{ maxWidth: '100vw' }}>
           {children}
           <WhatsAppButton />
