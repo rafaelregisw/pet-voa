@@ -300,7 +300,7 @@ export default function Hero() {
               <div className="absolute inset-0 bg-gradient-to-br from-neon/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               <div className="relative z-10">
                 <div className="w-12 h-12 mx-auto mb-3 bg-gradient-to-br from-neon to-purple-600 rounded-full flex items-center justify-center shadow-lg">
-                  <span className="text-xl">💜</span>
+                  <span className="text-xl">🧠</span>
                 </div>
                 <h3 className="text-base font-bold text-ice mb-1">
                   <span className="text-neon">PSICÓLOGA</span>
@@ -319,7 +319,7 @@ export default function Hero() {
               <div className="absolute inset-0 bg-gradient-to-br from-amber-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               <div className="relative z-10">
                 <div className="w-12 h-12 mx-auto mb-3 bg-gradient-to-br from-amber-400 to-amber-600 rounded-full flex items-center justify-center shadow-lg">
-                  <span className="text-xl">💛</span>
+                  <span className="text-xl">⚖️</span>
                 </div>
                 <h3 className="text-base font-bold text-ice mb-1">
                   <span className="text-amber-400">JURÍDICO</span>
@@ -371,7 +371,7 @@ export default function Hero() {
               <div className="absolute inset-0 bg-gradient-to-br from-green-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               <div className="relative z-10">
                 <div className="w-12 h-12 mx-auto mb-3 bg-gradient-to-br from-green-500 to-emerald-600 rounded-full flex items-center justify-center shadow-lg">
-                  <span className="text-xl">💚</span>
+                  <span className="text-xl">📸</span>
                 </div>
                 <h3 className="text-base font-bold text-ice mb-1">
                   <span className="text-green-500">FOTOS/VÍDEOS</span>
