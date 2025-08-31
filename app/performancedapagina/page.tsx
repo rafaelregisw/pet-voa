@@ -391,7 +391,7 @@ export default function RedisMonitor() {
                   Cache Funcionando! ⚡
                 </p>
                 <p className="text-white/60 text-sm">
-                  Sistema otimizado - Dados servidos {status.stats.cacheStats?.hitRate > 50 ? 'principalmente do cache' : 'com cache inteligente'}
+                  Sistema otimizado - Dados servidos {(status.stats.cacheStats?.hitRate || 0) > 50 ? 'principalmente do cache' : 'com cache inteligente'}
                 </p>
               </div>
               <div className="text-right">
