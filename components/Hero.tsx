@@ -2,6 +2,8 @@
 
 import { motion } from 'framer-motion'
 import { ArrowRight, Star, Shield, Heart, MapPin, Satellite } from 'lucide-react'
+import PsychIcon from './icons/PsychIcon'
+import LegalIcon from './icons/LegalIcon'
 import PetMascot from './PetMascot'
 import CatMascot from './CatMascot'
 import { openWhatsApp } from '@/lib/whatsapp'
@@ -34,11 +36,10 @@ export default function Hero() {
               <span className="relative inline-flex rounded-full h-2 w-2 bg-electric"></span>
             </span>
             <span className="text-sm text-ice/80">Transporte Premium de Pets</span>
-            <span className="flex gap-1 ml-2">
-              <motion.span animate={{ rotate: [0, 10, -10, 0] }} transition={{ duration: 2, repeat: Infinity }} className="text-sm">🐕</motion.span>
-              <motion.span animate={{ rotate: [0, -10, 10, 0] }} transition={{ duration: 2, repeat: Infinity, delay: 0.2 }} className="text-sm">🐈</motion.span>
-              <motion.span animate={{ y: [0, -3, 0] }} transition={{ duration: 1.5, repeat: Infinity, delay: 0.4 }} className="text-sm">🦜</motion.span>
-              <motion.span animate={{ y: [0, 3, 0] }} transition={{ duration: 1.5, repeat: Infinity, delay: 0.6 }} className="text-sm">🐰</motion.span>
+            <span className="hidden md:flex gap-1 ml-2 opacity-60">
+              <span className="text-sm">🐕</span>
+              <span className="text-sm">🐈</span>
+              <span className="text-sm">🦜</span>
             </span>
           </motion.div>
 
@@ -101,26 +102,15 @@ export default function Hero() {
                 {/* Badge principal SUPER FOFO */}
                 <div className="relative bg-gradient-to-r from-pink-500 via-rose-400 to-pink-500 px-4 md:px-6 py-3 rounded-full shadow-2xl border-2 border-white/30 backdrop-blur-sm">
                   <div className="flex items-center gap-2 md:gap-3">
-                    {/* Patinha animada */}
-                    <motion.div
-                      animate={{ 
-                        rotate: [-10, 10, -10],
-                        scale: [1, 1.1, 1]
-                      }}
-                      transition={{ 
-                        duration: 2,
-                        repeat: Infinity
-                      }}
-                      className="text-2xl"
-                    >
+                    {/* Patinha estática */}
+                    <div className="text-2xl">
                       🐾
-                    </motion.div>
+                    </div>
                     
                     {/* Texto carinhoso */}
                     <div className="flex flex-col">
                       <span className="text-white font-bold text-sm md:text-base flex items-center gap-1">
-                        <span className="inline-block">🐶</span>
-                        GPS COM AMOR 24H
+                        📍 GPS RASTREÁVEL 24H
                         <motion.span
                           animate={{ rotate: 360 }}
                           transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
@@ -135,24 +125,13 @@ export default function Hero() {
                       </span>
                     </div>
                     
-                    {/* Coleira com GPS piscando */}
-                    <motion.div
-                      animate={{ 
-                        y: [-2, 2, -2]
-                      }}
-                      transition={{ duration: 1.5, repeat: Infinity }}
-                      className="hidden md:flex items-center"
-                    >
-                      <div className="relative">
-                        <span className="text-xl">🥰</span>
-                        <div className="absolute top-0 right-0">
-                          <span className="relative flex h-2 w-2">
-                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75" />
-                            <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500" />
-                          </span>
-                        </div>
-                      </div>
-                    </motion.div>
+                    {/* Sinal ao vivo */}
+                    <div className="hidden md:flex items-center">
+                      <span className="relative flex h-3 w-3">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
+                        <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500" />
+                      </span>
+                    </div>
                   </div>
                 </div>
                 
@@ -291,7 +270,7 @@ export default function Hero() {
               <div className="absolute inset-0 bg-gradient-to-br from-neon/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               <div className="relative z-10">
                 <div className="w-12 h-12 mx-auto mb-3 bg-gradient-to-br from-neon to-purple-600 rounded-full flex items-center justify-center shadow-lg">
-                  <span className="text-xl">🤗</span>
+                  <PsychIcon className="w-7 h-7" />
                 </div>
                 <h3 className="text-base font-bold text-ice mb-1">
                   <span className="text-neon">PSICÓLOGA</span>
@@ -310,7 +289,7 @@ export default function Hero() {
               <div className="absolute inset-0 bg-gradient-to-br from-amber-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               <div className="relative z-10">
                 <div className="w-12 h-12 mx-auto mb-3 bg-gradient-to-br from-amber-400 to-amber-600 rounded-full flex items-center justify-center shadow-lg">
-                  <span className="text-xl">📜</span>
+                  <LegalIcon className="w-7 h-7" />
                 </div>
                 <h3 className="text-base font-bold text-ice mb-1">
                   <span className="text-amber-400">JURÍDICO</span>
