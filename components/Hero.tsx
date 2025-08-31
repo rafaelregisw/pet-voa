@@ -4,8 +4,6 @@ import { motion } from 'framer-motion'
 import { ArrowRight, Star, Shield, Heart, MapPin, Satellite } from 'lucide-react'
 import PsychIcon from './icons/PsychIcon'
 import LegalIcon from './icons/LegalIcon'
-import PetMascot from './PetMascot'
-import CatMascot from './CatMascot'
 import { openWhatsApp } from '@/lib/whatsapp'
 import { useSmoothScroll } from '@/hooks/useSmoothScroll'
 
@@ -57,6 +55,183 @@ export default function Hero() {
               </h1>
             </motion.div>
             
+            {/* Mascotes Organizados com Partículas Mágicas */}
+            <div className="relative mb-6">
+              <div className="flex justify-center items-end gap-6 md:gap-12 lg:gap-20">
+                
+                {/* Cachorro com Corações */}
+                <motion.div
+                  initial={{ opacity: 0, x: -50 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.8, delay: 0.2 }}
+                  className="relative"
+                >
+                  <motion.div
+                    animate={{ 
+                      y: [0, -10, 0],
+                      rotate: [-5, 5, -5]
+                    }}
+                    transition={{ duration: 3, repeat: Infinity }}
+                    className="text-5xl md:text-7xl lg:text-8xl"
+                  >
+                    🐕
+                  </motion.div>
+                  {/* Corações flutuando */}
+                  {[...Array(3)].map((_, i) => (
+                    <motion.div
+                      key={`dog-heart-${i}`}
+                      className="absolute text-pink-500"
+                      style={{ 
+                        left: `${-10 + i * 15}px`,
+                        top: `-${20 + i * 10}px`
+                      }}
+                      animate={{
+                        y: [-20, -40, -20],
+                        opacity: [0.5, 1, 0],
+                        scale: [0.8, 1, 0.5]
+                      }}
+                      transition={{
+                        duration: 2.5,
+                        repeat: Infinity,
+                        delay: i * 0.8
+                      }}
+                    >
+                      ❤️
+                    </motion.div>
+                  ))}
+                </motion.div>
+                
+                {/* Gato com Patinhas */}
+                <motion.div
+                  initial={{ opacity: 0, y: 50 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.3 }}
+                  className="relative"
+                >
+                  <motion.div
+                    animate={{ 
+                      y: [0, -5, 0],
+                      rotate: [0, -10, 10, 0]
+                    }}
+                    transition={{ duration: 4, repeat: Infinity }}
+                    className="text-4xl md:text-6xl lg:text-7xl"
+                  >
+                    🐈
+                  </motion.div>
+                  {/* Patinhas */}
+                  {[...Array(2)].map((_, i) => (
+                    <motion.div
+                      key={`cat-paw-${i}`}
+                      className="absolute text-purple-400"
+                      style={{ 
+                        right: `${-15 + i * 20}px`,
+                        top: `-${15 + i * 15}px`
+                      }}
+                      animate={{
+                        y: [-10, -25, -10],
+                        x: [0, i === 0 ? -5 : 5, 0],
+                        rotate: [0, 360, 720],
+                        opacity: [0.6, 1, 0.3]
+                      }}
+                      transition={{
+                        duration: 3,
+                        repeat: Infinity,
+                        delay: i * 0.5
+                      }}
+                    >
+                      🐾
+                    </motion.div>
+                  ))}
+                </motion.div>
+                
+                {/* Papagaio com Notas Musicais */}
+                <motion.div
+                  initial={{ opacity: 0, y: -50 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.4 }}
+                  className="relative"
+                >
+                  <motion.div
+                    animate={{ 
+                      x: [0, 5, 0, -5, 0],
+                      y: [0, -15, 0]
+                    }}
+                    transition={{ duration: 2.5, repeat: Infinity }}
+                    className="text-4xl md:text-6xl lg:text-7xl"
+                  >
+                    🦜
+                  </motion.div>
+                  {/* Notas musicais */}
+                  {[...Array(3)].map((_, i) => (
+                    <motion.div
+                      key={`parrot-note-${i}`}
+                      className="absolute text-green-400"
+                      style={{ 
+                        left: `${10 + i * 12}px`,
+                        top: `-${10 + i * 8}px`
+                      }}
+                      animate={{
+                        y: [-15, -35, -15],
+                        x: [0, i % 2 === 0 ? 10 : -10, 0],
+                        opacity: [0.4, 1, 0],
+                        scale: [0.7, 1.1, 0.5]
+                      }}
+                      transition={{
+                        duration: 2,
+                        repeat: Infinity,
+                        delay: i * 0.6
+                      }}
+                    >
+                      🎵
+                    </motion.div>
+                  ))}
+                </motion.div>
+                
+                {/* Coelho com Estrelas */}
+                <motion.div
+                  initial={{ opacity: 0, x: 50 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.8, delay: 0.5 }}
+                  className="relative"
+                >
+                  <motion.div
+                    animate={{ 
+                      y: [0, -20, 0],
+                      scale: [1, 1.1, 1]
+                    }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                    className="text-5xl md:text-7xl lg:text-8xl"
+                  >
+                    🐰
+                  </motion.div>
+                  {/* Estrelas */}
+                  {[...Array(3)].map((_, i) => (
+                    <motion.div
+                      key={`rabbit-star-${i}`}
+                      className="absolute text-yellow-400"
+                      style={{ 
+                        right: `${-5 + i * 10}px`,
+                        top: `-${25 + i * 5}px`
+                      }}
+                      animate={{
+                        rotate: [0, 360],
+                        scale: [0.5, 1.2, 0.5],
+                        opacity: [0.5, 1, 0.2]
+                      }}
+                      transition={{
+                        duration: 2.5,
+                        repeat: Infinity,
+                        delay: i * 0.4
+                      }}
+                    >
+                      ⭐
+                    </motion.div>
+                  ))}
+                </motion.div>
+                
+              </div>
+            </div>
+            
             {/* 🐾 GPS TRACKER FOFO E LINDO! 🐾 */}
             <motion.div
               initial={{ scale: 0, opacity: 0 }}
@@ -99,37 +274,41 @@ export default function Hero() {
                   <div className="w-full h-full bg-gradient-to-r from-pink-400/20 to-rose-400/20 rounded-full blur-xl" />
                 </div>
                 
-                {/* Badge principal SUPER FOFO */}
-                <div className="relative bg-gradient-to-r from-pink-500 via-rose-400 to-pink-500 px-4 md:px-6 py-3 rounded-full shadow-2xl border-2 border-white/30 backdrop-blur-sm">
-                  <div className="flex items-center gap-2 md:gap-3">
-                    {/* Patinha estática */}
-                    <div className="text-2xl">
-                      🐾
-                    </div>
+                {/* Badge principal MAIOR E MELHOR */}
+                <div className="relative bg-gradient-to-r from-red-600 via-orange-500 to-red-600 px-6 md:px-8 py-4 md:py-5 rounded-full shadow-2xl border-2 border-white/40 backdrop-blur-sm transform hover:scale-105 transition-transform">
+                  <div className="flex items-center gap-3 md:gap-4">
+                    {/* Ícone GPS animado */}
+                    <motion.div
+                      animate={{ scale: [1, 1.2, 1] }}
+                      transition={{ duration: 2, repeat: Infinity }}
+                      className="text-3xl md:text-4xl"
+                    >
+                      📍
+                    </motion.div>
                     
-                    {/* Texto carinhoso */}
+                    {/* Texto maior e mais destacado */}
                     <div className="flex flex-col">
-                      <span className="text-white font-bold text-sm md:text-base flex items-center gap-1">
-                        📍 GPS RASTREÁVEL 24H
+                      <span className="text-white font-black text-base md:text-xl flex items-center gap-2">
+                        GPS RASTREÁVEL 24H
                         <motion.span
-                          animate={{ rotate: 360 }}
-                          transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-                          className="hidden md:inline-block text-xs"
+                          animate={{ scale: [1, 1.3, 1] }}
+                          transition={{ duration: 1.5, repeat: Infinity }}
+                          className="text-base"
                         >
-                          ✨
+                          🔴
                         </motion.span>
                       </span>
-                      <span className="text-white/90 text-xs flex items-center gap-1">
-                        Acompanhe as patinhas em tempo real
-                        <span className="hidden md:inline">💕</span>
+                      <span className="text-white/95 text-sm md:text-base font-medium flex items-center gap-1">
+                        Coleira com GPS + Link exclusivo
+                        <span className="hidden md:inline">🐾</span>
                       </span>
                     </div>
                     
-                    {/* Sinal ao vivo */}
-                    <div className="hidden md:flex items-center">
-                      <span className="relative flex h-3 w-3">
+                    {/* Sinal ao vivo MAIOR */}
+                    <div className="flex items-center">
+                      <span className="relative flex h-4 w-4">
                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
-                        <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500" />
+                        <span className="relative inline-flex rounded-full h-4 w-4 bg-green-500 border-2 border-white" />
                       </span>
                     </div>
                   </div>
