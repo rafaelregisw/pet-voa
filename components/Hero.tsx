@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { ArrowRight, Star, Shield, Heart, MapPin, Satellite } from 'lucide-react'
 import PsychIcon from './icons/PsychIcon'
 import LegalIcon from './icons/LegalIcon'
+import SecurityBadges from './SecurityBadges'
 import { openWhatsApp } from '@/lib/whatsapp'
 import { useSmoothScroll } from '@/hooks/useSmoothScroll'
 
@@ -436,26 +437,14 @@ export default function Hero() {
             </motion.div>
           </motion.div>
 
-          {/* CTA Buttons */}
+          {/* Security Badges */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
+            className="mt-8"
           >
-            <button 
-              onClick={() => openWhatsApp('Olá! Quero começar o processo de transporte do meu pet para os EUA! 🐕✈️')}
-              className="button-primary group"
-            >
-              Começar Agora
-              <ArrowRight className="inline-block ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </button>
-            <button 
-              onClick={() => scrollToSection('how')}
-              className="button-secondary"
-            >
-              Ver Como Funciona
-            </button>
+            <SecurityBadges />
           </motion.div>
 
         </div>

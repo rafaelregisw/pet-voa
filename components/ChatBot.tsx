@@ -44,39 +44,18 @@ export default function ChatBot() {
   const [isTyping, setIsTyping] = useState(false)
   const [hasNewMessage, setHasNewMessage] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
-  const [keyboardHeight, setKeyboardHeight] = useState(0)
   const messagesEndRef = useRef<HTMLDivElement>(null)
-  const chatWindowRef = useRef<HTMLDivElement>(null)
+  const messagesContainerRef = useRef<HTMLDivElement>(null)
 
-  // Detectar se é mobile e altura do teclado
+  // Detectar se é mobile
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768)
     }
     checkMobile()
     window.addEventListener('resize', checkMobile)
-    
-    // Detectar altura do teclado no mobile
-    if (window.visualViewport && isMobile) {
-      const handleViewportChange = () => {
-        if (window.visualViewport) {
-          const currentHeight = window.innerHeight - window.visualViewport.height
-          setKeyboardHeight(currentHeight)
-        }
-      }
-      
-      window.visualViewport.addEventListener('resize', handleViewportChange)
-      window.visualViewport.addEventListener('scroll', handleViewportChange)
-      
-      return () => {
-        window.removeEventListener('resize', checkMobile)
-        window.visualViewport?.removeEventListener('resize', handleViewportChange)
-        window.visualViewport?.removeEventListener('scroll', handleViewportChange)
-      }
-    }
-    
     return () => window.removeEventListener('resize', checkMobile)
-  }, [isMobile])
+  }, [])
 
   // Carregar dados salvos do localStorage
   useEffect(() => {
@@ -139,7 +118,9 @@ export default function ChatBot() {
   }, [isOpen, hasNewMessage])
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+    if (messagesContainerRef.current) {
+      messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight
+    }
   }
 
   useEffect(() => {
@@ -456,16 +437,13 @@ export default function ChatBot() {
             initial={{ opacity: 0, y: 20, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.9 }}
-            ref={chatWindowRef}
-            className="fixed inset-0 md:inset-auto md:bottom-8 md:right-8 z-50 w-full md:w-96 h-full md:h-[600px] bg-gradient-to-br from-slate-900/95 via-purple-900/95 to-pink-900/95 backdrop-blur-md md:backdrop-blur-xl md:rounded-3xl shadow-2xl border-0 md:border border-white/20 flex flex-col overflow-hidden"
+            className="fixed inset-0 md:inset-auto md:bottom-8 md:right-8 z-50 w-full md:w-96 bg-gradient-to-br from-slate-900/95 via-purple-900/95 to-pink-900/95 backdrop-blur-md md:backdrop-blur-xl md:rounded-3xl shadow-2xl border-0 md:border border-white/20 flex flex-col"
             style={{
-              height: isMobile ? `calc(100vh - ${keyboardHeight}px)` : '600px',
-              bottom: isMobile ? `${keyboardHeight}px` : 'auto',
-              transition: 'height 0.3s ease, bottom 0.3s ease'
+              height: isMobile ? '100dvh' : '600px'
             }}
           >
             {/* Header */}
-            <div className="bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 p-4 flex items-center justify-between">
+            <div className="shrink-0 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 p-4 flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
                   <Bot className="w-6 h-6 text-white" />
@@ -509,9 +487,10 @@ export default function ChatBot() {
             </div>
 
             {!isRegistered ? (
-              // Formulário de Registro - MELHORADO
-              <div className="flex-1 p-6 flex flex-col justify-center bg-gradient-to-b from-midnight/50 to-midnight/80">
-                <div className="max-w-sm mx-auto w-full space-y-6">
+              // Formulário de Registro
+              <div className="flex-1 overflow-y-auto p-6 bg-gradient-to-b from-midnight/50 to-midnight/80">
+                <div className="min-h-full flex items-center justify-center">
+                <div className="max-w-sm w-full space-y-6">
                   <div className="text-center mb-6">
                     <h2 className="text-xl font-bold text-ice mb-2">Bem-vindo! 👋</h2>
                     <p className="text-ice/60 text-sm">Preencha seus dados para começar</p>
@@ -594,11 +573,18 @@ export default function ChatBot() {
                     Seus dados são salvos apenas no seu navegador
                   </p>
                 </div>
+                </div>
               </div>
             ) : (
               <>
                 {/* Messages */}
-                <div className="flex-1 overflow-y-auto p-4 space-y-4">
+                <div 
+                  ref={messagesContainerRef}
+                  className="flex-1 overflow-y-auto p-4 space-y-4"
+                  style={{
+                    WebkitOverflowScrolling: 'touch'
+                  }}
+                >
                   {messages.map((message) => (
                     <motion.div
                       key={message.id}
@@ -659,7 +645,7 @@ export default function ChatBot() {
                 </div>
 
                 {/* Input Area */}
-                <div className="p-4 border-t border-white/10 bg-gradient-to-b from-transparent to-black/20">
+                <div className="shrink-0 p-4 border-t border-white/10 bg-gradient-to-b from-transparent to-black/20">
                   <div className="flex gap-2">
                     <input
                       type="text"
@@ -667,8 +653,11 @@ export default function ChatBot() {
                       onChange={(e) => setInputValue(e.target.value)}
                       onKeyPress={handleKeyPress}
                       placeholder="Digite sua mensagem..."
-                      className="flex-1 bg-white/10 text-ice rounded-full px-4 py-2 outline-none focus:bg-white/20 transition-colors placeholder-ice/50"
-                      style={{ fontSize: '16px' }} // Previne zoom no iOS
+                      className="flex-1 bg-white/10 text-ice rounded-full px-4 py-3 outline-none focus:bg-white/20 transition-colors placeholder-ice/50"
+                      style={{ 
+                        fontSize: '16px',
+                        WebkitAppearance: 'none'
+                      }}
                     />
                     <button
                       onClick={sendMessage}

@@ -16,9 +16,11 @@ export async function GET(request: Request) {
     if (process.env.REDIS_URL) {
       const { getRedisClient } = await import('@/lib/redis')
       const redis = getRedisClient()
-      const cached = await redis.get(key)
-      if (cached) {
-        return NextResponse.json({ data: JSON.parse(cached), source: 'redis' })
+      if (redis) {
+        const cached = await redis.get(key)
+        if (cached) {
+          return NextResponse.json({ data: JSON.parse(cached), source: 'redis' })
+        }
       }
     }
   } catch (error) {
@@ -46,8 +48,10 @@ export async function POST(request: Request) {
     if (process.env.REDIS_URL) {
       const { getRedisClient } = await import('@/lib/redis')
       const redis = getRedisClient()
-      await redis.setex(key, ttl, JSON.stringify(data))
-      return NextResponse.json({ success: true, source: 'redis' })
+      if (redis) {
+        await redis.setex(key, ttl, JSON.stringify(data))
+        return NextResponse.json({ success: true, source: 'redis' })
+      }
     }
   } catch (error) {
     console.log('Redis not available, using memory cache')

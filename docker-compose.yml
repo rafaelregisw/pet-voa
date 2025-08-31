@@ -1,45 +1,37 @@
 version: '3.8'
 
 services:
-  # Redis service for caching and session storage
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - REDIS_URL=redis://redis:6379
+      - NODE_ENV=production
+    depends_on:
+      - redis
+    restart: unless-stopped
+    networks:
+      - petvoa-network
+
   redis:
     image: redis:7-alpine
-    container_name: petvoa-redis
-    restart: unless-stopped
     ports:
       - "6379:6379"
     volumes:
-      - redis_data:/data
-    command: redis-server --appendonly yes --maxmemory 256mb --maxmemory-policy allkeys-lru
+      - redis-data:/data
+    command: redis-server --appendonly yes --appendfsync everysec
+    restart: unless-stopped
+    networks:
+      - petvoa-network
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 10s
       timeout: 5s
       retries: 5
-    networks:
-      - petvoa-network
-
-  # Next.js application (optional - you can run locally with npm run dev)
-  # Uncomment if you want to run the app in Docker too
-  # app:
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile
-  #   container_name: petvoa-app
-  #   restart: unless-stopped
-  #   ports:
-  #     - "3000:3000"
-  #   environment:
-  #     - NODE_ENV=production
-  #     - REDIS_URL=redis://redis:6379
-  #   depends_on:
-  #     redis:
-  #       condition: service_healthy
-  #   networks:
-  #     - petvoa-network
 
 volumes:
-  redis_data:
+  redis-data:
     driver: local
 
 networks:

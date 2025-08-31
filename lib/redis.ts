@@ -1,43 +1,57 @@
 import Redis from 'ioredis'
+import { memoryCacheWrapper, memoryRateLimiter, incrementMemoryCounter, getMemoryCounter } from './memory-cache'
 
 // Redis client singleton
 let redis: Redis | null = null
+let isRedisAvailable = false
 
 /**
  * Get Redis client instance
  * Uses environment variables for configuration
  * Defaults to localhost:6379 for local development
  */
-export function getRedisClient(): Redis {
-  if (!redis) {
-    const redisUrl = process.env.REDIS_URL || 'redis://localhost:6379'
+export function getRedisClient(): Redis | null {
+  if (!redis && process.env.REDIS_URL) {
+    const redisUrl = process.env.REDIS_URL
     
-    redis = new Redis(redisUrl, {
-      maxRetriesPerRequest: 3,
-      retryStrategy(times) {
-        const delay = Math.min(times * 50, 2000)
-        return delay
-      },
-      reconnectOnError(err) {
-        const targetError = 'READONLY'
-        if (err.message.includes(targetError)) {
-          // Only reconnect when the error contains "READONLY"
-          return true
-        }
-        return false
-      },
-    })
+    try {
+      redis = new Redis(redisUrl, {
+        maxRetriesPerRequest: 1,
+        enableOfflineQueue: false,
+        retryStrategy(times) {
+          if (times > 3) {
+            console.log('⚠️ Redis not available, using memory cache')
+            isRedisAvailable = false
+            return null
+          }
+          const delay = Math.min(times * 50, 2000)
+          return delay
+        },
+        reconnectOnError(err) {
+          const targetError = 'READONLY'
+          if (err.message.includes(targetError)) {
+            return true
+          }
+          return false
+        },
+      })
 
-    redis.on('connect', () => {
-      console.log('✅ Redis connected successfully')
-    })
+      redis.on('connect', () => {
+        console.log('✅ Redis connected successfully (Coolify)')
+        isRedisAvailable = true
+      })
 
-    redis.on('error', (error) => {
-      console.error('❌ Redis connection error:', error)
-    })
+      redis.on('error', (error) => {
+        console.log('⚠️ Redis not available, using memory cache fallback')
+        isRedisAvailable = false
+      })
+    } catch (error) {
+      console.log('💾 Using memory cache (Redis will be available in production)')
+      isRedisAvailable = false
+    }
   }
 
-  return redis
+  return isRedisAvailable ? redis : null
 }
 
 /**
@@ -50,26 +64,31 @@ export async function cacheWrapper<T>(
 ): Promise<T> {
   const client = getRedisClient()
   
-  try {
-    // Try to get from cache
-    const cached = await client.get(key)
-    if (cached) {
-      console.log(`📦 Cache hit for key: ${key}`)
-      return JSON.parse(cached)
+  // Use Redis if available, otherwise use memory cache
+  if (client && isRedisAvailable) {
+    try {
+      // Try to get from cache
+      const cached = await client.get(key)
+      if (cached) {
+        console.log(`🚀 Redis cache hit for key: ${key}`)
+        return JSON.parse(cached)
+      }
+      
+      // Fetch fresh data
+      console.log(`🔄 Redis cache miss for key: ${key}, fetching...`)
+      const data = await fetcher()
+      
+      // Store in cache with TTL
+      await client.setex(key, ttl, JSON.stringify(data))
+      
+      return data
+    } catch (error) {
+      // Fallback to memory cache if Redis fails
+      return memoryCacheWrapper(key, fetcher, ttl)
     }
-    
-    // Fetch fresh data
-    console.log(`🔄 Cache miss for key: ${key}, fetching...`)
-    const data = await fetcher()
-    
-    // Store in cache with TTL
-    await client.setex(key, ttl, JSON.stringify(data))
-    
-    return data
-  } catch (error) {
-    console.error('Cache error:', error)
-    // Fallback to fetcher if Redis fails
-    return await fetcher()
+  } else {
+    // Use memory cache fallback
+    return memoryCacheWrapper(key, fetcher, ttl)
   }
 }
 
@@ -82,23 +101,28 @@ export async function rateLimiter(
   window: number = 60 // seconds
 ): Promise<{ allowed: boolean; remaining: number }> {
   const client = getRedisClient()
-  const key = `rate_limit:${identifier}`
   
-  try {
-    const current = await client.incr(key)
+  if (client && isRedisAvailable) {
+    const key = `rate_limit:${identifier}`
     
-    if (current === 1) {
-      await client.expire(key, window)
+    try {
+      const current = await client.incr(key)
+      
+      if (current === 1) {
+        await client.expire(key, window)
+      }
+      
+      return {
+        allowed: current <= limit,
+        remaining: Math.max(0, limit - current)
+      }
+    } catch (error) {
+      // Fallback to memory rate limiter
+      return memoryRateLimiter(identifier, limit, window)
     }
-    
-    return {
-      allowed: current <= limit,
-      remaining: Math.max(0, limit - current)
-    }
-  } catch (error) {
-    console.error('Rate limiter error:', error)
-    // Allow request if Redis fails
-    return { allowed: true, remaining: limit }
+  } else {
+    // Use memory rate limiter
+    return memoryRateLimiter(identifier, limit, window)
   }
 }
 
@@ -107,6 +131,12 @@ export async function rateLimiter(
  */
 export async function setSession(sessionId: string, data: any, ttl: number = 86400) {
   const client = getRedisClient()
+  
+  if (!client || !isRedisAvailable) {
+    // Use memory cache for sessions in development
+    return false
+  }
+  
   const key = `session:${sessionId}`
   
   try {
@@ -120,6 +150,11 @@ export async function setSession(sessionId: string, data: any, ttl: number = 864
 
 export async function getSession(sessionId: string) {
   const client = getRedisClient()
+  
+  if (!client || !isRedisAvailable) {
+    return null
+  }
+  
   const key = `session:${sessionId}`
   
   try {
@@ -133,6 +168,11 @@ export async function getSession(sessionId: string) {
 
 export async function deleteSession(sessionId: string) {
   const client = getRedisClient()
+  
+  if (!client || !isRedisAvailable) {
+    return false
+  }
+  
   const key = `session:${sessionId}`
   
   try {
@@ -149,14 +189,20 @@ export async function deleteSession(sessionId: string) {
  */
 export async function incrementCounter(name: string): Promise<number> {
   const client = getRedisClient()
-  const key = `counter:${name}`
   
-  try {
-    const value = await client.incr(key)
-    return value
-  } catch (error) {
-    console.error('Counter error:', error)
-    return 0
+  if (client && isRedisAvailable) {
+    const key = `counter:${name}`
+    
+    try {
+      const value = await client.incr(key)
+      return value
+    } catch (error) {
+      // Fallback to memory counter
+      return incrementMemoryCounter(name)
+    }
+  } else {
+    // Use memory counter
+    return incrementMemoryCounter(name)
   }
 }
 
@@ -165,14 +211,20 @@ export async function incrementCounter(name: string): Promise<number> {
  */
 export async function getCounter(name: string): Promise<number> {
   const client = getRedisClient()
-  const key = `counter:${name}`
   
-  try {
-    const value = await client.get(key)
-    return value ? parseInt(value, 10) : 0
-  } catch (error) {
-    console.error('Counter retrieval error:', error)
-    return 0
+  if (client && isRedisAvailable) {
+    const key = `counter:${name}`
+    
+    try {
+      const value = await client.get(key)
+      return value ? parseInt(value, 10) : 0
+    } catch (error) {
+      // Fallback to memory counter
+      return getMemoryCounter(name)
+    }
+  } else {
+    // Use memory counter
+    return getMemoryCounter(name)
   }
 }
 
@@ -180,9 +232,10 @@ export async function getCounter(name: string): Promise<number> {
  * Clean up Redis connection
  */
 export async function closeRedis() {
-  if (redis) {
+  if (redis && isRedisAvailable) {
     await redis.quit()
     redis = null
+    isRedisAvailable = false
     console.log('🔌 Redis connection closed')
   }
 }

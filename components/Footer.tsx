@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { Instagram, Facebook, Mail, Phone, MapPin } from 'lucide-react'
 import AnimatedLogoUltra from './AnimatedLogoUltra'
+import { SecurityBadgesFooter } from './SecurityBadges'
 
 export default function Footer() {
   return (
@@ -81,6 +82,9 @@ export default function Footer() {
           </div>
         </div>
 
+        {/* Security Badges */}
+        <SecurityBadgesFooter />
+        
         {/* Bottom Bar */}
         <div className="border-t border-ice/10 pt-8 text-center">
           <p className="text-ice/40 text-sm">
