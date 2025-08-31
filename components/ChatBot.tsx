@@ -427,7 +427,11 @@ export default function ChatBot() {
             initial={{ opacity: 0, y: 20, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.9 }}
-            className="fixed inset-0 md:inset-auto md:bottom-8 md:right-8 z-50 w-full md:w-96 h-full md:h-[600px] bg-gradient-to-br from-slate-900/95 via-purple-900/95 to-pink-900/95 backdrop-blur-xl md:rounded-3xl shadow-2xl border-0 md:border border-white/20 flex flex-col overflow-hidden"
+            className="fixed inset-0 md:inset-auto md:bottom-8 md:right-8 z-50 w-full md:w-96 h-full md:h-[600px] bg-gradient-to-br from-slate-900/95 via-purple-900/95 to-pink-900/95 md:backdrop-blur-xl md:rounded-3xl shadow-2xl border-0 md:border border-white/20 flex flex-col overflow-hidden"
+            style={{
+              height: isMobile ? 'calc(100vh - env(safe-area-inset-bottom))' : '600px',
+              paddingBottom: isMobile ? 'env(safe-area-inset-bottom)' : 0
+            }}
           >
             {/* Header */}
             <div className="bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 p-4 flex items-center justify-between">
@@ -466,9 +470,9 @@ export default function ChatBot() {
                     setIsOpen(false)
                     setHasNewMessage(false)
                   }}
-                  className="text-white/80 hover:text-white transition-colors"
+                  className="text-white hover:text-white transition-colors p-1 rounded-lg hover:bg-white/20"
                 >
-                  <X className="w-5 h-5" />
+                  <X className="w-6 h-6 md:w-5 md:h-5" />
                 </button>
               </div>
             </div>
@@ -623,8 +627,8 @@ export default function ChatBot() {
                   <div ref={messagesEndRef} />
                 </div>
 
-                {/* Input */}
-                <div className="p-4 border-t border-white/10">
+                {/* Input - Fix para teclado mobile */}
+                <div className="p-4 border-t border-white/10" style={{ paddingBottom: isMobile ? 'env(safe-area-inset-bottom, 16px)' : '16px' }}>
                   <div className="flex gap-2">
                     <input
                       type="text"
@@ -633,6 +637,7 @@ export default function ChatBot() {
                       onKeyPress={handleKeyPress}
                       placeholder="Digite sua mensagem..."
                       className="flex-1 bg-white/10 text-ice rounded-full px-4 py-2 outline-none focus:bg-white/20 transition-colors placeholder-ice/50"
+                      style={{ fontSize: '16px' }} // Previne zoom no iOS
                     />
                     <button
                       onClick={sendMessage}

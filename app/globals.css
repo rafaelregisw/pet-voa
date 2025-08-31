@@ -198,6 +198,7 @@
       width: 100%;
       max-width: 100vw;
       position: relative;
+      -webkit-overflow-scrolling: touch;
     }
     
     /* Prevent horizontal scroll */
@@ -205,27 +206,49 @@
       max-width: 100vw !important;
     }
     
-    /* Fix fixed elements */
+    /* Fix fixed elements with GPU acceleration */
     .fixed {
-      transform: translateZ(0);
-      -webkit-transform: translateZ(0);
-      will-change: transform;
+      transform: translate3d(0, 0, 0);
+      -webkit-transform: translate3d(0, 0, 0);
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
     }
     
-    /* Disable heavy animations on mobile */
-    .animate-pulse {
-      animation: none;
+    /* Disable ALL animations on mobile */
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
     }
     
-    /* Disable blur effects on mobile for performance */
-    .blur-xl, .blur-2xl, .blur-3xl {
+    /* Remove all blur effects on mobile */
+    .backdrop-blur-xl, .backdrop-blur-2xl, .blur-xl, .blur-2xl, .blur-3xl {
+      backdrop-filter: none !important;
       filter: none !important;
+      -webkit-backdrop-filter: none !important;
       -webkit-filter: none !important;
     }
     
     /* Simplify shadows on mobile */
-    .shadow-2xl, .shadow-xl {
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1) !important;
+    .shadow-2xl, .shadow-xl, .shadow-lg {
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+    }
+    
+    /* Disable gradients animations */
+    .bg-gradient-to-r, .bg-gradient-to-br {
+      background-image: none !important;
+      background-color: #1a1a2e !important;
+    }
+    
+    /* Otimizar fontes */
+    body {
+      text-rendering: optimizeSpeed;
+      -webkit-font-smoothing: antialiased;
+    }
+    
+    /* Prevenir zoom no input */
+    input, textarea, select {
+      font-size: 16px !important;
     }
   }
 }

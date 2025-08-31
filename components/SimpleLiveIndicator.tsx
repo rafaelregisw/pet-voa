@@ -49,26 +49,7 @@ export default function SimpleLiveIndicator() {
         </div>
       </div>
 
-      {/* Mobile - super simples */}
-      <div className="fixed top-14 left-2 z-30 md:hidden">
-        <div className="bg-midnight/90 backdrop-blur rounded px-2 py-1">
-          <div className="flex items-center gap-1">
-            <div className="w-1.5 h-1.5 bg-green-500 rounded-full" />
-            <span className="text-xs text-ice/80">{viewers} online</span>
-          </div>
-        </div>
-      </div>
-
-      {/* Notificação mobile - super discreta */}
-      {showNotification && (
-        <div className="fixed bottom-20 inset-x-4 z-40 md:hidden">
-          <div className="bg-midnight/95 backdrop-blur rounded-lg p-2 text-center">
-            <p className="text-xs text-ice/70">
-              Alguém de {city} está navegando agora
-            </p>
-          </div>
-        </div>
-      )}
+      {/* Desabilitado no mobile para performance */}
     </>
   )
 }

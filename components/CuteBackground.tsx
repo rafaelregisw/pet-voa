@@ -1,6 +1,28 @@
 'use client'
 
+import { useState, useEffect } from 'react'
+
 export default function CuteBackground() {
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
+
+  // No mobile, apenas gradiente simples
+  if (isMobile) {
+    return (
+      <div className="fixed inset-0 pointer-events-none overflow-hidden" style={{ zIndex: -1 }}>
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0f] via-[#050510] to-[#0a0a0f]" />
+      </div>
+    )
+  }
+
   return (
     <div className="fixed inset-0 pointer-events-none overflow-hidden" style={{ zIndex: -1 }}>
       {/* Base escura profunda */}
