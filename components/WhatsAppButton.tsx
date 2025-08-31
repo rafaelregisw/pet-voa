@@ -24,7 +24,7 @@ export default function WhatsAppButton() {
         whileHover={{ scale: 1.15 }}
         whileTap={{ scale: 0.9 }}
         onClick={handleClick}
-        className="fixed top-6 right-6 z-50 group"
+        className="fixed top-[18px] right-4 z-50 group"
         aria-label="WhatsApp"
       >
         <div className="relative">
