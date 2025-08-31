@@ -27,10 +27,6 @@ interface Country {
 const countries: Country[] = [
   { name: 'Brasil', code: 'BR', flag: '🇧🇷', phoneCode: '+55' },
   { name: 'Estados Unidos', code: 'US', flag: '🇺🇸', phoneCode: '+1' },
-  { name: 'Portugal', code: 'PT', flag: '🇵🇹', phoneCode: '+351' },
-  { name: 'Espanha', code: 'ES', flag: '🇪🇸', phoneCode: '+34' },
-  { name: 'Argentina', code: 'AR', flag: '🇦🇷', phoneCode: '+54' },
-  { name: 'México', code: 'MX', flag: '🇲🇽', phoneCode: '+52' },
 ]
 
 export default function ChatBot() {
@@ -121,11 +117,19 @@ export default function ChatBot() {
     // Remove tudo que não é número
     const numbers = value.replace(/\D/g, '')
     
-    // Formata no padrão brasileiro
-    if (numbers.length <= 2) return numbers
-    if (numbers.length <= 7) return `${numbers.slice(0, 2)} ${numbers.slice(2)}`
-    if (numbers.length <= 11) return `${numbers.slice(0, 2)} ${numbers.slice(2, 7)}-${numbers.slice(7)}`
-    return `${numbers.slice(0, 2)} ${numbers.slice(2, 7)}-${numbers.slice(7, 11)}`
+    if (selectedCountry.code === 'BR') {
+      // Formato brasileiro: 11 99999-9999
+      if (numbers.length <= 2) return numbers
+      if (numbers.length <= 7) return `${numbers.slice(0, 2)} ${numbers.slice(2)}`
+      if (numbers.length <= 11) return `${numbers.slice(0, 2)} ${numbers.slice(2, 7)}-${numbers.slice(7)}`
+      return `${numbers.slice(0, 2)} ${numbers.slice(2, 7)}-${numbers.slice(7, 11)}`
+    } else {
+      // Formato americano: (212) 555-0100
+      if (numbers.length <= 3) return numbers
+      if (numbers.length <= 6) return `(${numbers.slice(0, 3)}) ${numbers.slice(3)}`
+      if (numbers.length <= 10) return `(${numbers.slice(0, 3)}) ${numbers.slice(3, 6)}-${numbers.slice(6)}`
+      return `(${numbers.slice(0, 3)}) ${numbers.slice(3, 6)}-${numbers.slice(6, 10)}`
+    }
   }
 
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -396,12 +400,12 @@ export default function ChatBot() {
                           type="tel"
                           value={formData.phone}
                           onChange={handlePhoneChange}
-                          placeholder="62 98321-1122"
+                          placeholder={selectedCountry.code === 'BR' ? '11 99999-9999' : '(212) 555-0100'}
                           className="flex-1 bg-white/10 text-ice rounded-xl px-4 py-3.5 outline-none focus:bg-white/15 focus:ring-2 focus:ring-electric/30 transition-all placeholder-ice/40"
                         />
                       </div>
                       <p className="text-ice/40 text-xs mt-2 ml-1">
-                        Exemplo: {selectedCountry.phoneCode} 62 98321-1122
+                        Exemplo: {selectedCountry.phoneCode} {selectedCountry.code === 'BR' ? '11 99999-9999' : '(212) 555-0100'}
                       </p>
                     </div>
                     
