@@ -183,4 +183,23 @@
   .animate-fadeIn {
     animation: fadeIn 0.3s ease-in;
   }
+
+  /* Mobile specific fixes */
+  @media (max-width: 768px) {
+    /* Remove any vertical lines or borders */
+    .border-l-*, .border-r-* {
+      border-left: none !important;
+      border-right: none !important;
+    }
+    
+    /* Ensure no overflow issues */
+    body {
+      overflow-x: hidden;
+    }
+    
+    /* Hide complex animations on mobile */
+    .animate-pulse {
+      animation: none;
+    }
+  }
 }

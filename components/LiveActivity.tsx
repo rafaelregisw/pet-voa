@@ -64,7 +64,7 @@ export default function LiveActivity() {
   return (
     <>
       {/* Indicador fixo de pessoas online */}
-      <div className="fixed top-20 left-2 sm:left-4 z-40 glass-dark rounded-lg sm:rounded-xl p-2 sm:p-3 border border-electric/30 shadow-xl animate-slideIn max-w-[200px] sm:max-w-none">
+      <div className="fixed top-16 left-2 sm:left-4 sm:top-20 z-40 glass-dark rounded-lg sm:rounded-xl p-2 sm:p-3 border border-electric/30 shadow-xl animate-slideIn hidden sm:block">
         <div className="flex items-center gap-3">
           {/* Indicador pulsante */}
           <div className="relative">
@@ -90,8 +90,8 @@ export default function LiveActivity() {
           </div>
         </div>
 
-        {/* Barra de progresso de vagas */}
-        <div className="mt-3">
+        {/* Barra de progresso de vagas - escondida no mobile */}
+        <div className="mt-3 hidden sm:block">
           <div className="flex justify-between text-xs mb-1">
             <span className="text-ice/60">Vagas disponíveis</span>
             <span className="text-amber-400 font-medium">Apenas 5 este mês</span>
@@ -107,8 +107,8 @@ export default function LiveActivity() {
 
       {/* Notificação popup de novo visitante */}
       {showNotification && (
-        <div className="fixed bottom-24 left-4 z-50 animate-slideUp">
-          <div className="glass-dark rounded-xl p-4 border border-electric/30 shadow-2xl max-w-xs">
+        <div className="fixed bottom-20 left-2 right-2 sm:left-4 sm:right-auto z-50 animate-slideUp">
+          <div className="glass-dark rounded-lg p-3 border border-electric/30 shadow-xl max-w-[280px] mx-auto sm:mx-0">
             <div className="flex items-start gap-3">
               <div className="w-2 h-2 bg-green-500 rounded-full mt-1.5 animate-pulse" />
               <div>
@@ -128,12 +128,12 @@ export default function LiveActivity() {
         </div>
       )}
 
-      {/* Badge flutuante mobile */}
-      <div className="fixed bottom-32 right-2 z-40 md:hidden">
-        <div className="glass-dark rounded-full px-3 py-1.5 border border-amber-400/30 shadow-lg animate-bounce">
-          <div className="flex items-center gap-2">
-            <AlertCircle className="w-3 h-3 text-amber-400" />
-            <span className="text-xs text-amber-400 font-medium">Últimas vagas!</span>
+      {/* Badge flutuante mobile - simplificado */}
+      <div className="fixed top-16 left-2 z-40 sm:hidden">
+        <div className="glass-dark rounded-lg px-2 py-1 border border-green-500/30">
+          <div className="flex items-center gap-1">
+            <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+            <span className="text-xs text-ice">{viewers} online</span>
           </div>
         </div>
       </div>
