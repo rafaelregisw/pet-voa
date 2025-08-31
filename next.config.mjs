@@ -4,11 +4,8 @@ const nextConfig = {
     domains: ['images.unsplash.com'],
   },
   
-  // Enable standalone output for Docker
-  output: 'standalone',
-  
-  // Optimize for production
-  swcMinify: true,
+  // Disable standalone for simpler deployment
+  // output: 'standalone',
   
   // Environment variables that can be accessed in the browser
   env: {
