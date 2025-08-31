@@ -36,7 +36,7 @@ export default function TrustBadges() {
   ]
 
   return (
-    <section className="py-8 md:py-12 relative overflow-hidden">
+    <section className="py-16 md:py-20 lg:py-24 relative overflow-hidden">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-r from-electric/5 via-transparent to-neon/5" />
       

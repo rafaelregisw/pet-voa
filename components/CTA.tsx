@@ -7,7 +7,7 @@ import { openWhatsApp } from '@/lib/whatsapp'
 
 export default function CTA() {
   return (
-    <section className="py-20 relative overflow-hidden">
+    <section className="py-16 md:py-20 lg:py-24 relative overflow-hidden">
       {/* Animated Background */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-r from-electric/20 via-neon/20 to-electric/20 animate-gradient" />

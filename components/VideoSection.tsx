@@ -11,7 +11,7 @@ export default function VideoSection() {
   const videoUrl = "https://www.youtube.com/embed/mGdfrvruGzo"
   
   return (
-    <section id="video" className="relative overflow-hidden h-screen flex items-center justify-center">
+    <section id="video" className="relative overflow-hidden py-16 md:py-20 lg:py-24 flex items-center justify-center min-h-screen">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-midnight via-midnight/95 to-midnight" />
       
