@@ -2,56 +2,15 @@
 
 import { motion } from 'framer-motion'
 import { MessageCircle } from 'lucide-react'
-import { useState, useEffect } from 'react'
 import { openWhatsApp } from '@/lib/whatsapp'
 
 export default function WhatsAppButton() {
-  const [showNotification, setShowNotification] = useState(false)
-  
   const handleClick = () => {
     openWhatsApp()
   }
 
-  useEffect(() => {
-    // Mostra notificação após 5 segundos
-    const timer = setTimeout(() => {
-      setShowNotification(true)
-      setTimeout(() => setShowNotification(false), 6000)
-    }, 5000)
-    
-    return () => clearTimeout(timer)
-  }, [])
-
   return (
     <>
-      {/* Notification Popup */}
-      {showNotification && (
-        <motion.div
-          initial={{ opacity: 0, y: 20, scale: 0.8 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          exit={{ opacity: 0, y: 20, scale: 0.8 }}
-          className="fixed bottom-32 right-8 z-50 bg-white rounded-xl shadow-2xl p-4 max-w-xs border-2 border-green-500/20"
-        >
-          <div className="flex items-start gap-3">
-            <div className="flex-shrink-0">
-              <div className="w-10 h-10 bg-gradient-to-r from-green-400 to-green-600 rounded-full flex items-center justify-center">
-                <MessageCircle className="w-6 h-6 text-white" fill="white" />
-              </div>
-            </div>
-            <div>
-              <p className="text-gray-900 font-bold">🟢 Equipe Online Agora!</p>
-              <p className="text-gray-600 text-sm mt-1">
-                Especialistas disponíveis para tirar todas as suas dúvidas.
-              </p>
-              <div className="flex items-center gap-2 mt-2">
-                <span className="text-2xl">👩‍⚕️👩‍⚖️</span>
-                <span className="text-xs text-green-600 font-bold">Resposta Imediata</span>
-              </div>
-            </div>
-          </div>
-        </motion.div>
-      )}
-
       {/* Main WhatsApp Button */}
       <motion.button
         initial={{ scale: 0 }}
