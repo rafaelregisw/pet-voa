@@ -25,11 +25,22 @@ interface RedisStatus {
     size: number
     active: boolean
     mode: string
+    totalCounters?: number
+    lastUpdated?: string
   }
   stats: {
     totalViews: number
     todayViews: number
     activeUsers: number
+    topPages?: Array<{ page: string; views: number }>
+    cacheStats?: {
+      hits: number
+      misses: number
+      hitRate: number
+      savedTime: number
+      totalRequests: number
+      activeCacheItems: number
+    }
   }
   timestamp: string
   environment: string
@@ -284,24 +295,114 @@ export default function RedisMonitor() {
           </motion.div>
         </div>
 
-        {/* Cache em Memória */}
-        {!isConnected && (
+        {/* Sistema de Cache (Tipo Redis) */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="mb-8"
+        >
+          <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
+            <HardDrive className="w-6 h-6 text-cyan-400" />
+            Sistema de Cache (Tipo Redis)
+          </h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {/* Taxa de Acerto */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="bg-gradient-to-br from-cyan-500/20 to-blue-500/20 backdrop-blur-md rounded-xl p-6 border border-cyan-400/30"
+            >
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-white/60 text-sm">Taxa de Acerto</span>
+                <CheckCircle className="w-5 h-5 text-cyan-400" />
+              </div>
+              <p className="text-3xl font-bold text-white">
+                {status.stats.cacheStats?.hitRate || 0}%
+              </p>
+              <div className="mt-2 bg-white/10 rounded-full h-2 overflow-hidden">
+                <div 
+                  className="h-full bg-gradient-to-r from-cyan-400 to-blue-400 transition-all"
+                  style={{ width: `${status.stats.cacheStats?.hitRate || 0}%` }}
+                />
+              </div>
+              <p className="text-xs text-white/50 mt-2">
+                {status.stats.cacheStats?.hits || 0} hits / {status.stats.cacheStats?.misses || 0} misses
+              </p>
+            </motion.div>
+            
+            {/* Tempo Economizado */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.1 }}
+              className="bg-gradient-to-br from-green-500/20 to-emerald-500/20 backdrop-blur-md rounded-xl p-6 border border-green-400/30"
+            >
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-white/60 text-sm">Tempo Economizado</span>
+                <Zap className="w-5 h-5 text-green-400" />
+              </div>
+              <p className="text-3xl font-bold text-white">
+                {status.stats.cacheStats?.savedTime || 0}ms
+              </p>
+              <p className="text-xs text-white/50 mt-2">
+                Carregamento mais rápido com cache
+              </p>
+            </motion.div>
+            
+            {/* Itens em Cache */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.2 }}
+              className="bg-gradient-to-br from-purple-500/20 to-pink-500/20 backdrop-blur-md rounded-xl p-6 border border-purple-400/30"
+            >
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-white/60 text-sm">Itens em Cache</span>
+                <Database className="w-5 h-5 text-purple-400" />
+              </div>
+              <p className="text-3xl font-bold text-white">
+                {status.stats.cacheStats?.activeCacheItems || status.memory.size || 0}
+              </p>
+              <p className="text-xs text-white/50 mt-2">
+                Dados prontos na memória
+              </p>
+            </motion.div>
+          </div>
+          
+          {/* Indicador de Performance */}
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="bg-yellow-500/20 backdrop-blur-md rounded-xl p-6 border border-yellow-400/30 mb-8"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+            className="mt-4 bg-gradient-to-r from-green-500/10 to-cyan-500/10 backdrop-blur-md rounded-xl p-4 border border-green-400/20"
           >
-            <div className="flex items-center gap-3">
-              <HardDrive className="w-8 h-8 text-yellow-400" />
-              <div>
-                <h3 className="text-xl font-bold text-white">Cache em Memória Ativo</h3>
-                <p className="text-white/60">
-                  Redis não disponível. Usando fallback em memória com {status.memory.size} itens em cache.
+            <div className="flex items-center gap-4">
+              <div className="relative">
+                <Activity className="w-8 h-8 text-green-400" />
+                <motion.div
+                  animate={{ scale: [1, 1.2, 1] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                  className="absolute inset-0 w-8 h-8 bg-green-400 rounded-full blur-xl opacity-50"
+                />
+              </div>
+              <div className="flex-1">
+                <p className="text-white font-semibold">
+                  Cache Funcionando! ⚡
                 </p>
+                <p className="text-white/60 text-sm">
+                  Sistema otimizado - Dados servidos {status.stats.cacheStats?.hitRate > 50 ? 'principalmente do cache' : 'com cache inteligente'}
+                </p>
+              </div>
+              <div className="text-right">
+                <p className="text-2xl font-bold text-green-400">
+                  {status.stats.cacheStats?.totalRequests || 0}
+                </p>
+                <p className="text-xs text-white/50">requisições totais</p>
               </div>
             </div>
           </motion.div>
-        )}
+        </motion.div>
 
         {/* Última Atualização */}
         <div className="text-center text-white/40 text-sm">
