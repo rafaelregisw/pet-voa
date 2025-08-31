@@ -1,0 +1,52 @@
+/* EMERGENCY FIX - Mobile visibility */
+
+@media (max-width: 768px) {
+  /* Ensure body and html are visible */
+  html, body {
+    background-color: #000814 !important;
+    color: white !important;
+    overflow-x: hidden !important;
+    position: relative !important;
+  }
+
+  /* Ensure main content is visible */
+  main {
+    position: relative !important;
+    z-index: 1 !important;
+    background-color: transparent !important;
+  }
+
+  /* Fix any overlapping fixed elements */
+  .fixed {
+    z-index: 10 !important;
+  }
+
+  /* Ensure sections are visible */
+  section {
+    position: relative !important;
+    z-index: 1 !important;
+    background-color: transparent !important;
+  }
+
+  /* Fix header visibility */
+  header {
+    position: fixed !important;
+    z-index: 50 !important;
+    background: rgba(0, 8, 20, 0.95) !important;
+  }
+
+  /* Ensure content isn't hidden */
+  * {
+    visibility: visible !important;
+  }
+
+  /* Fix potential white overlay issues */
+  div[class*="inset-0"] {
+    pointer-events: none !important;
+  }
+
+  /* Make sure interactive elements work */
+  button, a, input, textarea {
+    pointer-events: auto !important;
+  }
+}

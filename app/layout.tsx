@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
+import './mobile-emergency-fix.css'
 import WhatsAppButton from '@/components/WhatsAppButton'
 
 const inter = Inter({ subsets: ['latin'] })
