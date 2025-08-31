@@ -1,0 +1,55 @@
+🚀 CONFIGURAÇÕES PARA COOLIFY - PET VOA
+=========================================
+
+1. REPOSITORY URL:
+https://github.com/rafaelregisw/pet-voa
+
+2. BRANCH:
+main
+
+3. BUILD PACK:
+Dockerfile
+
+4. PORT:
+3000
+
+5. ENVIRONMENT VARIABLES (Adicione estas):
+NODE_ENV=production
+REDIS_URL=redis://localhost:6379
+NEXT_PUBLIC_WHATSAPP_NUMBER=5562983211122
+
+6. PUBLISH DIRECTORY:
+.next
+
+7. INSTALL COMMAND:
+npm install
+
+8. BUILD COMMAND:
+npm run build
+
+9. START COMMAND:
+npm start
+
+10. HEALTH CHECK:
+Path: /
+Interval: 30
+Timeout: 10
+Retries: 3
+
+11. RESOURCES:
+Memory: 512MB minimum
+CPU: 0.5 vCPU
+
+12. DOMAIN (opcional):
+petvoa.com.br
+ou
+pet-voa.coolify.app
+
+=========================================
+REDIS SEPARADO (Adicione como novo serviço):
+
+1. Choose: Docker Image
+2. Image: redis:7-alpine
+3. Port: 6379
+4. Command: redis-server --maxmemory 256mb --maxmemory-policy allkeys-lru
+=========================================
