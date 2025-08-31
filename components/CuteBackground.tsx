@@ -70,19 +70,6 @@ export default function CuteBackground() {
         }}
       />
       
-      {/* Laser Lines - Cinema Style */}
-      <div 
-        className="absolute top-0 left-0 w-full h-full opacity-30"
-        style={{
-          background: `
-            linear-gradient(90deg, transparent 0%, rgba(236, 72, 153, 0.03) 49%, rgba(236, 72, 153, 0.08) 50%, rgba(236, 72, 153, 0.03) 51%, transparent 100%),
-            linear-gradient(0deg, transparent 0%, rgba(147, 51, 234, 0.03) 49%, rgba(147, 51, 234, 0.08) 50%, rgba(147, 51, 234, 0.03) 51%, transparent 100%)
-          `,
-          backgroundSize: '100px 100px',
-          animation: 'laserGrid 20s linear infinite'
-        }}
-      />
-      
       {/* Floating Neon Orbs */}
       {[
         { color: '236, 72, 153', size: 200, x: '15%', y: '30%', duration: 18 },
@@ -107,15 +94,6 @@ export default function CuteBackground() {
         />
       ))}
       
-      {/* Cinema Flare Effect */}
-      <div 
-        className="absolute top-0 left-0 w-full h-full opacity-20"
-        style={{
-          background: 'conic-gradient(from 0deg at 50% 50%, transparent 0deg, rgba(236, 72, 153, 0.1) 60deg, transparent 120deg, rgba(147, 51, 234, 0.1) 180deg, transparent 240deg, rgba(6, 182, 212, 0.1) 300deg, transparent 360deg)',
-          animation: 'cinemaRotate 30s linear infinite'
-        }}
-      />
-
       <style jsx>{`
         @keyframes neonPulse {
           0%, 100% {
@@ -177,24 +155,6 @@ export default function CuteBackground() {
           66% {
             transform: translate(-15px, 15px) scale(0.95);
             opacity: 0.4;
-          }
-        }
-        
-        @keyframes laserGrid {
-          0% {
-            transform: translate(0, 0);
-          }
-          100% {
-            transform: translate(50px, 50px);
-          }
-        }
-        
-        @keyframes cinemaRotate {
-          0% {
-            transform: rotate(0deg) scale(1);
-          }
-          100% {
-            transform: rotate(360deg) scale(1);
           }
         }
       `}</style>
