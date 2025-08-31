@@ -44,6 +44,7 @@ export default function ChatPage() {
   const [inputValue, setInputValue] = useState('')
   const [isTyping, setIsTyping] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
+  const messagesContainerRef = useRef<HTMLDivElement>(null)
 
   // Carregar dados salvos
   useEffect(() => {
@@ -80,7 +81,9 @@ export default function ChatPage() {
   }, [messages])
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+    if (messagesContainerRef.current) {
+      messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight
+    }
   }
 
   useEffect(() => {
@@ -215,9 +218,9 @@ export default function ChatPage() {
   }
 
   return (
-    <div className="fixed inset-0 bg-gradient-to-br from-slate-900 via-purple-900 to-pink-900 flex flex-col">
-      {/* Header */}
-      <div className="bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 p-4 flex items-center justify-between">
+    <div className="h-screen flex flex-col bg-gradient-to-br from-slate-900 via-purple-900 to-pink-900" style={{ height: '100vh', height: '100dvh' }}>
+      {/* Header Fixo */}
+      <div className="shrink-0 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 p-4 flex items-center justify-between shadow-lg">
         <div className="flex items-center gap-3">
           <button
             onClick={() => router.back()}
@@ -238,97 +241,106 @@ export default function ChatPage() {
       </div>
 
       {!isRegistered ? (
-        // Formulário de Registro
-        <div className="flex-1 p-6 flex flex-col justify-center overflow-y-auto">
-          <div className="max-w-sm mx-auto w-full space-y-6">
-            <div className="text-center mb-6">
-              <h2 className="text-2xl font-bold text-white mb-2">Bem-vindo! 👋</h2>
-              <p className="text-white/60">Preencha seus dados para começar</p>
-            </div>
-            
-            <div className="space-y-5">
-              <div>
-                <label className="text-white text-sm font-medium mb-2 block">
-                  Nome Completo
-                </label>
-                <input
-                  type="text"
-                  value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  placeholder="Digite seu nome completo"
-                  className="w-full bg-white/10 text-white rounded-xl px-4 py-3 outline-none focus:bg-white/20 focus:ring-2 focus:ring-white/30 transition-all placeholder-white/40"
-                  style={{ fontSize: '16px' }}
-                />
+        // Formulário de Registro - Com scroll
+        <div className="flex-1 overflow-y-auto p-6">
+          <div className="min-h-full flex items-center justify-center">
+            <div className="max-w-sm w-full space-y-6">
+              <div className="text-center mb-6">
+                <h2 className="text-2xl font-bold text-white mb-2">Bem-vindo! 👋</h2>
+                <p className="text-white/60">Preencha seus dados para começar</p>
               </div>
               
-              <div>
-                <label className="text-white text-sm font-medium mb-2 block">
-                  País
-                </label>
-                <button
-                  onClick={() => setShowCountryDropdown(!showCountryDropdown)}
-                  className="w-full bg-white/10 text-white rounded-xl px-4 py-3 flex items-center justify-between hover:bg-white/20 transition-colors"
-                >
-                  <span className="flex items-center gap-2">
-                    <span className="text-xl">{selectedCountry.flag}</span>
-                    <span>{selectedCountry.name}</span>
-                  </span>
-                  <ChevronDown className={`w-4 h-4 transition-transform ${showCountryDropdown ? 'rotate-180' : ''}`} />
-                </button>
-                
-                {showCountryDropdown && (
-                  <div className="mt-2 bg-slate-800 rounded-xl overflow-hidden">
-                    {countries.map(country => (
-                      <button
-                        key={country.code}
-                        onClick={() => {
-                          setSelectedCountry(country)
-                          setShowCountryDropdown(false)
-                          setFormData({ ...formData, phone: '' })
-                        }}
-                        className="w-full px-4 py-3 flex items-center gap-2 hover:bg-white/10 transition-colors text-left"
-                      >
-                        <span className="text-xl">{country.flag}</span>
-                        <span className="text-white">{country.name}</span>
-                        <span className="text-white/60 ml-auto">{country.phoneCode}</span>
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </div>
-              
-              <div>
-                <label className="text-white text-sm font-medium mb-2 block">
-                  Telefone
-                </label>
-                <div className="flex gap-2">
-                  <div className="bg-white/10 rounded-xl px-3 flex items-center">
-                    <span className="text-white/60 text-sm">{selectedCountry.phoneCode}</span>
-                  </div>
+              <div className="space-y-5">
+                <div>
+                  <label className="text-white text-sm font-medium mb-2 block">
+                    Nome Completo
+                  </label>
                   <input
-                    type="tel"
-                    value={formData.phone}
-                    onChange={handlePhoneChange}
-                    placeholder={selectedCountry.code === 'BR' ? '11 99999-9999' : '(212) 555-0100'}
-                    className="flex-1 bg-white/10 text-white rounded-xl px-4 py-3 outline-none focus:bg-white/20 focus:ring-2 focus:ring-white/30 transition-all placeholder-white/40"
+                    type="text"
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    placeholder="Digite seu nome completo"
+                    className="w-full bg-white/10 text-white rounded-xl px-4 py-3 outline-none focus:bg-white/20 focus:ring-2 focus:ring-white/30 transition-all placeholder-white/40"
                     style={{ fontSize: '16px' }}
                   />
                 </div>
+                
+                <div>
+                  <label className="text-white text-sm font-medium mb-2 block">
+                    País
+                  </label>
+                  <button
+                    onClick={() => setShowCountryDropdown(!showCountryDropdown)}
+                    className="w-full bg-white/10 text-white rounded-xl px-4 py-3 flex items-center justify-between hover:bg-white/20 transition-colors"
+                  >
+                    <span className="flex items-center gap-2">
+                      <span className="text-xl">{selectedCountry.flag}</span>
+                      <span>{selectedCountry.name}</span>
+                    </span>
+                    <ChevronDown className={`w-4 h-4 transition-transform ${showCountryDropdown ? 'rotate-180' : ''}`} />
+                  </button>
+                  
+                  {showCountryDropdown && (
+                    <div className="mt-2 bg-slate-800 rounded-xl overflow-hidden">
+                      {countries.map(country => (
+                        <button
+                          key={country.code}
+                          onClick={() => {
+                            setSelectedCountry(country)
+                            setShowCountryDropdown(false)
+                            setFormData({ ...formData, phone: '' })
+                          }}
+                          className="w-full px-4 py-3 flex items-center gap-2 hover:bg-white/10 transition-colors text-left"
+                        >
+                          <span className="text-xl">{country.flag}</span>
+                          <span className="text-white">{country.name}</span>
+                          <span className="text-white/60 ml-auto">{country.phoneCode}</span>
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+                
+                <div>
+                  <label className="text-white text-sm font-medium mb-2 block">
+                    Telefone
+                  </label>
+                  <div className="flex gap-2">
+                    <div className="bg-white/10 rounded-xl px-3 flex items-center">
+                      <span className="text-white/60 text-sm">{selectedCountry.phoneCode}</span>
+                    </div>
+                    <input
+                      type="tel"
+                      value={formData.phone}
+                      onChange={handlePhoneChange}
+                      placeholder={selectedCountry.code === 'BR' ? '11 99999-9999' : '(212) 555-0100'}
+                      className="flex-1 bg-white/10 text-white rounded-xl px-4 py-3 outline-none focus:bg-white/20 focus:ring-2 focus:ring-white/30 transition-all placeholder-white/40"
+                      style={{ fontSize: '16px' }}
+                    />
+                  </div>
+                </div>
               </div>
+              
+              <button
+                onClick={handleRegistration}
+                className="w-full bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 text-white font-bold py-4 rounded-xl hover:scale-105 transition-transform"
+              >
+                Iniciar Conversa
+              </button>
             </div>
-            
-            <button
-              onClick={handleRegistration}
-              className="w-full bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 text-white font-bold py-4 rounded-xl hover:scale-105 transition-transform"
-            >
-              Iniciar Conversa
-            </button>
           </div>
         </div>
       ) : (
         <>
-          {/* Mensagens */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-4">
+          {/* Container de Mensagens - Scrollável */}
+          <div 
+            ref={messagesContainerRef}
+            className="flex-1 overflow-y-auto p-4 space-y-4"
+            style={{ 
+              WebkitOverflowScrolling: 'touch',
+              paddingBottom: '20px'
+            }}
+          >
             {messages.map((message) => (
               <motion.div
                 key={message.id}
@@ -338,7 +350,7 @@ export default function ChatPage() {
                   message.sender === 'user' ? 'flex-row-reverse' : ''
                 }`}
               >
-                <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 ${
                   message.sender === 'user' 
                     ? 'bg-gradient-to-r from-green-500 to-emerald-500' 
                     : 'bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500'
@@ -358,7 +370,7 @@ export default function ChatPage() {
                       ? 'bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-tr-none'
                       : 'bg-white/10 text-white rounded-tl-none'
                   }`}>
-                    <p className="text-sm whitespace-pre-wrap">{message.text}</p>
+                    <p className="text-sm whitespace-pre-wrap break-words">{message.text}</p>
                   </div>
                   <p className="text-xs text-white/40 mt-1 px-2">
                     {message.timestamp.toLocaleTimeString('pt-BR', { 
@@ -392,9 +404,9 @@ export default function ChatPage() {
             <div ref={messagesEndRef} />
           </div>
 
-          {/* Input */}
-          <div className="p-4 border-t border-white/10 bg-black/20">
-            <div className="flex gap-2">
+          {/* Input Area - Sempre visível */}
+          <div className="shrink-0 p-4 border-t border-white/10 bg-black/30 backdrop-blur-md">
+            <div className="flex gap-2 max-w-4xl mx-auto">
               <input
                 type="text"
                 value={inputValue}
@@ -402,12 +414,16 @@ export default function ChatPage() {
                 onKeyPress={handleKeyPress}
                 placeholder="Digite sua mensagem..."
                 className="flex-1 bg-white/10 text-white rounded-full px-4 py-3 outline-none focus:bg-white/20 transition-colors placeholder-white/50"
-                style={{ fontSize: '16px' }}
+                style={{ 
+                  fontSize: '16px',
+                  WebkitAppearance: 'none',
+                  borderRadius: '9999px'
+                }}
               />
               <button
                 onClick={sendMessage}
                 disabled={!inputValue.trim() || isTyping}
-                className="w-12 h-12 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 rounded-full flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed hover:scale-110 transition-transform"
+                className="shrink-0 w-12 h-12 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 rounded-full flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed hover:scale-110 transition-transform"
               >
                 <Send className="w-5 h-5 text-white" />
               </button>
