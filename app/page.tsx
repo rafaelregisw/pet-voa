@@ -1,23 +1,30 @@
+import dynamic from 'next/dynamic'
 import Header from '@/components/Header'
 import Hero from '@/components/Hero'
 import TrustBadges from '@/components/TrustBadges'
-import VideoSection from '@/components/VideoSection'
 import Process from '@/components/Process'
 import Services from '@/components/Services'
-import Testimonials from '@/components/Testimonials'
 import CTA from '@/components/CTA'
-import FAQ from '@/components/FAQ'
 import Footer from '@/components/Footer'
 import WhatsAppButton from '@/components/WhatsAppButton'
-import FloatingParticles from '@/components/FloatingParticles'
-import LiveViewers from '@/components/LiveViewers'
+
+// Lazy load componentes pesados
+const VideoSection = dynamic(() => import('@/components/VideoSection'), {
+  loading: () => <div className="min-h-[400px] flex items-center justify-center">Carregando...</div>
+})
+
+const Testimonials = dynamic(() => import('@/components/Testimonials'), {
+  loading: () => <div className="min-h-[300px] flex items-center justify-center">Carregando...</div>
+})
+
+const FAQ = dynamic(() => import('@/components/FAQ'), {
+  loading: () => <div className="min-h-[300px] flex items-center justify-center">Carregando...</div>
+})
 
 export default function Home() {
   return (
     <>
-      <FloatingParticles />
       <Header />
-      <LiveViewers />
       <main>
         <Hero />
         <TrustBadges />

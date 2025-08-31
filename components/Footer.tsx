@@ -12,7 +12,7 @@ export default function Footer() {
           <div>
             <div className="mb-4">
               <img 
-                src="/logo.png" 
+                src="/logo.jpg" 
                 alt="Pet Voa" 
                 className="h-14 w-auto"
               />

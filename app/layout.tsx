@@ -1,18 +1,9 @@
 import type { Metadata } from 'next'
-import { Inter, Montserrat, Poppins } from 'next/font/google'
+import { Inter } from 'next/font/google'
 import './globals.css'
 import WhatsAppButton from '@/components/WhatsAppButton'
 
 const inter = Inter({ subsets: ['latin'] })
-const montserrat = Montserrat({ 
-  subsets: ['latin'],
-  variable: '--font-montserrat'
-})
-const poppins = Poppins({ 
-  weight: ['400', '500', '600', '700'],
-  subsets: ['latin'],
-  variable: '--font-poppins'
-})
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://petvoa.com'),
@@ -69,7 +60,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-BR" className="scroll-smooth">
-      <body className={`${inter.className} ${montserrat.variable} ${poppins.variable} bg-midnight text-ice antialiased`}>
+      <body className={`${inter.className} bg-midnight text-ice antialiased`}>
         {children}
         <WhatsAppButton />
       </body>

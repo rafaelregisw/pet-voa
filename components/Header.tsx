@@ -1,6 +1,5 @@
 'use client'
 
-import { motion } from 'framer-motion'
 import { Menu, X, Phone } from 'lucide-react'
 import { useState } from 'react'
 import { useSmoothScroll } from '@/hooks/useSmoothScroll'
@@ -26,54 +25,40 @@ export default function Header() {
   }
 
   return (
-    <motion.header
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.6 }}
-      className="fixed top-0 left-0 right-0 z-50 glass-dark border-b border-electric/10"
-    >
+    <header className="fixed top-0 left-0 right-0 z-50 glass-dark border-b border-electric/10 animate-slideDown">
       <nav className="container mx-auto px-6 py-2">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            className="flex items-center gap-2"
-          >
+          <div className="flex items-center gap-2 hover:scale-105 transition-transform">
             <img 
-              src="/logo.png" 
+              src="/logo.jpg" 
               alt="Pet Voa" 
               className="h-10 md:h-14 w-auto"
             />
-          </motion.div>
+          </div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-4 lg:gap-6">
-            {navItems.map((item, i) => (
-              <motion.a
+            {navItems.map((item) => (
+              <a
                 key={item.label}
                 href={`#${item.href}`}
                 onClick={(e) => handleNavClick(e, item.href)}
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.1 }}
-                className="text-sm text-ice/80 hover:text-electric transition-colors cursor-pointer"
-                whileHover={{ y: -2 }}
+                className="text-sm text-ice/80 hover:text-electric transition-colors cursor-pointer hover:-translate-y-0.5"
               >
                 {item.label}
-              </motion.a>
+              </a>
             ))}
           </div>
 
           {/* CTA Button */}
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+          <button
             onClick={() => openWhatsApp()}
-            className="hidden md:flex items-center gap-2 button-primary text-sm"
+            className="hidden md:flex items-center gap-2 button-primary text-sm hover:scale-105 active:scale-95 transition-transform"
           >
             <Phone className="w-4 h-4" />
             Falar Agora
-          </motion.button>
+          </button>
 
           {/* Mobile Menu Button */}
           <button
@@ -86,12 +71,7 @@ export default function Header() {
 
         {/* Mobile Navigation */}
         {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden mt-4 py-4 border-t border-ice/10"
-          >
+          <div className="md:hidden mt-4 py-4 border-t border-ice/10 animate-fadeIn">
             {navItems.map((item) => (
               <a
                 key={item.label}
@@ -109,9 +89,9 @@ export default function Header() {
               <Phone className="inline-block w-4 h-4 mr-2" />
               Falar Agora
             </button>
-          </motion.div>
+          </div>
         )}
       </nav>
-    </motion.header>
+    </header>
   )
 }
