@@ -15,7 +15,7 @@ const poppins = Poppins({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://petvoa.com.br'),
+  metadataBase: new URL('https://petvoa.com'),
   title: 'Pet Voa - Transporte Premium de Pets para os EUA',
   description: 'A única empresa com psicóloga acompanhante e atualizações em tempo real. Seu pet nunca viaja sozinho.',
   keywords: 'transporte pets, pets EUA, viagem pets, psicóloga pets, transporte animais internacional',
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Pet Voa - Seu Pet Voa com uma Psicóloga ao Lado',
     description: 'Acompanhe com fotos e vídeos em tempo real. Documentação com expertise jurídica.',
-    url: 'https://petvoa.com.br',
+    url: 'https://petvoa.com',
     siteName: 'Pet Voa',
     images: [
       {
