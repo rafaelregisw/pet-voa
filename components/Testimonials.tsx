@@ -30,7 +30,7 @@ export default function Testimonials() {
   ]
 
   return (
-    <section id="testimonials" className="py-16 md:py-20 lg:py-24 relative overflow-hidden">
+    <section id="testimonials" className="py-12 md:py-16 lg:py-20 relative overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 mesh-background opacity-10" />
       

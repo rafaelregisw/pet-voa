@@ -8,7 +8,6 @@ import CTA from '@/components/CTA'
 import Footer from '@/components/Footer'
 import WhatsAppButton from '@/components/WhatsAppButton'
 import CuteBackground from '@/components/CuteBackground'
-import SectionDivider from '@/components/SectionDivider'
 
 // Lazy load componentes pesados
 const VideoSection = dynamic(() => import('@/components/VideoSection'), {
@@ -30,19 +29,12 @@ export default function Home() {
       <Header />
       <main>
         <Hero />
-        <SectionDivider variant="dots" />
         <TrustBadges />
-        <SectionDivider variant="gradient" />
         <VideoSection />
-        <SectionDivider variant="dots" />
         <Process />
-        <SectionDivider variant="gradient" />
         <Services />
-        <SectionDivider variant="dots" />
         <Testimonials />
-        <SectionDivider variant="gradient" />
         <CTA />
-        <SectionDivider variant="dots" />
         <FAQ />
       </main>
       <Footer />

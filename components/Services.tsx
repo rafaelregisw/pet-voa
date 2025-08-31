@@ -66,7 +66,7 @@ export default function Services() {
   }
 
   return (
-    <section id="services" className="py-16 md:py-20 lg:py-24 relative">
+    <section id="services" className="py-12 md:py-16 lg:py-20 relative">
       <div className="container mx-auto px-6">
         {/* Section Header */}
         <motion.div

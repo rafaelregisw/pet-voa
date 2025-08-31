@@ -28,16 +28,20 @@ export default function FAQ() {
     },
     {
       question: 'Qual o valor do serviço?',
-      answer: 'O investimento varia de R$ 20.000 a R$ 40.000, dependendo do destino e tamanho do pet. Inclui TUDO para o cliente: transporte premium, acompanhamento especializado, toda documentação, exames veterinários, seguro viagem e suporte 24h. O único custo adicional são as taxas governamentais (CDC/USDA) que devem ser pagas diretamente aos órgãos oficiais.',
+      answer: 'Nosso serviço varia de R$ 20.000 a R$ 40.000, dependendo do destino e tamanho do pet. Este valor cobre nosso trabalho completo de acompanhamento, assessoria e coordenação de todo o processo.',
     },
     {
-      question: 'O que está incluído no valor?',
-      answer: 'TUDO! ✅ Passagem aérea do pet, ✅ Acompanhamento profissional durante o voo, ✅ Toda documentação (CVI, Carteira de Vacinação, Exames), ✅ Assessoria jurídica completa, ✅ Caixa de transporte aprovada, ✅ Seguro viagem, ✅ Fotos e vídeos em tempo real, ✅ Busca e entrega door-to-door. Você só paga à parte as taxas dos órgãos governamentais.',
+      question: 'O que está incluído no valor do serviço?',
+      answer: 'Nosso serviço inclui: ✅ Acompanhamento profissional durante o voo, ✅ Assessoria jurídica para documentação, ✅ Coordenação de todo o processo, ✅ Orientação sobre exames e vacinas, ✅ Fotos e vídeos em tempo real, ✅ Suporte 24h durante a viagem, ✅ Busca e entrega do pet.',
+    },
+    {
+      question: 'Quais custos adicionais o cliente deve pagar?',
+      answer: 'Além do nosso serviço, o cliente paga diretamente: 💵 Passagem aérea do pet (varia conforme companhia), 💵 ARK (taxa aeroportuária para animais), 💵 Taxas CDC e USDA (documentação governamental), 💵 Exames veterinários (raiva, sorologia, etc), 💵 Caixa de transporte IATA (se necessário), 💵 Certidão de Saúde (CVI). Orientamos sobre todos esses custos e onde pagar.',
     },
   ]
 
   return (
-    <section id="faq" className="py-16 md:py-20 lg:py-24">
+    <section id="faq" className="py-12 md:py-16 lg:py-20">
       <div className="container mx-auto px-6">
         {/* Section Header */}
         <motion.div

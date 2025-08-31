@@ -38,7 +38,7 @@ export default function Process() {
   ]
 
   return (
-    <section id="how" className="py-16 md:py-20 lg:py-24 relative">
+    <section id="how" className="py-12 md:py-16 lg:py-20 relative">
       <div className="container mx-auto px-4 md:px-6">
         {/* Section Header */}
         <motion.div
