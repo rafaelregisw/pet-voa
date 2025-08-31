@@ -4,7 +4,6 @@ import { motion } from 'framer-motion'
 import { ArrowRight, Star, Shield, Heart } from 'lucide-react'
 import PetMascot from './PetMascot'
 import CatMascot from './CatMascot'
-import FloatingPets from './FloatingPets'
 import { openWhatsApp } from '@/lib/whatsapp'
 import { useSmoothScroll } from '@/hooks/useSmoothScroll'
 
@@ -13,9 +12,6 @@ export default function Hero() {
   
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 pb-8 md:pt-16">
-      {/* Floating Pets Background */}
-      <FloatingPets />
-      
       {/* Background Effects */}
       <div className="absolute inset-0 mesh-background opacity-30" />
       
