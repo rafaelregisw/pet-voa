@@ -259,28 +259,155 @@ export default function ChatBot() {
 
   return (
     <>
-      {/* Botão do Chat - Canto inferior direito */}
-      <motion.button
-        initial={{ scale: 0 }}
-        animate={{ scale: 1 }}
-        transition={{ delay: 2, type: 'spring' }}
-        onClick={() => setIsOpen(true)}
-        className="fixed bottom-8 right-8 z-40 w-16 h-16 bg-gradient-to-r from-electric to-neon rounded-full shadow-2xl flex items-center justify-center group hover:scale-110 transition-transform"
-      >
-        <Bot className="w-8 h-8 text-white" />
-        <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-500 rounded-full animate-pulse" />
+      {/* Botão do Chat 3D Moderno */}
+      <div className="fixed bottom-8 right-8 z-40">
+        {/* Mensagem Chamativa */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 3, duration: 0.5 }}
+          className="absolute -top-16 -left-20 bg-gradient-to-r from-purple-600 to-pink-600 text-white px-4 py-2 rounded-xl shadow-2xl whitespace-nowrap"
+        >
+          <div className="text-sm font-bold">Oi! 👋 Precisa de ajuda?</div>
+          <div className="text-xs opacity-90">Clique para conversar!</div>
+          <div className="absolute bottom-[-8px] right-12 w-0 h-0 border-t-[8px] border-t-purple-600 border-x-[8px] border-x-transparent" />
+        </motion.div>
         
-        {hasNewMessage && !isOpen && (
-          <div className="absolute -top-2 -left-2 w-6 h-6 bg-red-500 rounded-full flex items-center justify-center text-white text-xs font-bold animate-bounce">
-            1
-          </div>
-        )}
+        {/* Botão Principal 3D */}
+        <motion.button
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ delay: 2, type: 'spring', stiffness: 260, damping: 20 }}
+          onClick={() => setIsOpen(true)}
+          className="relative group"
+        >
+          {/* Camada de Fundo 3D */}
+          <div className="absolute inset-0 bg-gradient-to-br from-purple-600 via-pink-600 to-blue-600 rounded-full blur-xl opacity-75 group-hover:opacity-100 transition-opacity animate-pulse" />
+          
+          {/* Botão Principal */}
+          <motion.div
+            animate={{
+              rotateY: [0, 10, 0, -10, 0],
+              rotateX: [0, 5, 0, -5, 0],
+            }}
+            transition={{
+              duration: 4,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+            className="relative w-20 h-20 bg-gradient-to-br from-purple-500 via-pink-500 to-blue-500 rounded-full shadow-2xl flex items-center justify-center transform-gpu"
+            style={{
+              transformStyle: 'preserve-3d',
+              boxShadow: '0 10px 40px rgba(168, 85, 247, 0.5), inset 0 2px 10px rgba(255,255,255,0.3)'
+            }}
+          >
+            {/* Ícone de Headset Moderno */}
+            <div className="relative">
+              <svg
+                width="40"
+                height="40"
+                viewBox="0 0 24 24"
+                fill="none"
+                className="text-white drop-shadow-lg"
+              >
+                <path
+                  d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2Z"
+                  fill="url(#gradient)"
+                  fillOpacity="0.2"
+                />
+                <path
+                  d="M20.5 9V12.5C20.5 14.5 19 16 17 16H16.5V11.5C16.5 10.5 17.5 9.5 18.5 9.5C19.5 9.5 20.5 9 20.5 9Z"
+                  fill="white"
+                />
+                <path
+                  d="M3.5 9V12.5C3.5 14.5 5 16 7 16H7.5V11.5C7.5 10.5 6.5 9.5 5.5 9.5C4.5 9.5 3.5 9 3.5 9Z"
+                  fill="white"
+                />
+                <path
+                  d="M12 3C8 3 4 6 4 11V16L6 18H9L10 17V11C10 11 10 9 12 9C14 9 14 11 14 11V17L15 18H18L20 16V11C20 6 16 3 12 3Z"
+                  fill="white"
+                />
+                <circle cx="12" cy="19" r="2" fill="white">
+                  <animate attributeName="r" values="2;2.5;2" dur="1s" repeatCount="indefinite" />
+                </circle>
+                <defs>
+                  <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#a855f7" />
+                    <stop offset="50%" stopColor="#ec4899" />
+                    <stop offset="100%" stopColor="#3b82f6" />
+                  </linearGradient>
+                </defs>
+              </svg>
+              
+              {/* Anéis Orbitando */}
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                className="absolute inset-0 flex items-center justify-center"
+              >
+                <div className="absolute w-24 h-24 border-2 border-white/20 rounded-full" />
+              </motion.div>
+              
+              <motion.div
+                animate={{ rotate: -360 }}
+                transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                className="absolute inset-0 flex items-center justify-center"
+              >
+                <div className="absolute w-28 h-28 border border-white/10 rounded-full" />
+              </motion.div>
+            </div>
+            
+            {/* Badge de Status */}
+            <div className="absolute -top-1 -right-1">
+              <span className="relative flex h-5 w-5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-5 w-5 bg-green-500 border-2 border-white" />
+              </span>
+            </div>
+            
+            {/* Notificação de Mensagem */}
+            {hasNewMessage && !isOpen && (
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                className="absolute -top-2 -left-2 w-8 h-8 bg-gradient-to-r from-red-500 to-pink-500 rounded-full flex items-center justify-center text-white text-sm font-bold shadow-lg animate-bounce"
+              >
+                1
+              </motion.div>
+            )}
+          </motion.div>
+          
+          {/* Efeito de Hover */}
+          <motion.div
+            className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+            whileHover={{ scale: 1.1 }}
+          >
+            <div className="absolute inset-0 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 rounded-full blur-2xl" />
+          </motion.div>
+        </motion.button>
         
-        {/* Tooltip */}
-        <span className="absolute right-20 px-3 py-2 bg-midnight text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-          💬 Fale com nosso assistente!
-        </span>
-      </motion.button>
+        {/* Partículas Flutuantes */}
+        {[...Array(3)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-2 h-2 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full"
+            style={{
+              left: `${20 + i * 20}px`,
+              bottom: `${20 + i * 15}px`,
+            }}
+            animate={{
+              y: [-10, -30, -10],
+              opacity: [0.5, 1, 0.5],
+              scale: [1, 1.5, 1],
+            }}
+            transition={{
+              duration: 3 + i,
+              repeat: Infinity,
+              delay: i * 0.5,
+            }}
+          />
+        ))}
+      </div>
 
       {/* Janela do Chat */}
       <AnimatePresence>
@@ -289,10 +416,10 @@ export default function ChatBot() {
             initial={{ opacity: 0, y: 20, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.9 }}
-            className="fixed bottom-8 right-8 z-50 w-96 h-[600px] bg-midnight/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-electric/20 flex flex-col overflow-hidden"
+            className="fixed bottom-8 right-8 z-50 w-96 h-[600px] bg-gradient-to-br from-slate-900/95 via-purple-900/95 to-pink-900/95 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/20 flex flex-col overflow-hidden"
           >
             {/* Header */}
-            <div className="bg-gradient-to-r from-electric to-neon p-4 flex items-center justify-between">
+            <div className="bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 p-4 flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
                   <Bot className="w-6 h-6 text-white" />
@@ -411,7 +538,7 @@ export default function ChatBot() {
                     
                     <button
                       onClick={handleRegistration}
-                      className="w-full bg-gradient-to-r from-electric to-neon text-white rounded-xl py-4 font-bold hover:scale-[1.02] transition-transform shadow-lg"
+                      className="w-full bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 text-white rounded-xl py-4 font-bold hover:scale-[1.02] transition-transform shadow-lg"
                     >
                       Começar Conversa
                     </button>
@@ -437,8 +564,8 @@ export default function ChatBot() {
                     >
                       <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
                         message.sender === 'user' 
-                          ? 'bg-electric' 
-                          : 'bg-gradient-to-r from-electric to-neon'
+                          ? 'bg-gradient-to-r from-purple-600 to-pink-600' 
+                          : 'bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500'
                       }`}>
                         {message.sender === 'user' ? (
                           <User className="w-4 h-4 text-white" />
@@ -448,7 +575,7 @@ export default function ChatBot() {
                       </div>
                       <div className={`max-w-[70%] p-3 rounded-2xl ${
                         message.sender === 'user'
-                          ? 'bg-electric text-white rounded-tr-none'
+                          ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-tr-none'
                           : 'bg-white/10 text-ice rounded-tl-none'
                       }`}>
                         <p className="text-sm">{message.text}</p>
@@ -469,7 +596,7 @@ export default function ChatBot() {
                       animate={{ opacity: 1 }}
                       className="flex items-center gap-2"
                     >
-                      <div className="w-8 h-8 rounded-full bg-gradient-to-r from-electric to-neon flex items-center justify-center">
+                      <div className="w-8 h-8 rounded-full bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 flex items-center justify-center">
                         <Bot className="w-4 h-4 text-white" />
                       </div>
                       <div className="bg-white/10 rounded-2xl rounded-tl-none p-3">
@@ -499,7 +626,7 @@ export default function ChatBot() {
                     <button
                       onClick={sendMessage}
                       disabled={!inputValue.trim() || isTyping}
-                      className="w-10 h-10 bg-gradient-to-r from-electric to-neon rounded-full flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed hover:scale-110 transition-transform"
+                      className="w-10 h-10 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 rounded-full flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed hover:scale-110 transition-transform"
                     >
                       <Send className="w-5 h-5 text-white" />
                     </button>
