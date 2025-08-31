@@ -66,9 +66,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-BR" className="scroll-smooth">
-      <body className={`${inter.className} bg-midnight text-ice antialiased`}>
-        {children}
-        <WhatsAppButton />
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+      </head>
+      <body className={`${inter.className} bg-midnight text-ice antialiased overflow-x-hidden`} style={{ width: '100vw', maxWidth: '100vw', position: 'relative' }}>
+        <div className="min-h-screen w-full overflow-x-hidden" style={{ maxWidth: '100vw' }}>
+          {children}
+          <WhatsAppButton />
+        </div>
       </body>
     </html>
   )
