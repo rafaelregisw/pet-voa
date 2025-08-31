@@ -11,7 +11,7 @@ export default function WhatsAppButton() {
 
   return (
     <>
-      {/* Main WhatsApp Button */}
+      {/* Main WhatsApp Button - Menor e no topo */}
       <motion.button
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
@@ -24,39 +24,35 @@ export default function WhatsAppButton() {
         whileHover={{ scale: 1.15 }}
         whileTap={{ scale: 0.9 }}
         onClick={handleClick}
-        className="fixed bottom-8 right-8 z-50 group"
+        className="fixed top-6 right-6 z-50 group"
         aria-label="WhatsApp"
       >
         <div className="relative">
-          {/* Main Button */}
+          {/* Main Button - Menor */}
           <motion.div
             animate={{
-              rotate: [0, 10, -10, 0],
+              scale: [1, 1.1, 1],
             }}
             transition={{
-              duration: 4,
+              duration: 2,
               repeat: Infinity,
               ease: "easeInOut",
             }}
-            className="relative w-20 h-20 bg-gradient-to-br from-green-400 via-green-500 to-green-600 rounded-full shadow-2xl shadow-green-500/50 flex items-center justify-center"
+            className="relative w-12 h-12 bg-gradient-to-br from-green-400 via-green-500 to-green-600 rounded-full shadow-lg shadow-green-500/50 flex items-center justify-center"
           >
-            <MessageCircle className="w-10 h-10 text-white drop-shadow-lg" fill="white" />
+            <MessageCircle className="w-6 h-6 text-white drop-shadow-lg" fill="white" />
             
-            {/* Online Status Badge */}
-            <div className="absolute -top-1 -right-1 w-7 h-7 bg-gradient-to-r from-green-300 to-green-400 rounded-full border-3 border-white flex items-center justify-center shadow-lg">
-              <div className="w-4 h-4 bg-white rounded-full" />
-            </div>
+            {/* Online Status Badge - Pulsante */}
+            <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-400 rounded-full animate-pulse" />
           </motion.div>
           
-          {/* Enhanced Tooltip */}
+          {/* Tooltip Compacto */}
           <motion.span
-            initial={{ opacity: 0, x: 10 }}
-            whileHover={{ opacity: 1, x: 0 }}
-            className="absolute right-24 top-1/2 -translate-y-1/2 px-5 py-3 bg-gradient-to-r from-green-600 to-green-500 text-white rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap shadow-2xl pointer-events-none"
+            initial={{ opacity: 0, y: -5 }}
+            whileHover={{ opacity: 1, y: 0 }}
+            className="absolute top-14 left-1/2 -translate-x-1/2 px-3 py-1 bg-green-600 text-white text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap shadow-lg pointer-events-none"
           >
-            <div className="font-bold text-lg">💬 Clique Aqui!</div>
-            <div className="text-xs opacity-90">Atendimento Imediato</div>
-            <div className="absolute right-[-10px] top-1/2 -translate-y-1/2 w-0 h-0 border-t-[10px] border-b-[10px] border-l-[10px] border-transparent border-l-green-500" />
+            WhatsApp
           </motion.span>
         </div>
       </motion.button>

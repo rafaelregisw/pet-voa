@@ -227,13 +227,13 @@ export default function ChatBot() {
 
   return (
     <>
-      {/* Botão do Chat - Posicionado mais à esquerda e acima */}
+      {/* Botão do Chat - Canto inferior direito */}
       <motion.button
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         transition={{ delay: 2, type: 'spring' }}
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-32 right-24 z-40 w-16 h-16 bg-gradient-to-r from-electric to-neon rounded-full shadow-2xl flex items-center justify-center group hover:scale-110 transition-transform"
+        className="fixed bottom-8 right-8 z-40 w-16 h-16 bg-gradient-to-r from-electric to-neon rounded-full shadow-2xl flex items-center justify-center group hover:scale-110 transition-transform"
       >
         <Bot className="w-8 h-8 text-white" />
         <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-500 rounded-full animate-pulse" />
