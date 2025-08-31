@@ -27,11 +27,29 @@ export default function Header() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 glass-dark border-b border-electric/10 animate-slideDown backdrop-blur-md">
-      <nav className="container mx-auto px-4 sm:px-6 py-2">
+      <nav className="container mx-auto px-3 sm:px-6 py-2">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <div className="hover:scale-105 transition-transform">
-            <AnimatedLogoUltra size="sm" showText={false} />
+            {/* Mobile: Logo menor e simples */}
+            <div className="md:hidden flex items-center gap-2">
+              <svg className="h-8 w-8" viewBox="0 0 60 60" fill="none">
+                <defs>
+                  <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#00B4D8" />
+                    <stop offset="100%" stopColor="#7209B7" />
+                  </linearGradient>
+                </defs>
+                <circle cx="30" cy="30" r="28" fill="url(#logoGrad)" opacity="0.2" />
+                <path d="M30 15 L38 30 L30 35 L22 30 Z" fill="url(#logoGrad)" />
+                <circle cx="30" cy="35" r="4" fill="#7209B7" opacity="0.8" />
+              </svg>
+              <span className="text-lg font-bold bg-gradient-to-r from-electric to-neon bg-clip-text text-transparent">Pet Voa</span>
+            </div>
+            {/* Desktop: Logo animada */}
+            <div className="hidden md:block">
+              <AnimatedLogoUltra size="sm" showText={false} />
+            </div>
           </div>
 
           {/* Desktop Navigation */}

@@ -12,7 +12,7 @@ export default function Hero() {
   const scrollToSection = useSmoothScroll()
   
   return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16 pb-8">
+    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 pb-8 md:pt-16">
       {/* Floating Pets Background */}
       <FloatingPets />
       
@@ -25,14 +25,14 @@ export default function Hero() {
         <div className="absolute bottom-1/4 -right-48 w-96 h-96 bg-neon/10 rounded-full blur-3xl" />
       </div>
 
-      <div className="container mx-auto px-4 sm:px-6 relative z-10">
+      <div className="container mx-auto px-4 md:px-6 relative z-10">
         <div className="max-w-5xl mx-auto text-center">
           {/* Badge */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-electric/30 mb-4"
+            className="inline-flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full glass border border-electric/30 mb-6 md:mb-4"
           >
             <span className="relative flex h-2 w-2">
               <span className="relative inline-flex rounded-full h-2 w-2 bg-electric"></span>
@@ -163,12 +163,12 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 max-w-4xl mx-auto"
+            className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8 max-w-4xl mx-auto px-2 md:px-0"
           >
             {/* Psicóloga Badge */}
             <motion.div
               whileHover={{ scale: 1.05, rotate: -2 }}
-              className="glass rounded-2xl p-5 border-2 border-neon/30 relative overflow-hidden group"
+              className="glass rounded-xl md:rounded-2xl p-4 md:p-5 border-2 border-neon/30 relative overflow-hidden group"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-neon/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               <div className="relative z-10">

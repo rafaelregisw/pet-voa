@@ -38,16 +38,16 @@ export default function Process() {
   ]
 
   return (
-    <section id="how" className="py-8 relative">
-      <div className="container mx-auto px-6">
+    <section id="how" className="py-6 md:py-8 relative">
+      <div className="container mx-auto px-4 md:px-6">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-6"
+          className="text-center mb-4 md:mb-6"
         >
-          <h2 className="text-3xl md:text-4xl font-display font-bold mb-3">
+          <h2 className="text-2xl md:text-4xl font-display font-bold mb-2 md:mb-3">
             Como <span className="text-gradient">Funciona</span>
           </h2>
           <p className="text-base text-ice/60 max-w-2xl mx-auto">

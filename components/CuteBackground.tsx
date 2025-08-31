@@ -3,43 +3,43 @@
 export default function CuteBackground() {
   return (
     <div className="fixed inset-0 pointer-events-none overflow-hidden">
-      {/* Camada de gradiente sutil */}
-      <div className="absolute inset-0 bg-gradient-to-br from-electric/5 via-transparent to-neon/5" />
+      {/* Camada de gradiente super sutil */}
+      <div className="absolute inset-0 bg-gradient-to-br from-electric/3 via-transparent to-neon/3" />
       
-      {/* Nuvens flutuantes */}
+      {/* Apenas 3 nuvens bem sutis e lentas */}
       <div className="absolute inset-0">
-        {[...Array(6)].map((_, i) => (
+        {[...Array(3)].map((_, i) => (
           <div
             key={`cloud-${i}`}
-            className="absolute opacity-10"
+            className="absolute opacity-5"
             style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animation: `floatCloud ${20 + i * 5}s infinite ease-in-out`,
-              animationDelay: `${i * 2}s`
+              left: `${i * 35 + 10}%`,
+              top: `${i * 30 + 10}%`,
+              animation: `floatCloud ${40 + i * 10}s infinite ease-in-out`,
+              animationDelay: `${i * 5}s`
             }}
           >
-            <svg width="120" height="60" viewBox="0 0 120 60" fill="currentColor" className="text-electric">
-              <ellipse cx="30" cy="40" rx="25" ry="15" />
-              <ellipse cx="60" cy="35" rx="35" ry="20" />
-              <ellipse cx="85" cy="40" rx="25" ry="15" />
+            <svg width="100" height="50" viewBox="0 0 100 50" fill="currentColor" className="text-electric">
+              <ellipse cx="25" cy="35" rx="20" ry="12" />
+              <ellipse cx="50" cy="30" rx="28" ry="16" />
+              <ellipse cx="70" cy="35" rx="20" ry="12" />
             </svg>
           </div>
         ))}
       </div>
 
-      {/* Corações flutuantes */}
+      {/* Menos corações e mais lentos */}
       <div className="absolute inset-0">
-        {[...Array(8)].map((_, i) => (
+        {[...Array(4)].map((_, i) => (
           <div
             key={`heart-${i}`}
-            className="absolute text-neon/20"
+            className="absolute text-neon/10"
             style={{
-              left: `${Math.random() * 100}%`,
+              left: `${i * 25 + 10}%`,
               bottom: `-50px`,
-              animation: `floatUp ${15 + i * 3}s infinite linear`,
-              animationDelay: `${i * 2}s`,
-              fontSize: `${20 + Math.random() * 20}px`
+              animation: `floatUp ${30 + i * 5}s infinite linear`,
+              animationDelay: `${i * 7}s`,
+              fontSize: `${16 + Math.random() * 12}px`
             }}
           >
             ❤️
@@ -47,44 +47,44 @@ export default function CuteBackground() {
         ))}
       </div>
 
-      {/* Patas de pet flutuantes */}
+      {/* Menos patas e bem mais sutis */}
       <div className="absolute inset-0">
-        {[...Array(10)].map((_, i) => (
+        {[...Array(5)].map((_, i) => (
           <div
             key={`paw-${i}`}
-            className="absolute opacity-5"
+            className="absolute opacity-3"
             style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animation: `floatDiagonal ${25 + i * 3}s infinite ease-in-out`,
-              animationDelay: `${i * 1.5}s`
+              left: `${i * 20 + 5}%`,
+              top: `${i * 18 + 10}%`,
+              animation: `floatDiagonal ${50 + i * 5}s infinite ease-in-out`,
+              animationDelay: `${i * 4}s`
             }}
           >
-            <svg width="30" height="30" viewBox="0 0 30 30" fill="currentColor" className="text-electric">
-              <circle cx="15" cy="18" r="6" />
-              <circle cx="10" cy="12" r="3" />
-              <circle cx="20" cy="12" r="3" />
-              <circle cx="8" cy="8" r="2" />
-              <circle cx="22" cy="8" r="2" />
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className="text-electric">
+              <circle cx="12" cy="14" r="5" />
+              <circle cx="8" cy="10" r="2.5" />
+              <circle cx="16" cy="10" r="2.5" />
+              <circle cx="6" cy="6" r="1.5" />
+              <circle cx="18" cy="6" r="1.5" />
             </svg>
           </div>
         ))}
       </div>
 
-      {/* Estrelas piscantes */}
+      {/* Menos estrelas e mais sutis */}
       <div className="absolute inset-0">
-        {[...Array(20)].map((_, i) => (
+        {[...Array(12)].map((_, i) => (
           <div
             key={`star-${i}`}
             className="absolute"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
-              animation: `twinkle ${3 + Math.random() * 2}s infinite ease-in-out`,
-              animationDelay: `${Math.random() * 3}s`
+              animation: `twinkle ${5 + Math.random() * 3}s infinite ease-in-out`,
+              animationDelay: `${Math.random() * 5}s`
             }}
           >
-            <div className="w-1 h-1 bg-electric/30 rounded-full" />
+            <div className="w-0.5 h-0.5 bg-electric/20 rounded-full" />
           </div>
         ))}
       </div>
@@ -94,14 +94,11 @@ export default function CuteBackground() {
           0%, 100% {
             transform: translate(0, 0) scale(1);
           }
-          25% {
-            transform: translate(30px, -20px) scale(1.1);
+          33% {
+            transform: translate(20px, -10px) scale(1.05);
           }
-          50% {
-            transform: translate(-20px, 10px) scale(0.95);
-          }
-          75% {
-            transform: translate(10px, -30px) scale(1.05);
+          66% {
+            transform: translate(-15px, 5px) scale(0.98);
           }
         }
 
@@ -110,11 +107,11 @@ export default function CuteBackground() {
             transform: translateY(100vh) rotate(0deg);
             opacity: 0;
           }
-          10% {
-            opacity: 0.3;
+          5% {
+            opacity: 0.15;
           }
-          90% {
-            opacity: 0.3;
+          95% {
+            opacity: 0.15;
           }
           100% {
             transform: translateY(-100vh) rotate(360deg);
@@ -127,24 +124,24 @@ export default function CuteBackground() {
             transform: translate(0, 0) rotate(0deg);
           }
           25% {
-            transform: translate(50px, -30px) rotate(90deg);
+            transform: translate(30px, -20px) rotate(45deg);
           }
           50% {
-            transform: translate(-30px, 20px) rotate(180deg);
+            transform: translate(-20px, 15px) rotate(90deg);
           }
           75% {
-            transform: translate(20px, -40px) rotate(270deg);
+            transform: translate(15px, -25px) rotate(135deg);
           }
         }
 
         @keyframes twinkle {
           0%, 100% {
-            opacity: 0.2;
+            opacity: 0.1;
             transform: scale(1);
           }
           50% {
-            opacity: 1;
-            transform: scale(1.5);
+            opacity: 0.5;
+            transform: scale(1.2);
           }
         }
       `}</style>

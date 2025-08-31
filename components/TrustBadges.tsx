@@ -36,16 +36,16 @@ export default function TrustBadges() {
   ]
 
   return (
-    <section className="py-12 relative overflow-hidden">
+    <section className="py-8 md:py-12 relative overflow-hidden">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-r from-electric/5 via-transparent to-neon/5" />
       
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="container mx-auto px-4 md:px-6 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-8"
+          className="text-center mb-6 md:mb-8"
         >
           <h3 className="text-2xl font-bold text-ice mb-2">
             Nossa Equipe Especializada
@@ -55,7 +55,7 @@ export default function TrustBadges() {
           </p>
         </motion.div>
 
-        <div className="flex flex-wrap justify-center gap-6 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 max-w-5xl mx-auto">
           {badges.map((badge, index) => (
             <motion.div
               key={badge.title}
@@ -70,7 +70,7 @@ export default function TrustBadges() {
               }}
               className="relative"
             >
-              <div className="glass rounded-xl p-6 border-2 border-white/10 hover:border-electric/30 transition-all duration-300 group">
+              <div className="glass rounded-xl p-4 md:p-6 border-2 border-white/10 hover:border-electric/30 transition-all duration-300 group">
                 {/* Glow effect on hover */}
                 <motion.div
                   className={`absolute inset-0 bg-gradient-to-br ${badge.color} opacity-0 group-hover:opacity-10 rounded-xl transition-opacity duration-300`}
@@ -78,8 +78,8 @@ export default function TrustBadges() {
                 
                 <div className="relative z-10 flex items-center gap-4">
                   {/* Icon with gradient background */}
-                  <div className={`w-14 h-14 bg-gradient-to-br ${badge.color} rounded-full flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow`}>
-                    <badge.icon className="w-7 h-7 text-white" />
+                  <div className={`w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br ${badge.color} rounded-full flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow`}>
+                    <badge.icon className="w-6 h-6 md:w-7 md:h-7 text-white" />
                   </div>
                   
                   {/* Text content */}
