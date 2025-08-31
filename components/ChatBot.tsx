@@ -59,8 +59,10 @@ export default function ChatBot() {
     // Detectar altura do teclado no mobile
     if (window.visualViewport && isMobile) {
       const handleViewportChange = () => {
-        const currentHeight = window.innerHeight - window.visualViewport.height
-        setKeyboardHeight(currentHeight)
+        if (window.visualViewport) {
+          const currentHeight = window.innerHeight - window.visualViewport.height
+          setKeyboardHeight(currentHeight)
+        }
       }
       
       window.visualViewport.addEventListener('resize', handleViewportChange)
