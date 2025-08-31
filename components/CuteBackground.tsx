@@ -14,11 +14,37 @@ export default function CuteBackground() {
     return () => window.removeEventListener('resize', checkMobile)
   }, [])
 
-  // No mobile, apenas gradiente simples
+  // No mobile, gradiente colorido mas sem animações
   if (isMobile) {
     return (
       <div className="fixed inset-0 pointer-events-none overflow-hidden" style={{ zIndex: -1 }}>
+        {/* Base escura */}
         <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0f] via-[#050510] to-[#0a0a0f]" />
+        
+        {/* Luzes coloridas estáticas mas bonitas */}
+        <div 
+          className="absolute -top-20 -left-20 w-60 h-60"
+          style={{
+            background: 'radial-gradient(circle, rgba(236, 72, 153, 0.2) 0%, transparent 70%)',
+            filter: 'blur(60px)'
+          }}
+        />
+        
+        <div 
+          className="absolute -top-20 -right-20 w-60 h-60"
+          style={{
+            background: 'radial-gradient(circle, rgba(147, 51, 234, 0.2) 0%, transparent 70%)',
+            filter: 'blur(60px)'
+          }}
+        />
+        
+        <div 
+          className="absolute bottom-0 left-1/2 -translate-x-1/2 w-80 h-40"
+          style={{
+            background: 'radial-gradient(ellipse, rgba(6, 182, 212, 0.15) 0%, transparent 70%)',
+            filter: 'blur(60px)'
+          }}
+        />
       </div>
     )
   }

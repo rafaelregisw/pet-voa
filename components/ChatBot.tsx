@@ -293,7 +293,7 @@ export default function ChatBot() {
           className="relative group"
         >
           {/* Camada de Fundo 3D */}
-          <div className="absolute inset-0 bg-gradient-to-br from-purple-600 via-pink-600 to-blue-600 rounded-full blur-xl opacity-75 group-hover:opacity-100 transition-opacity animate-pulse" />
+          <div className="absolute inset-0 bg-gradient-to-br from-purple-600 via-pink-600 to-blue-600 rounded-full blur-lg md:blur-xl opacity-75 group-hover:opacity-100 transition-opacity md:animate-pulse" />
           
           {/* Botão Principal */}
           <motion.div
@@ -427,7 +427,7 @@ export default function ChatBot() {
             initial={{ opacity: 0, y: 20, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.9 }}
-            className="fixed inset-0 md:inset-auto md:bottom-8 md:right-8 z-50 w-full md:w-96 h-full md:h-[600px] bg-gradient-to-br from-slate-900/95 via-purple-900/95 to-pink-900/95 md:backdrop-blur-xl md:rounded-3xl shadow-2xl border-0 md:border border-white/20 flex flex-col overflow-hidden"
+            className="fixed inset-0 md:inset-auto md:bottom-8 md:right-8 z-50 w-full md:w-96 h-full md:h-[600px] bg-gradient-to-br from-slate-900/95 via-purple-900/95 to-pink-900/95 backdrop-blur-md md:backdrop-blur-xl md:rounded-3xl shadow-2xl border-0 md:border border-white/20 flex flex-col overflow-hidden"
             style={{
               height: isMobile ? 'calc(100vh - env(safe-area-inset-bottom))' : '600px',
               paddingBottom: isMobile ? 'env(safe-area-inset-bottom)' : 0
