@@ -1,0 +1,45 @@
+# Dependencies
+node_modules
+npm-debug.log*
+yarn-error.log*
+
+# Next.js
+.next
+out
+
+# Testing
+coverage
+.nyc_output
+
+# Misc
+.DS_Store
+.env
+.env.local
+.env.production.local
+.env.development.local
+.env.test.local
+
+# IDE
+.vscode
+.idea
+
+# Git
+.git
+.gitignore
+
+# Documentation
+README.md
+README_REDIS.md
+README_GITHUB.md
+*.md
+
+# Development files
+docker-compose.yml
+.eslintrc.json
+jest.config.js
+*.test.js
+*.test.ts
+
+# Redis
+dump.rdb
+redis_data/

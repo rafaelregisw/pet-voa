@@ -32,7 +32,7 @@ export default function Header() {
       transition={{ duration: 0.6 }}
       className="fixed top-0 left-0 right-0 z-50 glass-dark border-b border-electric/10"
     >
-      <nav className="container mx-auto px-6 py-4">
+      <nav className="container mx-auto px-6 py-2">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <motion.div
@@ -42,7 +42,7 @@ export default function Header() {
             <img 
               src="/logo.png" 
               alt="Pet Voa" 
-              className="h-14 md:h-20 w-auto"
+              className="h-10 md:h-14 w-auto"
             />
           </motion.div>
 

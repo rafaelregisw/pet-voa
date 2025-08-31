@@ -14,7 +14,7 @@ export default function Footer() {
               <img 
                 src="/logo.png" 
                 alt="Pet Voa" 
-                className="h-16 w-auto"
+                className="h-14 w-auto"
               />
             </div>
             <p className="text-ice/60 text-sm">

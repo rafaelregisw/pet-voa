@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  # Redis Cache Service
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    command: redis-server --maxmemory 256mb --maxmemory-policy allkeys-lru
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Next.js Application - Using pre-built image
+  app:
+    image: node:20-alpine
+    restart: unless-stopped
+    working_dir: /app
+    ports:
+      - "3000"
+    environment:
+      - NODE_ENV=production
+      - REDIS_URL=redis://redis:6379
+      - NEXT_PUBLIC_WHATSAPP_NUMBER=5562983211122
+    depends_on:
+      - redis
+    volumes:
+      - ./:/app
+    command: sh -c "npm install && npm run build && npm start"
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3000"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
