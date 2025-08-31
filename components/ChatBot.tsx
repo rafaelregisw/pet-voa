@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { MessageCircle, X, Send, Bot, User } from 'lucide-react'
+import { MessageCircle, X, Send, Bot, User, Phone, ChevronDown } from 'lucide-react'
 
 interface Message {
   id: string
@@ -11,19 +11,103 @@ interface Message {
   timestamp: Date
 }
 
+interface UserData {
+  name: string
+  phone: string
+  countryCode: string
+}
+
+interface Country {
+  name: string
+  code: string
+  flag: string
+  phoneCode: string
+}
+
+const countries: Country[] = [
+  { name: 'Brasil', code: 'BR', flag: '🇧🇷', phoneCode: '+55' },
+  { name: 'Estados Unidos', code: 'US', flag: '🇺🇸', phoneCode: '+1' },
+  { name: 'Portugal', code: 'PT', flag: '🇵🇹', phoneCode: '+351' },
+  { name: 'Espanha', code: 'ES', flag: '🇪🇸', phoneCode: '+34' },
+  { name: 'Argentina', code: 'AR', flag: '🇦🇷', phoneCode: '+54' },
+  { name: 'México', code: 'MX', flag: '🇲🇽', phoneCode: '+52' },
+]
+
 export default function ChatBot() {
   const [isOpen, setIsOpen] = useState(false)
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      id: '1',
-      text: 'Olá! 👋 Sou o assistente da Pet Voa. Como posso ajudar você hoje?',
-      sender: 'bot',
-      timestamp: new Date()
-    }
-  ])
+  const [isRegistered, setIsRegistered] = useState(false)
+  const [userData, setUserData] = useState<UserData | null>(null)
+  const [selectedCountry, setSelectedCountry] = useState(countries[0])
+  const [showCountryDropdown, setShowCountryDropdown] = useState(false)
+  const [formData, setFormData] = useState({
+    name: '',
+    phone: ''
+  })
+  const [messages, setMessages] = useState<Message[]>([])
   const [inputValue, setInputValue] = useState('')
   const [isTyping, setIsTyping] = useState(false)
+  const [hasNewMessage, setHasNewMessage] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
+
+  // Carregar dados salvos do localStorage
+  useEffect(() => {
+    const savedUserData = localStorage.getItem('chatUserData')
+    const savedMessages = localStorage.getItem('chatMessages')
+    
+    if (savedUserData) {
+      const data = JSON.parse(savedUserData)
+      setUserData(data)
+      setIsRegistered(true)
+    }
+    
+    if (savedMessages) {
+      const msgs = JSON.parse(savedMessages)
+      setMessages(msgs.map((m: any) => ({
+        ...m,
+        timestamp: new Date(m.timestamp)
+      })))
+    } else {
+      // Mensagem inicial se não houver histórico
+      setMessages([{
+        id: '1',
+        text: 'Olá! 👋 Sou o assistente da Pet Voa. Para começarmos, preciso de algumas informações suas.',
+        sender: 'bot',
+        timestamp: new Date()
+      }])
+    }
+  }, [])
+
+  // Salvar mensagens no localStorage sempre que mudarem
+  useEffect(() => {
+    if (messages.length > 1) {
+      localStorage.setItem('chatMessages', JSON.stringify(messages))
+    }
+  }, [messages])
+
+  // Solicitar permissão para notificações
+  useEffect(() => {
+    if ('Notification' in window && Notification.permission === 'default') {
+      Notification.requestPermission()
+    }
+  }, [])
+
+  // Detectar quando o usuário sai da página
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.hidden && isOpen && hasNewMessage) {
+        if (Notification.permission === 'granted') {
+          new Notification('Pet Voa - Nova Mensagem! 🐕', {
+            body: 'Você tem uma nova mensagem do assistente.',
+            icon: '/favicon.ico',
+            tag: 'pet-voa-chat'
+          })
+        }
+      }
+    }
+    
+    document.addEventListener('visibilitychange', handleVisibilityChange)
+    return () => document.removeEventListener('visibilitychange', handleVisibilityChange)
+  }, [isOpen, hasNewMessage])
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -33,8 +117,51 @@ export default function ChatBot() {
     scrollToBottom()
   }, [messages])
 
+  const formatPhone = (value: string) => {
+    // Remove tudo que não é número
+    const numbers = value.replace(/\D/g, '')
+    
+    // Formata no padrão brasileiro
+    if (numbers.length <= 2) return numbers
+    if (numbers.length <= 7) return `${numbers.slice(0, 2)} ${numbers.slice(2)}`
+    if (numbers.length <= 11) return `${numbers.slice(0, 2)} ${numbers.slice(2, 7)}-${numbers.slice(7)}`
+    return `${numbers.slice(0, 2)} ${numbers.slice(2, 7)}-${numbers.slice(7, 11)}`
+  }
+
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const formatted = formatPhone(e.target.value)
+    setFormData({ ...formData, phone: formatted })
+  }
+
+  const handleRegistration = () => {
+    if (!formData.name.trim() || !formData.phone.trim()) {
+      alert('Por favor, preencha todos os campos!')
+      return
+    }
+
+    const fullPhone = `${selectedCountry.phoneCode} ${formData.phone}`
+    const user = {
+      name: formData.name,
+      phone: fullPhone,
+      countryCode: selectedCountry.phoneCode
+    }
+    
+    setUserData(user)
+    setIsRegistered(true)
+    localStorage.setItem('chatUserData', JSON.stringify(user))
+    
+    // Adicionar mensagem de boas-vindas personalizada
+    const welcomeMessage: Message = {
+      id: Date.now().toString(),
+      text: `Prazer em conhecê-lo, ${formData.name}! 😊 Como posso ajudar você hoje com o transporte do seu pet?`,
+      sender: 'bot',
+      timestamp: new Date()
+    }
+    setMessages(prev => [...prev, welcomeMessage])
+  }
+
   const sendMessage = async () => {
-    if (!inputValue.trim()) return
+    if (!inputValue.trim() || !userData) return
 
     const userMessage: Message = {
       id: Date.now().toString(),
@@ -48,7 +175,7 @@ export default function ChatBot() {
     setIsTyping(true)
 
     try {
-      // Enviar para o webhook do n8n
+      // Enviar para o webhook do n8n com dados do usuário
       const response = await fetch('https://n8n.uccai.com.br/webhook/pet-voa-bot-site-vendas', {
         method: 'POST',
         headers: {
@@ -57,7 +184,9 @@ export default function ChatBot() {
         body: JSON.stringify({
           message: inputValue,
           timestamp: new Date().toISOString(),
-          sessionId: localStorage.getItem('chatSessionId') || Date.now().toString()
+          userName: userData.name,
+          userPhone: userData.phone, // Usando o telefone como chave única
+          sessionId: userData.phone.replace(/\D/g, '') // ID único baseado no telefone
         })
       })
 
@@ -73,6 +202,7 @@ export default function ChatBot() {
         }
         setMessages(prev => [...prev, botMessage])
         setIsTyping(false)
+        setHasNewMessage(true)
       }, 1000)
     } catch (error) {
       console.error('Erro ao enviar mensagem:', error)
@@ -95,25 +225,24 @@ export default function ChatBot() {
     }
   }
 
-  // Salvar sessionId no localStorage
-  useEffect(() => {
-    if (!localStorage.getItem('chatSessionId')) {
-      localStorage.setItem('chatSessionId', Date.now().toString())
-    }
-  }, [])
-
   return (
     <>
-      {/* Botão do Chat */}
+      {/* Botão do Chat - Posicionado mais à esquerda e acima */}
       <motion.button
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         transition={{ delay: 2, type: 'spring' }}
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-28 right-8 z-40 w-16 h-16 bg-gradient-to-r from-electric to-neon rounded-full shadow-2xl flex items-center justify-center group hover:scale-110 transition-transform"
+        className="fixed bottom-32 right-24 z-40 w-16 h-16 bg-gradient-to-r from-electric to-neon rounded-full shadow-2xl flex items-center justify-center group hover:scale-110 transition-transform"
       >
         <Bot className="w-8 h-8 text-white" />
         <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-500 rounded-full animate-pulse" />
+        
+        {hasNewMessage && !isOpen && (
+          <div className="absolute -top-2 -left-2 w-6 h-6 bg-red-500 rounded-full flex items-center justify-center text-white text-xs font-bold animate-bounce">
+            1
+          </div>
+        )}
         
         {/* Tooltip */}
         <span className="absolute right-20 px-3 py-2 bg-midnight text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
@@ -138,98 +267,177 @@ export default function ChatBot() {
                 </div>
                 <div>
                   <h3 className="text-white font-bold">Assistente Pet Voa</h3>
-                  <p className="text-white/80 text-xs">Online agora</p>
+                  <p className="text-white/80 text-xs">
+                    {userData ? `Conversando com ${userData.name}` : 'Online agora'}
+                  </p>
                 </div>
               </div>
               <button
-                onClick={() => setIsOpen(false)}
+                onClick={() => {
+                  setIsOpen(false)
+                  setHasNewMessage(false)
+                }}
                 className="text-white/80 hover:text-white transition-colors"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
-            {/* Messages */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-4">
-              {messages.map((message) => (
-                <motion.div
-                  key={message.id}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className={`flex items-start gap-2 ${
-                    message.sender === 'user' ? 'flex-row-reverse' : ''
-                  }`}
-                >
-                  <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
-                    message.sender === 'user' 
-                      ? 'bg-electric' 
-                      : 'bg-gradient-to-r from-electric to-neon'
-                  }`}>
-                    {message.sender === 'user' ? (
-                      <User className="w-4 h-4 text-white" />
-                    ) : (
-                      <Bot className="w-4 h-4 text-white" />
-                    )}
+            {!isRegistered ? (
+              // Formulário de Registro
+              <div className="flex-1 p-6 flex flex-col justify-center">
+                <div className="space-y-4">
+                  <div>
+                    <label className="text-ice text-sm mb-2 block">Nome Completo</label>
+                    <input
+                      type="text"
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      placeholder="Digite seu nome completo"
+                      className="w-full bg-white/10 text-ice rounded-lg px-4 py-3 outline-none focus:bg-white/20 transition-colors"
+                    />
                   </div>
-                  <div className={`max-w-[70%] p-3 rounded-2xl ${
-                    message.sender === 'user'
-                      ? 'bg-electric text-white rounded-tr-none'
-                      : 'bg-white/10 text-ice rounded-tl-none'
-                  }`}>
-                    <p className="text-sm">{message.text}</p>
-                    <p className="text-xs opacity-60 mt-1">
-                      {message.timestamp.toLocaleTimeString('pt-BR', { 
-                        hour: '2-digit', 
-                        minute: '2-digit' 
-                      })}
+                  
+                  <div>
+                    <label className="text-ice text-sm mb-2 block">WhatsApp</label>
+                    <div className="flex gap-2">
+                      {/* Seletor de País */}
+                      <div className="relative">
+                        <button
+                          onClick={() => setShowCountryDropdown(!showCountryDropdown)}
+                          className="bg-white/10 text-ice rounded-lg px-3 py-3 flex items-center gap-2 hover:bg-white/20 transition-colors"
+                        >
+                          <span className="text-lg">{selectedCountry.flag}</span>
+                          <span className="text-sm">{selectedCountry.phoneCode}</span>
+                          <ChevronDown className="w-4 h-4" />
+                        </button>
+                        
+                        {showCountryDropdown && (
+                          <div className="absolute top-full mt-1 left-0 bg-midnight border border-electric/20 rounded-lg overflow-hidden z-10">
+                            {countries.map((country) => (
+                              <button
+                                key={country.code}
+                                onClick={() => {
+                                  setSelectedCountry(country)
+                                  setShowCountryDropdown(false)
+                                }}
+                                className="w-full px-3 py-2 flex items-center gap-2 hover:bg-white/10 transition-colors text-ice"
+                              >
+                                <span className="text-lg">{country.flag}</span>
+                                <span className="text-sm">{country.phoneCode}</span>
+                              </button>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                      
+                      {/* Input do Telefone */}
+                      <input
+                        type="tel"
+                        value={formData.phone}
+                        onChange={handlePhoneChange}
+                        placeholder="62 98321-1122"
+                        className="flex-1 bg-white/10 text-ice rounded-lg px-4 py-3 outline-none focus:bg-white/20 transition-colors"
+                      />
+                    </div>
+                    <p className="text-ice/50 text-xs mt-1">
+                      Exemplo: {selectedCountry.phoneCode} 62 98321-1122
                     </p>
                   </div>
-                </motion.div>
-              ))}
-              
-              {/* Typing indicator */}
-              {isTyping && (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  className="flex items-center gap-2"
-                >
-                  <div className="w-8 h-8 rounded-full bg-gradient-to-r from-electric to-neon flex items-center justify-center">
-                    <Bot className="w-4 h-4 text-white" />
-                  </div>
-                  <div className="bg-white/10 rounded-2xl rounded-tl-none p-3">
-                    <div className="flex gap-1">
-                      <span className="w-2 h-2 bg-ice rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-                      <span className="w-2 h-2 bg-ice rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-                      <span className="w-2 h-2 bg-ice rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
-                    </div>
-                  </div>
-                </motion.div>
-              )}
-              
-              <div ref={messagesEndRef} />
-            </div>
-
-            {/* Input */}
-            <div className="p-4 border-t border-white/10">
-              <div className="flex gap-2">
-                <input
-                  type="text"
-                  value={inputValue}
-                  onChange={(e) => setInputValue(e.target.value)}
-                  onKeyPress={handleKeyPress}
-                  placeholder="Digite sua mensagem..."
-                  className="flex-1 bg-white/10 text-ice rounded-full px-4 py-2 outline-none focus:bg-white/20 transition-colors placeholder-ice/50"
-                />
-                <button
-                  onClick={sendMessage}
-                  disabled={!inputValue.trim() || isTyping}
-                  className="w-10 h-10 bg-gradient-to-r from-electric to-neon rounded-full flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed hover:scale-110 transition-transform"
-                >
-                  <Send className="w-5 h-5 text-white" />
-                </button>
+                  
+                  <button
+                    onClick={handleRegistration}
+                    className="w-full bg-gradient-to-r from-electric to-neon text-white rounded-lg py-3 font-bold hover:scale-105 transition-transform"
+                  >
+                    Começar Conversa
+                  </button>
+                </div>
               </div>
-            </div>
+            ) : (
+              <>
+                {/* Messages */}
+                <div className="flex-1 overflow-y-auto p-4 space-y-4">
+                  {messages.map((message) => (
+                    <motion.div
+                      key={message.id}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className={`flex items-start gap-2 ${
+                        message.sender === 'user' ? 'flex-row-reverse' : ''
+                      }`}
+                    >
+                      <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
+                        message.sender === 'user' 
+                          ? 'bg-electric' 
+                          : 'bg-gradient-to-r from-electric to-neon'
+                      }`}>
+                        {message.sender === 'user' ? (
+                          <User className="w-4 h-4 text-white" />
+                        ) : (
+                          <Bot className="w-4 h-4 text-white" />
+                        )}
+                      </div>
+                      <div className={`max-w-[70%] p-3 rounded-2xl ${
+                        message.sender === 'user'
+                          ? 'bg-electric text-white rounded-tr-none'
+                          : 'bg-white/10 text-ice rounded-tl-none'
+                      }`}>
+                        <p className="text-sm">{message.text}</p>
+                        <p className="text-xs opacity-60 mt-1">
+                          {message.timestamp.toLocaleTimeString('pt-BR', { 
+                            hour: '2-digit', 
+                            minute: '2-digit' 
+                          })}
+                        </p>
+                      </div>
+                    </motion.div>
+                  ))}
+                  
+                  {/* Typing indicator */}
+                  {isTyping && (
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      className="flex items-center gap-2"
+                    >
+                      <div className="w-8 h-8 rounded-full bg-gradient-to-r from-electric to-neon flex items-center justify-center">
+                        <Bot className="w-4 h-4 text-white" />
+                      </div>
+                      <div className="bg-white/10 rounded-2xl rounded-tl-none p-3">
+                        <div className="flex gap-1">
+                          <span className="w-2 h-2 bg-ice rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+                          <span className="w-2 h-2 bg-ice rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+                          <span className="w-2 h-2 bg-ice rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                  
+                  <div ref={messagesEndRef} />
+                </div>
+
+                {/* Input */}
+                <div className="p-4 border-t border-white/10">
+                  <div className="flex gap-2">
+                    <input
+                      type="text"
+                      value={inputValue}
+                      onChange={(e) => setInputValue(e.target.value)}
+                      onKeyPress={handleKeyPress}
+                      placeholder="Digite sua mensagem..."
+                      className="flex-1 bg-white/10 text-ice rounded-full px-4 py-2 outline-none focus:bg-white/20 transition-colors placeholder-ice/50"
+                    />
+                    <button
+                      onClick={sendMessage}
+                      disabled={!inputValue.trim() || isTyping}
+                      className="w-10 h-10 bg-gradient-to-r from-electric to-neon rounded-full flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed hover:scale-110 transition-transform"
+                    >
+                      <Send className="w-5 h-5 text-white" />
+                    </button>
+                  </div>
+                </div>
+              </>
+            )}
           </motion.div>
         )}
       </AnimatePresence>
