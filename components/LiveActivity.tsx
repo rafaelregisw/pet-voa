@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { Users, MapPin, Clock, TrendingUp, AlertCircle } from 'lucide-react'
 
 export default function LiveActivity() {
-  const [viewers, setViewers] = useState(127)
+  const [viewers, setViewers] = useState(23)
   const [recentCity, setRecentCity] = useState('São Paulo')
   const [showNotification, setShowNotification] = useState(false)
   const [urgencyMessage, setUrgencyMessage] = useState('consultando agora')
@@ -30,7 +30,7 @@ export default function LiveActivity() {
       setViewers(prev => {
         const change = Math.random() > 0.5 ? 1 : -1
         const newValue = prev + change
-        return Math.max(89, Math.min(234, newValue)) // Mantém entre 89-234
+        return Math.max(12, Math.min(47, newValue)) // Mantém entre 12-47
       })
     }, 4000 + Math.random() * 3000) // Varia a cada 4-7 segundos
 
@@ -49,11 +49,11 @@ export default function LiveActivity() {
       setTimeout(() => setShowNotification(false), 3000)
     }
 
-    // Primeira notificação após 3 segundos
-    const firstTimer = setTimeout(showNewVisitor, 3000)
+    // Primeira notificação após 8 segundos
+    const firstTimer = setTimeout(showNewVisitor, 8000)
     
-    // Depois a cada 15-25 segundos
-    const interval = setInterval(showNewVisitor, 15000 + Math.random() * 10000)
+    // Depois a cada 30-45 segundos
+    const interval = setInterval(showNewVisitor, 30000 + Math.random() * 15000)
 
     return () => {
       clearTimeout(firstTimer)
@@ -81,7 +81,7 @@ export default function LiveActivity() {
             </div>
             
             {/* Badge de urgência */}
-            {viewers > 150 && (
+            {viewers > 35 && (
               <div className="flex items-center gap-1 mt-1">
                 <TrendingUp className="w-3 h-3 text-amber-400" />
                 <span className="text-xs text-amber-400 font-medium">Alta demanda</span>
@@ -94,12 +94,12 @@ export default function LiveActivity() {
         <div className="mt-3">
           <div className="flex justify-between text-xs mb-1">
             <span className="text-ice/60">Vagas disponíveis</span>
-            <span className="text-amber-400 font-medium">Apenas 3 este mês</span>
+            <span className="text-amber-400 font-medium">Apenas 5 este mês</span>
           </div>
           <div className="w-full h-2 bg-midnight/50 rounded-full overflow-hidden">
             <div 
               className="h-full bg-gradient-to-r from-amber-400 to-red-500 rounded-full transition-all duration-1000"
-              style={{ width: '75%' }}
+              style={{ width: '60%' }}
             />
           </div>
         </div>

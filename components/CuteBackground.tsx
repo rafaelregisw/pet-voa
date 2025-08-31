@@ -39,7 +39,7 @@ export default function CuteBackground() {
               bottom: `-50px`,
               animation: `floatUp ${30 + i * 5}s infinite linear`,
               animationDelay: `${i * 7}s`,
-              fontSize: `${16 + Math.random() * 12}px`
+              fontSize: `${18 + i * 2}px`
             }}
           >
             ❤️
@@ -78,10 +78,10 @@ export default function CuteBackground() {
             key={`star-${i}`}
             className="absolute"
             style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animation: `twinkle ${5 + Math.random() * 3}s infinite ease-in-out`,
-              animationDelay: `${Math.random() * 5}s`
+              left: `${(i * 8.3) + 4}%`,
+              top: `${((i * 7.7) % 100) + 5}%`,
+              animation: `twinkle ${5 + (i % 3)}s infinite ease-in-out`,
+              animationDelay: `${i * 0.4}s`
             }}
           >
             <div className="w-0.5 h-0.5 bg-electric/20 rounded-full" />

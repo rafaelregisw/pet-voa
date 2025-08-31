@@ -5,12 +5,12 @@ import { Clock, AlertTriangle, ChevronRight } from 'lucide-react'
 import { openWhatsApp } from '@/lib/whatsapp'
 
 export default function LimitedTimeOffer() {
-  const [timeLeft, setTimeLeft] = useState({ hours: 23, minutes: 47, seconds: 52 })
+  const [timeLeft, setTimeLeft] = useState({ hours: 11, minutes: 32, seconds: 45 })
   const [isVisible, setIsVisible] = useState(false)
 
-  // Mostra após 5 segundos na página
+  // Mostra após 10 segundos na página
   useEffect(() => {
-    const timer = setTimeout(() => setIsVisible(true), 5000)
+    const timer = setTimeout(() => setIsVisible(true), 10000)
     return () => clearTimeout(timer)
   }, [])
 
@@ -28,8 +28,8 @@ export default function LimitedTimeOffer() {
             minutes = 59
             hours--
             if (hours < 0) {
-              // Reinicia para 47h quando chega a zero
-              return { hours: 47, minutes: 59, seconds: 59 }
+              // Reinicia para 23h quando chega a zero
+              return { hours: 23, minutes: 59, seconds: 59 }
             }
           }
         }
@@ -83,14 +83,14 @@ export default function LimitedTimeOffer() {
 
         {/* Mensagem */}
         <p className="text-ice text-sm mb-3">
-          <span className="font-bold text-amber-400">10% de desconto</span> para quem fechar 
+          <span className="font-bold text-amber-400">5% de desconto</span> para quem fechar 
           <span className="text-electric font-bold"> HOJE!</span>
         </p>
 
         {/* Pets restantes */}
         <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-2 mb-3">
           <p className="text-xs text-red-400 text-center font-medium">
-            ⚠️ Apenas 2 vagas restantes para Dezembro
+            ⚠️ Apenas 3 vagas restantes para Dezembro
           </p>
         </div>
 
@@ -105,7 +105,7 @@ export default function LimitedTimeOffer() {
 
         {/* Pessoas interessadas */}
         <p className="text-xs text-ice/50 text-center mt-2">
-          🔥 17 pessoas visualizaram esta oferta na última hora
+          🔥 8 pessoas visualizaram esta oferta na última hora
         </p>
       </div>
 
