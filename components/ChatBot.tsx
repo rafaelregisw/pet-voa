@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { MessageCircle, X, Send, Bot, User, Phone, ChevronDown } from 'lucide-react'
+import { MessageCircle, X, Send, Bot, User, Phone, ChevronDown, Trash2, RefreshCw } from 'lucide-react'
 
 interface Message {
   id: string
@@ -225,6 +225,34 @@ export default function ChatBot() {
     }
   }
 
+  const clearChat = () => {
+    if (confirm('Deseja limpar toda a conversa? Isso não pode ser desfeito.')) {
+      localStorage.removeItem('chatMessages')
+      setMessages([{
+        id: '1',
+        text: 'Conversa limpa! Como posso ajudar você?',
+        sender: 'bot',
+        timestamp: new Date()
+      }])
+    }
+  }
+
+  const resetAll = () => {
+    if (confirm('Isso vai apagar todos os seus dados e conversas. Tem certeza?')) {
+      localStorage.removeItem('chatUserData')
+      localStorage.removeItem('chatMessages')
+      setUserData(null)
+      setIsRegistered(false)
+      setFormData({ name: '', phone: '' })
+      setMessages([{
+        id: '1',
+        text: 'Olá! 👋 Sou o assistente da Pet Voa. Para começarmos, preciso de algumas informações suas.',
+        sender: 'bot',
+        timestamp: new Date()
+      }])
+    }
+  }
+
   return (
     <>
       {/* Botão do Chat - Canto inferior direito */}
@@ -272,85 +300,122 @@ export default function ChatBot() {
                   </p>
                 </div>
               </div>
-              <button
-                onClick={() => {
-                  setIsOpen(false)
-                  setHasNewMessage(false)
-                }}
-                className="text-white/80 hover:text-white transition-colors"
-              >
-                <X className="w-5 h-5" />
-              </button>
+              <div className="flex items-center gap-2">
+                {isRegistered && (
+                  <>
+                    <button
+                      onClick={clearChat}
+                      className="text-white/60 hover:text-white transition-colors"
+                      title="Limpar conversa"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </button>
+                    <button
+                      onClick={resetAll}
+                      className="text-white/60 hover:text-white transition-colors"
+                      title="Resetar tudo"
+                    >
+                      <RefreshCw className="w-4 h-4" />
+                    </button>
+                  </>
+                )}
+                <button
+                  onClick={() => {
+                    setIsOpen(false)
+                    setHasNewMessage(false)
+                  }}
+                  className="text-white/80 hover:text-white transition-colors"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
             </div>
 
             {!isRegistered ? (
-              // Formulário de Registro
-              <div className="flex-1 p-6 flex flex-col justify-center">
-                <div className="space-y-4">
-                  <div>
-                    <label className="text-ice text-sm mb-2 block">Nome Completo</label>
-                    <input
-                      type="text"
-                      value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      placeholder="Digite seu nome completo"
-                      className="w-full bg-white/10 text-ice rounded-lg px-4 py-3 outline-none focus:bg-white/20 transition-colors"
-                    />
+              // Formulário de Registro - MELHORADO
+              <div className="flex-1 p-6 flex flex-col justify-center bg-gradient-to-b from-midnight/50 to-midnight/80">
+                <div className="max-w-sm mx-auto w-full space-y-6">
+                  <div className="text-center mb-6">
+                    <h2 className="text-xl font-bold text-ice mb-2">Bem-vindo! 👋</h2>
+                    <p className="text-ice/60 text-sm">Preencha seus dados para começar</p>
                   </div>
                   
-                  <div>
-                    <label className="text-ice text-sm mb-2 block">WhatsApp</label>
-                    <div className="flex gap-2">
-                      {/* Seletor de País */}
-                      <div className="relative">
-                        <button
-                          onClick={() => setShowCountryDropdown(!showCountryDropdown)}
-                          className="bg-white/10 text-ice rounded-lg px-3 py-3 flex items-center gap-2 hover:bg-white/20 transition-colors"
-                        >
-                          <span className="text-lg">{selectedCountry.flag}</span>
-                          <span className="text-sm">{selectedCountry.phoneCode}</span>
-                          <ChevronDown className="w-4 h-4" />
-                        </button>
-                        
-                        {showCountryDropdown && (
-                          <div className="absolute top-full mt-1 left-0 bg-midnight border border-electric/20 rounded-lg overflow-hidden z-10">
-                            {countries.map((country) => (
-                              <button
-                                key={country.code}
-                                onClick={() => {
-                                  setSelectedCountry(country)
-                                  setShowCountryDropdown(false)
-                                }}
-                                className="w-full px-3 py-2 flex items-center gap-2 hover:bg-white/10 transition-colors text-ice"
-                              >
-                                <span className="text-lg">{country.flag}</span>
-                                <span className="text-sm">{country.phoneCode}</span>
-                              </button>
-                            ))}
-                          </div>
-                        )}
-                      </div>
-                      
-                      {/* Input do Telefone */}
+                  <div className="space-y-5">
+                    <div>
+                      <label className="text-ice text-sm font-medium mb-2 block">
+                        Nome Completo
+                      </label>
                       <input
-                        type="tel"
-                        value={formData.phone}
-                        onChange={handlePhoneChange}
-                        placeholder="62 98321-1122"
-                        className="flex-1 bg-white/10 text-ice rounded-lg px-4 py-3 outline-none focus:bg-white/20 transition-colors"
+                        type="text"
+                        value={formData.name}
+                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                        placeholder="Digite seu nome completo"
+                        className="w-full bg-white/10 text-ice rounded-xl px-4 py-3.5 outline-none focus:bg-white/15 focus:ring-2 focus:ring-electric/30 transition-all placeholder-ice/40"
+                        autoFocus
                       />
                     </div>
-                    <p className="text-ice/50 text-xs mt-1">
-                      Exemplo: {selectedCountry.phoneCode} 62 98321-1122
-                    </p>
+                    
+                    <div>
+                      <label className="text-ice text-sm font-medium mb-2 block">
+                        WhatsApp
+                      </label>
+                      <div className="flex gap-2">
+                        {/* Seletor de País */}
+                        <div className="relative">
+                          <button
+                            onClick={() => setShowCountryDropdown(!showCountryDropdown)}
+                            className="bg-white/10 text-ice rounded-xl px-3 py-3.5 flex items-center gap-2 hover:bg-white/15 transition-all min-w-[110px]"
+                          >
+                            <span className="text-lg">{selectedCountry.flag}</span>
+                            <span className="text-sm font-medium">{selectedCountry.phoneCode}</span>
+                            <ChevronDown className={`w-4 h-4 transition-transform ${showCountryDropdown ? 'rotate-180' : ''}`} />
+                          </button>
+                          
+                          {showCountryDropdown && (
+                            <div className="absolute top-full mt-2 left-0 bg-midnight border border-electric/20 rounded-xl overflow-hidden z-10 shadow-2xl">
+                              {countries.map((country) => (
+                                <button
+                                  key={country.code}
+                                  onClick={() => {
+                                    setSelectedCountry(country)
+                                    setShowCountryDropdown(false)
+                                  }}
+                                  className="w-full px-4 py-3 flex items-center gap-3 hover:bg-white/10 transition-colors text-ice text-left"
+                                >
+                                  <span className="text-lg">{country.flag}</span>
+                                  <span className="text-sm font-medium">{country.phoneCode}</span>
+                                  <span className="text-xs text-ice/60">{country.name}</span>
+                                </button>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                        
+                        {/* Input do Telefone */}
+                        <input
+                          type="tel"
+                          value={formData.phone}
+                          onChange={handlePhoneChange}
+                          placeholder="62 98321-1122"
+                          className="flex-1 bg-white/10 text-ice rounded-xl px-4 py-3.5 outline-none focus:bg-white/15 focus:ring-2 focus:ring-electric/30 transition-all placeholder-ice/40"
+                        />
+                      </div>
+                      <p className="text-ice/40 text-xs mt-2 ml-1">
+                        Exemplo: {selectedCountry.phoneCode} 62 98321-1122
+                      </p>
+                    </div>
+                    
+                    <button
+                      onClick={handleRegistration}
+                      className="w-full bg-gradient-to-r from-electric to-neon text-white rounded-xl py-4 font-bold hover:scale-[1.02] transition-transform shadow-lg"
+                    >
+                      Começar Conversa
+                    </button>
                   </div>
                   
-                  <button
-                    onClick={handleRegistration}
-                    className="w-full bg-gradient-to-r from-electric to-neon text-white rounded-lg py-3 font-bold hover:scale-105 transition-transform"
-                  >
-                    Começar Conversa
-                  </button>
+                  <p className="text-center text-ice/40 text-xs mt-4">
+                    Seus dados são salvos apenas no seu navegador
+                  </p>
                 </div>
               </div>
             ) : (
