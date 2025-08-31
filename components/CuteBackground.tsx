@@ -25,43 +25,6 @@ export default function CuteBackground() {
         ))}
       </div>
 
-      {/* Corações subindo suavemente */}
-      <div className="absolute inset-0">
-        {[...Array(4)].map((_, i) => (
-          <div
-            key={`heart-${i}`}
-            className="absolute text-neon/10"
-            style={{
-              left: `${i * 25 + 10}%`,
-              bottom: `-100px`,
-              animation: `floatUpSlow ${60 + i * 10}s infinite linear`,
-              animationDelay: `${i * 8}s`,
-              fontSize: `${14 + i * 2}px`
-            }}
-          >
-            ❤️
-          </div>
-        ))}
-      </div>
-
-      {/* Estrelas flutuando suavemente */}
-      <div className="absolute inset-0">
-        {[...Array(5)].map((_, i) => (
-          <div
-            key={`star-${i}`}
-            className="absolute text-yellow-400/8"
-            style={{
-              right: `${i * 20 + 5}%`,
-              bottom: `-100px`,
-              animation: `floatUpSlow ${70 + i * 8}s infinite linear`,
-              animationDelay: `${i * 6 + 3}s`,
-              fontSize: `${12 + i * 2}px`
-            }}
-          >
-            ⭐
-          </div>
-        ))}
-      </div>
 
       {/* Pequenas partículas laterais */}
       <div className="absolute inset-0">
@@ -95,23 +58,6 @@ export default function CuteBackground() {
       </div>
 
       <style jsx>{`
-        @keyframes floatUpSlow {
-          0% {
-            transform: translateY(0) rotate(0deg) scale(1);
-            opacity: 0;
-          }
-          5% {
-            opacity: 1;
-          }
-          95% {
-            opacity: 1;
-          }
-          100% {
-            transform: translateY(-120vh) rotate(360deg) scale(0.8);
-            opacity: 0;
-          }
-        }
-
         @keyframes floatBokeh {
           0%, 100% {
             transform: translate(0, 0) scale(1);
