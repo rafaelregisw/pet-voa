@@ -12,7 +12,7 @@ export default function Hero() {
   const scrollToSection = useSmoothScroll()
   
   return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16 pb-8">
       {/* Floating Pets Background */}
       <FloatingPets />
       
@@ -25,7 +25,7 @@ export default function Hero() {
         <div className="absolute bottom-1/4 -right-48 w-96 h-96 bg-neon/10 rounded-full blur-3xl" />
       </div>
 
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 relative z-10">
         <div className="max-w-5xl mx-auto text-center">
           {/* Badge */}
           <motion.div
@@ -54,7 +54,7 @@ export default function Hero() {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="text-center mb-6"
             >
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-display font-bold">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-bold">
                 <span className="block">Seu Pet Viaja</span>
                 <span className="block text-gradient">Com Segurança Total</span>
               </h1>

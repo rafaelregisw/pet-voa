@@ -7,6 +7,7 @@ import Services from '@/components/Services'
 import CTA from '@/components/CTA'
 import Footer from '@/components/Footer'
 import WhatsAppButton from '@/components/WhatsAppButton'
+import CuteBackground from '@/components/CuteBackground'
 
 // Lazy load componentes pesados
 const VideoSection = dynamic(() => import('@/components/VideoSection'), {
@@ -24,6 +25,7 @@ const FAQ = dynamic(() => import('@/components/FAQ'), {
 export default function Home() {
   return (
     <>
+      <CuteBackground />
       <Header />
       <main>
         <Hero />

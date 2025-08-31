@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { Instagram, Facebook, Mail, Phone, MapPin } from 'lucide-react'
+import AnimatedLogoUltra from './AnimatedLogoUltra'
 
 export default function Footer() {
   return (
@@ -11,11 +12,7 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <div className="mb-4">
-              <img 
-                src="/logo.jpg" 
-                alt="Pet Voa" 
-                className="h-14 w-auto"
-              />
+              <AnimatedLogoUltra size="md" />
             </div>
             <p className="text-ice/60 text-sm">
               Transporte premium de pets para os EUA com amor e segurança.
