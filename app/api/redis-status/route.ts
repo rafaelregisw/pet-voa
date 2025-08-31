@@ -85,7 +85,8 @@ export async function GET() {
       totalViews: persistentStats.totalViews,
       todayViews: persistentStats.todayViews,
       activeUsers: persistentStats.activeUsers,
-      topPages: persistentStats.topPages
+      topPages: persistentStats.topPages,
+      cacheStats: persistentStats.cacheStats // ADICIONAR ISSO AQUI!
     }
     
     return NextResponse.json({
