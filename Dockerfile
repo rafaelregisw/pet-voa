@@ -30,5 +30,9 @@ ENV HOSTNAME=0.0.0.0
 # Expose port
 EXPOSE 3000
 
+# Copy start script
+COPY start.sh .
+RUN chmod +x start.sh
+
 # Start the server
-CMD ["npm", "start"]
+CMD ["./start.sh"]
