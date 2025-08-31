@@ -11,6 +11,7 @@ import CuteBackground from '@/components/CuteBackground'
 import SimpleLiveIndicator from '@/components/SimpleLiveIndicator'
 import ChatBot from '@/components/ChatBot'
 import SSLBadge from '@/components/SSLBadge'
+import CacheMonitor from '@/components/CacheMonitor'
 
 // Lazy load componentes pesados
 const VideoSection = dynamic(() => import('@/components/VideoSection'), {
@@ -45,6 +46,7 @@ export default function Home() {
       <WhatsAppButton />
       <ChatBot />
       <SSLBadge />
+      <CacheMonitor />
     </>
   )
 }

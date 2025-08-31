@@ -1,21 +1,23 @@
 import { NextResponse } from 'next/server'
-import { incrementCounter, getCounter, cacheWrapper } from '@/lib/redis'
+import { incrementCounter, getCounter, trackPageView, getStats } from '@/lib/persistent-storage'
+import { cacheWrapper } from '@/lib/page-cache'
 
 // Track page views
 export async function POST(request: Request) {
   try {
     const { page } = await request.json()
     
-    // Increment page view counter
-    const views = await incrementCounter(`page_views:${page}`)
+    // Track page view using persistent storage
+    await trackPageView(page)
     
-    // Increment total views
-    await incrementCounter('total_views')
+    // Get updated view count
+    const views = await getCounter(`page_views_${page}`)
     
     return NextResponse.json({ 
       success: true, 
       views,
-      message: 'View tracked successfully' 
+      message: 'View tracked successfully',
+      cached: false
     })
   } catch (error) {
     console.error('Error tracking view:', error)
@@ -26,50 +28,51 @@ export async function POST(request: Request) {
   }
 }
 
-// Get stats
+// Get stats with caching
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url)
   const page = searchParams.get('page')
   
   try {
-    // Use cache wrapper for stats
+    // Use cache wrapper for expensive stats calculation
     const stats = await cacheWrapper(
-      'site_stats',
+      'site_stats_v2',
       async () => {
-        const totalViews = await getCounter('total_views')
-        const heroViews = await getCounter('page_views:hero')
-        const videoViews = await getCounter('page_views:video')
-        const processViews = await getCounter('page_views:process')
-        const faqViews = await getCounter('page_views:faq')
+        const fullStats = await getStats()
         
         return {
-          total: totalViews,
-          pages: {
-            hero: heroViews,
-            video: videoViews,
-            process: processViews,
-            faq: faqViews
-          },
+          total: fullStats.totalViews,
+          todayViews: fullStats.todayViews,
+          activeUsers: fullStats.activeUsers,
+          pages: fullStats.pageViews,
+          topPages: fullStats.topPages,
+          cacheStats: fullStats.cacheStats,
           timestamp: new Date().toISOString()
         }
       },
-      300 // Cache for 5 minutes
+      { ttl: 300 } // Cache for 5 minutes
     )
     
     if (page) {
-      const pageViews = await getCounter(`page_views:${page}`)
+      const pageViews = stats.pages[page] || 0
       return NextResponse.json({ 
         page, 
         views: pageViews,
-        totalSiteViews: stats.total 
+        totalSiteViews: stats.total,
+        cached: true
       })
     }
     
-    return NextResponse.json(stats)
+    // Add cache headers for better performance
+    const response = NextResponse.json(stats)
+    response.headers.set('Cache-Control', 'public, max-age=300, stale-while-revalidate=60')
+    response.headers.set('X-Cache-Source', 'persistent-storage')
+    
+    return response
   } catch (error) {
     console.error('Error getting stats:', error)
     return NextResponse.json(
-      { error: 'Failed to get stats' },
+      { error: 'Failed to get stats', timestamp: new Date().toISOString() },
       { status: 500 }
     )
   }
