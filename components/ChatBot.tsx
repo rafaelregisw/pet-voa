@@ -220,7 +220,7 @@ export default function ChatBot() {
                        (typeof data === 'string' ? data : null) ||
                        'Desculpe, não consegui processar sua mensagem. Tente novamente!'
       
-      // Simular delay de digitação
+      // Resposta quase instantânea (100ms apenas para animação)
       setTimeout(() => {
         const botMessage: Message = {
           id: (Date.now() + 1).toString(),
@@ -231,7 +231,7 @@ export default function ChatBot() {
         setMessages(prev => [...prev, botMessage])
         setIsTyping(false)
         setHasNewMessage(true)
-      }, 1000)
+      }, 100)
     } catch (error) {
       console.error('Erro ao enviar mensagem:', error)
       setIsTyping(false)

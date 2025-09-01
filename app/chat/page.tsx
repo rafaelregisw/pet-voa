@@ -195,6 +195,7 @@ export default function ChatPage() {
                        (typeof data === 'string' ? data : null) ||
                        'Obrigado pela mensagem! Um de nossos especialistas entrará em contato em breve pelo WhatsApp.'
       
+      // Resposta instantânea (100ms apenas para animação suave)
       setTimeout(() => {
         const botMessage: Message = {
           id: (Date.now() + 1).toString(),
@@ -204,9 +205,10 @@ export default function ChatPage() {
         }
         setMessages(prev => [...prev, botMessage])
         setIsTyping(false)
-      }, 1000)
+      }, 100)
     } catch (error) {
       console.error('Erro ao enviar mensagem:', error)
+      // Resposta rápida em caso de erro
       setTimeout(() => {
         const botMessage: Message = {
           id: (Date.now() + 1).toString(),
@@ -216,7 +218,7 @@ export default function ChatPage() {
         }
         setMessages(prev => [...prev, botMessage])
         setIsTyping(false)
-      }, 1000)
+      }, 100)
     }
   }
 
