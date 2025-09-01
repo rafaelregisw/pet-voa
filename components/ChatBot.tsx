@@ -216,6 +216,7 @@ export default function ChatBot() {
                        data.response || 
                        data.message || 
                        data.text ||
+                       data.output ||
                        (typeof data === 'string' ? data : null) ||
                        'Desculpe, não consegui processar sua mensagem. Tente novamente!'
       

@@ -191,6 +191,7 @@ export default function ChatPage() {
                        data.response || 
                        data.message || 
                        data.text ||
+                       data.output ||
                        (typeof data === 'string' ? data : null) ||
                        'Obrigado pela mensagem! Um de nossos especialistas entrará em contato em breve pelo WhatsApp.'
       
