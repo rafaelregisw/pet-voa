@@ -28,15 +28,15 @@ export default function FAQ() {
     },
     {
       question: 'Qual o valor do serviço?',
-      answer: 'Nosso serviço varia de R$ 20.000 a R$ 40.000, dependendo do destino e tamanho do pet. Este valor cobre nosso trabalho completo de acompanhamento, assessoria e coordenação de todo o processo.',
+      answer: 'Nosso serviço completo varia de R$ 20.000 a R$ 40.000, incluindo passagem aérea do pet, acompanhamento profissional, toda documentação e assessoria jurídica. O cliente paga à parte apenas as taxas governamentais americanas e vacinas obrigatórias.',
     },
     {
       question: 'O que está incluído no valor do serviço?',
-      answer: 'Nosso serviço inclui: ✅ Acompanhamento profissional durante o voo, ✅ Assessoria jurídica para documentação, ✅ Coordenação de todo o processo, ✅ Orientação sobre exames e vacinas, ✅ Fotos e vídeos em tempo real, ✅ Suporte 24h durante a viagem, ✅ Busca e entrega do pet.',
+      answer: 'Nosso serviço inclui TUDO, exceto taxas governamentais e vacinas: ✅ Passagem aérea do pet, ✅ Acompanhamento profissional durante o voo, ✅ Toda documentação e assessoria jurídica, ✅ Caixa de transporte aprovada (se necessário), ✅ Coordenação completa do processo, ✅ Fotos e vídeos em tempo real, ✅ Suporte 24h durante a viagem, ✅ Busca e entrega do pet.',
     },
     {
       question: 'Quais custos adicionais o cliente deve pagar?',
-      answer: 'Além do nosso serviço, o cliente paga diretamente: 💵 Passagem aérea do pet (varia conforme companhia), 💵 ARK (taxa aeroportuária para animais), 💵 Taxas CDC e USDA (documentação governamental), 💵 Exames veterinários (raiva, sorologia, etc), 💵 Caixa de transporte IATA (se necessário), 💵 Certidão de Saúde (CVI). Orientamos sobre todos esses custos e onde pagar.',
+      answer: 'Além do nosso serviço completo, o cliente é responsável apenas por: 📋 Taxas governamentais obrigatórias (taxas oficiais do governo americano para entrada de pets), 💉 Vacinas necessárias (raiva e outras exigidas pelas autoridades sanitárias). Nós cuidamos de todo o resto! Orientamos você sobre cada taxa e vacina necessária, explicando onde e como fazer cada pagamento.',
     },
   ]
 
