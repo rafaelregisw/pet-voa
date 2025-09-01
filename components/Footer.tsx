@@ -58,26 +58,32 @@ export default function Footer() {
             <h4 className="font-semibold mb-4 text-ice">Redes Sociais</h4>
             <div className="flex gap-4">
               <motion.a
-                href="#"
+                href="https://www.instagram.com/pet.voa/"
+                target="_blank"
+                rel="noopener noreferrer"
                 whileHover={{ scale: 1.1, y: -2 }}
                 className="w-10 h-10 rounded-lg glass flex items-center justify-center hover:border-electric/30 transition-all"
+                title="Instagram @pet.voa"
               >
                 <Instagram className="w-5 h-5 text-ice/60 hover:text-electric" />
               </motion.a>
               <motion.a
-                href="#"
+                href="mailto:contato@petvoa.com"
                 whileHover={{ scale: 1.1, y: -2 }}
                 className="w-10 h-10 rounded-lg glass flex items-center justify-center hover:border-electric/30 transition-all"
-              >
-                <Facebook className="w-5 h-5 text-ice/60 hover:text-electric" />
-              </motion.a>
-              <motion.a
-                href="#"
-                whileHover={{ scale: 1.1, y: -2 }}
-                className="w-10 h-10 rounded-lg glass flex items-center justify-center hover:border-electric/30 transition-all"
+                title="Email: contato@petvoa.com"
               >
                 <Mail className="w-5 h-5 text-ice/60 hover:text-electric" />
               </motion.a>
+              <motion.div
+                className="w-10 h-10 rounded-lg glass flex items-center justify-center opacity-40 cursor-not-allowed relative"
+                title="Facebook - Indisponível"
+              >
+                <Facebook className="w-5 h-5 text-ice/30" />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="w-8 h-[2px] bg-red-500/50 rotate-45 absolute"></div>
+                </div>
+              </motion.div>
             </div>
           </div>
         </div>
