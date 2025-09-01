@@ -51,6 +51,9 @@ export default function RedisMonitor() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [autoRefresh, setAutoRefresh] = useState(true)
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [password, setPassword] = useState('')
+  const [passwordError, setPasswordError] = useState(false)
 
   const fetchStatus = async () => {
     try {
@@ -67,13 +70,96 @@ export default function RedisMonitor() {
   }
 
   useEffect(() => {
-    fetchStatus()
-    
-    if (autoRefresh) {
-      const interval = setInterval(fetchStatus, 3000) // Atualiza a cada 3 segundos
-      return () => clearInterval(interval)
+    // Verificar se já está autenticado (cookie/localStorage)
+    const savedAuth = localStorage.getItem('petvoa_performance_auth')
+    if (savedAuth === 'authenticated') {
+      setIsAuthenticated(true)
     }
-  }, [autoRefresh])
+  }, [])
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      fetchStatus()
+      
+      if (autoRefresh) {
+        const interval = setInterval(fetchStatus, 3000) // Atualiza a cada 3 segundos
+        return () => clearInterval(interval)
+      }
+    }
+  }, [autoRefresh, isAuthenticated])
+
+  const handlePasswordSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (password === '123123123') {
+      setIsAuthenticated(true)
+      setPasswordError(false)
+      localStorage.setItem('petvoa_performance_auth', 'authenticated')
+      setLoading(true)
+    } else {
+      setPasswordError(true)
+      setTimeout(() => setPasswordError(false), 3000)
+    }
+  }
+
+  // Tela de login com senha
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-pink-900 flex items-center justify-center p-4">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="bg-white/10 backdrop-blur-md rounded-2xl p-8 max-w-md w-full border border-white/20"
+        >
+          <div className="text-center mb-6">
+            <Database className="w-16 h-16 text-white mx-auto mb-4" />
+            <h1 className="text-2xl font-bold text-white mb-2">
+              Monitor de Performance
+            </h1>
+            <p className="text-white/60 text-sm">
+              Acesso restrito - Digite a senha
+            </p>
+          </div>
+
+          <form onSubmit={handlePasswordSubmit} className="space-y-4">
+            <div>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Digite a senha"
+                className={`w-full px-4 py-3 bg-white/10 border rounded-lg text-white placeholder-white/50 focus:outline-none focus:border-white/50 transition-all ${
+                  passwordError ? 'border-red-500 animate-shake' : 'border-white/20'
+                }`}
+                autoFocus
+              />
+              {passwordError && (
+                <motion.p
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="text-red-400 text-sm mt-2"
+                >
+                  Senha incorreta. Tente novamente.
+                </motion.p>
+              )}
+            </div>
+
+            <button
+              type="submit"
+              className="w-full py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold rounded-lg hover:opacity-90 transition-opacity"
+            >
+              Acessar Monitor
+            </button>
+          </form>
+
+          <div className="mt-6 text-center">
+            <a href="/" className="text-white/60 hover:text-white text-sm transition-colors">
+              ← Voltar ao site
+            </a>
+          </div>
+        </motion.div>
+      </div>
+    )
+  }
 
   if (loading) {
     return (
