@@ -184,11 +184,20 @@ export default function ChatPage() {
       })
 
       const data = await response.json()
+      console.log('Resposta do n8n:', data) // Debug
+      
+      // Aceitar múltiplos formatos de resposta
+      const botReply = data.reply || 
+                       data.response || 
+                       data.message || 
+                       data.text ||
+                       (typeof data === 'string' ? data : null) ||
+                       'Obrigado pela mensagem! Um de nossos especialistas entrará em contato em breve pelo WhatsApp.'
       
       setTimeout(() => {
         const botMessage: Message = {
           id: (Date.now() + 1).toString(),
-          text: data.reply || 'Obrigado pela mensagem! Um de nossos especialistas entrará em contato em breve pelo WhatsApp.',
+          text: botReply,
           sender: 'bot',
           timestamp: new Date()
         }

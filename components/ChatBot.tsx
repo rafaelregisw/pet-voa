@@ -209,12 +209,21 @@ export default function ChatBot() {
       })
 
       const data = await response.json()
+      console.log('Resposta do n8n (ChatBot):', data) // Debug
+      
+      // Aceitar múltiplos formatos de resposta
+      const botReply = data.reply || 
+                       data.response || 
+                       data.message || 
+                       data.text ||
+                       (typeof data === 'string' ? data : null) ||
+                       'Desculpe, não consegui processar sua mensagem. Tente novamente!'
       
       // Simular delay de digitação
       setTimeout(() => {
         const botMessage: Message = {
           id: (Date.now() + 1).toString(),
-          text: data.response || 'Desculpe, não consegui processar sua mensagem. Tente novamente!',
+          text: botReply,
           sender: 'bot',
           timestamp: new Date()
         }
