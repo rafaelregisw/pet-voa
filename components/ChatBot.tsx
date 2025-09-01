@@ -194,7 +194,7 @@ export default function ChatBot() {
 
     try {
       // Enviar para o webhook do n8n com dados do usuário
-      const response = await fetch('https://n8n.uccai.com.br/webhook/pet-voa-bot-site-vendas', {
+      const response = await fetch('https://n8n.petvoa.com/webhook/agente-2025-site', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

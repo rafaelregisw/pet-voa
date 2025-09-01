@@ -129,7 +129,7 @@ export default function ChatPage() {
 
     // Enviar dados para webhook
     try {
-      await fetch('https://n8n.uccai.com.br/webhook/pet-voa-bot-site-vendas', {
+      await fetch('https://n8n.petvoa.com/webhook/agente-2025-site', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -172,7 +172,7 @@ export default function ChatPage() {
 
     // Enviar para webhook
     try {
-      const response = await fetch('https://n8n.uccai.com.br/webhook/pet-voa-bot-site-vendas', {
+      const response = await fetch('https://n8n.petvoa.com/webhook/agente-2025-site', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
