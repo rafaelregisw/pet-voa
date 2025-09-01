@@ -20,6 +20,7 @@ export default function CTA() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
           className="glass rounded-3xl p-12 text-center max-w-4xl mx-auto border border-electric/20"
+          style={{ transition: 'none' }}
         >
           {/* Floating Elements */}
           <motion.div
