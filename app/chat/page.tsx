@@ -169,9 +169,17 @@ export default function ChatPage() {
     setMessages(prev => [...prev, userMessage])
     setInputValue('')
     setIsTyping(true)
+    
+    // Aviso se demorar muito
+    const slowWarningTimer = setTimeout(() => {
+      console.log('⚠️ Resposta demorando mais que o esperado...')
+    }, 3000)
 
     // Enviar para webhook
     try {
+      const startTime = Date.now()
+      console.log('🚀 Enviando mensagem para n8n...')
+      
       const response = await fetch('https://n8n.petvoa.com/webhook/agente-2025-site', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -183,8 +191,11 @@ export default function ChatPage() {
         })
       })
 
+      const fetchTime = Date.now() - startTime
+      console.log(`⏱️ Tempo de resposta do n8n: ${fetchTime}ms`)
+
       const data = await response.json()
-      console.log('Resposta do n8n:', data) // Debug
+      console.log('✅ Resposta do n8n:', data)
       
       // Aceitar múltiplos formatos de resposta
       const botReply = data.reply || 

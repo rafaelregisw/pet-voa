@@ -193,6 +193,9 @@ export default function ChatBot() {
     setIsTyping(true)
 
     try {
+      const startTime = Date.now()
+      console.log('🚀 [ChatBot] Enviando para n8n...')
+      
       // Enviar para o webhook do n8n com dados do usuário
       const response = await fetch('https://n8n.petvoa.com/webhook/agente-2025-site', {
         method: 'POST',
@@ -208,8 +211,11 @@ export default function ChatBot() {
         })
       })
 
+      const fetchTime = Date.now() - startTime
+      console.log(`⏱️ [ChatBot] Tempo de resposta: ${fetchTime}ms`)
+      
       const data = await response.json()
-      console.log('Resposta do n8n (ChatBot):', data) // Debug
+      console.log('✅ [ChatBot] Resposta:', data)
       
       // Aceitar múltiplos formatos de resposta
       const botReply = data.reply || 

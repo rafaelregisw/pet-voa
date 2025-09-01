@@ -28,15 +28,15 @@ export default function FAQ() {
     },
     {
       question: 'Qual o valor do serviço?',
-      answer: 'Nosso serviço completo varia de R$ 20.000 a R$ 40.000, incluindo passagem aérea do pet, acompanhamento profissional, toda documentação e assessoria jurídica. O cliente paga à parte apenas as taxas governamentais americanas e vacinas obrigatórias.',
+      answer: 'Nosso serviço completo varia de R$ 20.000 a R$ 40.000, incluindo passagem aérea do pet, acompanhamento profissional, toda documentação e assessoria jurídica. O cliente paga à parte: caixa de transporte IATA, taxas governamentais americanas e vacinas obrigatórias.',
     },
     {
       question: 'O que está incluído no valor do serviço?',
-      answer: 'Nosso serviço inclui TUDO, exceto taxas governamentais e vacinas: ✅ Passagem aérea do pet, ✅ Acompanhamento profissional durante o voo, ✅ Toda documentação e assessoria jurídica, ✅ Caixa de transporte aprovada (se necessário), ✅ Coordenação completa do processo, ✅ Fotos e vídeos em tempo real, ✅ Suporte 24h durante a viagem, ✅ Busca e entrega do pet.',
+      answer: 'Nosso serviço inclui: ✅ Passagem aérea do pet, ✅ Acompanhamento profissional durante o voo, ✅ Toda documentação e assessoria jurídica, ✅ Coordenação completa do processo, ✅ Fotos e vídeos em tempo real, ✅ Suporte 24h durante a viagem, ✅ Busca e entrega do pet. ❌ NÃO INCLUI: Caixa de transporte (cada pet precisa ter a sua própria), taxas governamentais e vacinas.',
     },
     {
       question: 'Quais custos adicionais o cliente deve pagar?',
-      answer: 'Além do nosso serviço completo, o cliente é responsável apenas por: 📋 Taxas governamentais obrigatórias (taxas oficiais do governo americano para entrada de pets), 💉 Vacinas necessárias (raiva e outras exigidas pelas autoridades sanitárias). Nós cuidamos de todo o resto! Orientamos você sobre cada taxa e vacina necessária, explicando onde e como fazer cada pagamento.',
+      answer: 'Além do nosso serviço completo, o cliente é responsável por: 📦 Caixa de transporte aprovada pela IATA (cada pet precisa ter a sua própria), 📋 Taxas governamentais obrigatórias (taxas oficiais do governo americano para entrada de pets), 💉 Vacinas necessárias (raiva e outras exigidas pelas autoridades sanitárias). Nós orientamos você sobre cada item, onde comprar a caixa e como fazer cada pagamento.',
     },
   ]
 

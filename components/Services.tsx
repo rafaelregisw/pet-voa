@@ -27,7 +27,7 @@ export default function Services() {
     {
       icon: Plane,
       title: 'Transporte Premium',
-      description: 'Viagem em cabine com profissional, nunca no compartimento de carga.',
+      description: 'Pequenos voam na cabine com nossa psicóloga. Grandes no porão, ela age rápido para buscar na chegada.',
       color: 'from-green-500 to-emerald-500',
     },
     {
