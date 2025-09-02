@@ -16,7 +16,7 @@ export default function FAQ() {
     },
     {
       question: 'Quais documentos são necessários?',
-      answer: 'Relaxa, nós cuidamos da parte burocrática! 📋 Nossa equipe prepara TODA a documentação oficial dos governos americano e brasileiro. Você só precisa providenciar: fotos do seu pet (te ensinamos como tirar), carteirinha de vacinação atualizada, certificado do microchip (conferimos tudo), e exame de sangue para raiva. Organizamos tudo junto e você nunca fica perdido no processo.',
+      answer: 'Relaxa, nós cuidamos da parte burocrática! 📋 Nossa equipe prepara TODA a documentação oficial dos governos americano e brasileiro. Você só precisa providenciar: fotos específicas do seu pet (frente, perfil, dentes - te ensinamos direitinho), carteirinha de vacinação atualizada, certificado do microchip (conferimos tudo), exame de sangue para raiva, e um documento seu (RG ou passaporte) para comprovar que o pet é seu. Organizamos tudo junto e você nunca fica perdido no processo!',
     },
     {
       question: 'Quanto tempo demora o processo?',
@@ -28,7 +28,7 @@ export default function FAQ() {
     },
     {
       question: 'Qual o valor do serviço?',
-      answer: 'Nosso serviço completo varia de R$ 25.000 a R$ 45.000 (dependendo do porte do pet), incluindo passagem aérea, acompanhamento profissional, toda documentação e assessoria jurídica. O cliente paga à parte: caixa de transporte IATA, taxas governamentais americanas e vacinas obrigatórias.',
+      answer: 'Nosso serviço completo varia de R$ 25.000 a R$ 45.000 (dependendo do porte do pet). Esse valor JÁ INCLUI a passagem aérea do pet, acompanhamento da nossa psicóloga durante o voo, e toda documentação/assessoria jurídica. O cliente paga à parte apenas: caixa de transporte, vacinas e taxas governamentais.',
     },
     {
       question: 'O que está incluído no valor do serviço?',
@@ -36,7 +36,7 @@ export default function FAQ() {
     },
     {
       question: 'Quais custos adicionais o cliente deve pagar?',
-      answer: 'Além do nosso serviço, você investe em: 📦 Caixa de transporte especial para avião, 💉 Vacinas e exame de sangue (sorologia da raiva), 🏷️ Microchip com certificado, 📋 Taxas do governo americano, 🩺 Exames veterinários necessários, 💊 Vermífugo e antipulgas. Orientamos você em cada etapa e conferimos toda a documentação!',
+      answer: 'Além do nosso serviço, você investe em: 📦 Caixa de transporte especial para avião, 💉 Vacinas e exame de sangue (sorologia da raiva), 🏷️ Microchip com certificado, 📋 Taxas do governo americano, 🩺 Exames veterinários necessários, 💊 Vermífugo e antipulgas, 📍 Coleira GPS (opcional, mas super recomendado para sua tranquilidade!). Orientamos você em cada etapa e conferimos toda a documentação!',
     },
   ]
 
