@@ -16,7 +16,7 @@ export default function FAQ() {
     },
     {
       question: 'Quais documentos são necessários?',
-      answer: 'Nosso jurídico cuida de TODA documentação oficial: ✅ Certificado Veterinário Internacional (CVI), ✅ CDC Dog Import Form, ✅ ARK CDC Agreement, ✅ POA Broker, ✅ Declarações e formulários USDA, ✅ Toda papelada governamental. O cliente providencia apenas: 📸 Fotos do pet, 💉 Carteira de vacinação atualizada, 🏷️ Microchip (aplicação e número), 🩺 Exames e sorologia da raiva. Nós organizamos tudo e garantimos que esteja perfeito!',
+      answer: 'Fazemos TUDO JUNTO com você! Nosso jurídico prepara: ✅ Certificado Veterinário Internacional (CVI), ✅ CDC Dog Import Form, ✅ ARK CDC Agreement, ✅ POA Broker, ✅ Formulários USDA. Orientamos você em cada etapa: 📸 Fotos do pet (explicamos como tirar), 💉 Vacinas (indicamos onde fazer), 🏷️ Microchip (acompanhamos aplicação), 🩺 Exames e sorologia. Você não fica perdido em momento algum - fazemos tudo passo a passo juntos!',
     },
     {
       question: 'Quanto tempo demora o processo?',
