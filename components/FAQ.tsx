@@ -16,7 +16,7 @@ export default function FAQ() {
     },
     {
       question: 'Quais documentos são necessários?',
-      answer: 'Nossa especialista jurídica prepara toda documentação: Certificado de Saúde (CVI), Carteira de Vacinação, Exame de Raiva, Aprovação USDA e documentação CDC. Você não precisa se preocupar com nada.',
+      answer: 'Você fornece os documentos do seu pet e nosso jurídico organiza tudo: ✅ Fotos do pet (com dentição), ✅ Carteira de vacinação, ✅ Certificado Veterinário Internacional (CVI), ✅ Passaporte e visto, ✅ Microchip (você providencia), ✅ Tratamento parasitário, ✅ Sorologia da raiva (você faz e paga), ✅ CDC Recibo, ✅ Valor declarado, ✅ ARK CDC Agreement, ✅ POA Broker, ✅ Outros documentos conforme necessário. Nossa equipe jurídica coordena e prepara toda a documentação necessária!',
     },
     {
       question: 'Quanto tempo demora o processo?',
@@ -36,7 +36,7 @@ export default function FAQ() {
     },
     {
       question: 'Quais custos adicionais o cliente deve pagar?',
-      answer: 'Além do nosso serviço completo, o cliente é responsável por: 📦 Caixa de transporte aprovada pela IATA (cada pet precisa ter a sua própria), 📋 Taxas governamentais obrigatórias (taxas oficiais do governo americano para entrada de pets), 💉 Vacinas necessárias (raiva e outras exigidas pelas autoridades sanitárias). Nós orientamos você sobre cada item, onde comprar a caixa e como fazer cada pagamento.',
+      answer: 'Além do nosso serviço completo, o cliente é responsável por: 📦 Caixa de transporte aprovada pela IATA, 💉 Vacinas e sorologia da raiva, 🏷️ Microchip de identificação, 📋 Taxas governamentais americanas, 🩺 Exames veterinários solicitados, 💊 Tratamentos parasitários. Nós orientamos você sobre cada item, onde fazer e como pagar.',
     },
   ]
 
