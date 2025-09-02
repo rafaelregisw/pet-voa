@@ -24,7 +24,7 @@ export default function FAQ() {
     },
     {
       question: 'Como recebo as fotos durante a viagem?',
-      answer: 'Criamos um grupo exclusivo no WhatsApp onde você recebe fotos e vídeos em tempo real durante toda a viagem, desde a busca até a entrega.',
+      answer: 'Criamos um grupo exclusivo no WhatsApp onde você recebe fotos e vídeos em tempo real durante toda a viagem, desde o check-in até a chegada.',,
     },
     {
       question: 'Qual o valor do serviço?',
@@ -32,7 +32,7 @@ export default function FAQ() {
     },
     {
       question: 'O que está incluído no valor do serviço?',
-      answer: 'Nosso serviço inclui: ✅ Passagem aérea do pet, ✅ Acompanhamento profissional durante o voo, ✅ Toda documentação e assessoria jurídica, ✅ Coordenação completa do processo, ✅ Fotos e vídeos em tempo real, ✅ Suporte 24h durante a viagem, ✅ Busca e entrega do pet. ❌ NÃO INCLUI: Caixa de transporte (cada pet precisa ter a sua própria), taxas governamentais e vacinas.',
+      answer: 'Nosso serviço inclui: ✅ Passagem aérea do pet, ✅ Acompanhamento profissional durante o voo, ✅ Toda documentação e assessoria jurídica, ✅ Coordenação completa do processo, ✅ Fotos e vídeos em tempo real, ✅ Suporte 24h durante a viagem, ✅ Recepção e acompanhamento no aeroporto. ❌ NÃO INCLUI: Caixa de transporte (cada pet precisa ter a sua própria), taxas governamentais e vacinas.',
     },
     {
       question: 'Quais custos adicionais o cliente deve pagar?',

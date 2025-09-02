@@ -20,7 +20,7 @@ export default function Process() {
     {
       icon: Plane,
       title: 'Dia da Viagem',
-      description: 'Nossa equipe busca seu pet e inicia o acompanhamento',
+      description: 'Você entrega seu pet no aeroporto para nossa equipe',,
       color: 'from-green-500 to-emerald-500',
     },
     {
@@ -31,8 +31,8 @@ export default function Process() {
     },
     {
       icon: CheckCircle,
-      title: 'Entrega Segura',
-      description: 'Pet entregue no destino com total segurança',
+      title: 'Chegada Segura',
+      description: 'Você recebe seu pet no aeroporto de destino',,
       color: 'from-red-500 to-pink-500',
     },
   ]
