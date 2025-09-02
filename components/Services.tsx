@@ -32,8 +32,8 @@ export default function Services() {
     },
     {
       icon: FileText,
-      title: 'Seguro Completo',
-      description: 'Cobertura total durante a viagem com seguro internacional especializado.',
+      title: 'Documentação Completa',
+      description: 'Preparamos toda documentação oficial: CVI, CDC, USDA e formulários necessários.',
       color: 'from-orange-500 to-amber-500',
     },
     {
