@@ -24,7 +24,7 @@ export default function FAQ() {
     },
     {
       question: 'Como recebo as fotos durante a viagem?',
-      answer: 'Criamos um grupo exclusivo no WhatsApp onde você recebe fotos e vídeos em tempo real durante toda a viagem, desde o check-in até a chegada.',,
+      answer: 'Criamos um grupo exclusivo no WhatsApp onde você recebe fotos e vídeos em tempo real durante toda a viagem, desde o check-in até a chegada.',
     },
     {
       question: 'Qual o valor do serviço?',

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
+import Link from 'next/link'
 import { 
   Activity, Database, Server, Users, Eye, Clock, 
   Wifi, WifiOff, AlertCircle, CheckCircle, RefreshCw,
@@ -152,9 +153,9 @@ export default function RedisMonitor() {
           </form>
 
           <div className="mt-6 text-center">
-            <a href="/" className="text-white/60 hover:text-white text-sm transition-colors">
+            <Link href="/" className="text-white/60 hover:text-white text-sm transition-colors">
               ← Voltar ao site
-            </a>
+            </Link>
           </div>
         </motion.div>
       </div>
