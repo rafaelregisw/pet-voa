@@ -16,7 +16,7 @@ export default function FAQ() {
     },
     {
       question: 'Quais documentos são necessários?',
-      answer: 'Você fornece os documentos do seu pet e nosso jurídico organiza tudo: ✅ Fotos do pet (com dentição), ✅ Carteira de vacinação, ✅ Certificado Veterinário Internacional (CVI), ✅ Passaporte e visto, ✅ Microchip (você providencia), ✅ Tratamento parasitário, ✅ Sorologia da raiva (você faz e paga), ✅ CDC Recibo, ✅ Valor declarado, ✅ ARK CDC Agreement, ✅ POA Broker, ✅ Outros documentos conforme necessário. Nossa equipe jurídica coordena e prepara toda a documentação necessária!',
+      answer: 'Nosso jurídico cuida de TODA documentação oficial: ✅ Certificado Veterinário Internacional (CVI), ✅ CDC Dog Import Form, ✅ ARK CDC Agreement, ✅ POA Broker, ✅ Declarações e formulários USDA, ✅ Toda papelada governamental. O cliente providencia apenas: 📸 Fotos do pet, 💉 Carteira de vacinação atualizada, 🏷️ Microchip (aplicação e número), 🩺 Exames e sorologia da raiva. Nós organizamos tudo e garantimos que esteja perfeito!',
     },
     {
       question: 'Quanto tempo demora o processo?',
