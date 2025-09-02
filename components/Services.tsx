@@ -33,7 +33,7 @@ export default function Services() {
     {
       icon: FileText,
       title: 'Rastreamento ao Vivo',
-      description: 'Acompanhe a viagem em tempo real. Pet viaja com coleira GPS rastreável 24h.',
+      description: 'Acompanhe a viagem em tempo real. Colocamos GPS na coleira do seu pet para rastreamento 24h.',
       color: 'from-orange-500 to-amber-500',
     },
     {

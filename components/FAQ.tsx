@@ -36,7 +36,7 @@ export default function FAQ() {
     },
     {
       question: 'Quais custos adicionais o cliente deve pagar?',
-      answer: 'Além do nosso serviço, você investe em: 📦 Caixa de transporte especial para avião, 💉 Vacinas e exame de sangue (sorologia da raiva), 🏷️ Microchip com certificado, 📋 Taxa ARK do governo americano (cobrança alta do aeroporto para entrada do pet, mas obrigatória para todos), 🩺 Exames veterinários necessários, 💊 Vermífugo e antipulgas, 📍 Coleira GPS (opcional, mas super recomendado para sua tranquilidade!). Orientamos você em cada etapa e conferimos toda a documentação!',
+      answer: 'Além do nosso serviço, você investe em: 📦 Caixa de transporte especial para avião, 💉 Vacinas e exame de sangue (sorologia da raiva), 🏷️ Microchip com certificado, 📋 Taxa ARK do governo americano (cobrança alta do aeroporto para entrada do pet, mas obrigatória para todos), 🩺 Exames veterinários necessários, 💊 Vermífugo e antipulgas, 🐕 Coleira comum (nós colocamos GPS para rastreamento durante a viagem). Orientamos você em cada etapa e conferimos toda a documentação!',
     },
   ]
 

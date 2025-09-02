@@ -300,7 +300,7 @@ export default function Hero() {
                         </motion.span>
                       </span>
                       <span className="text-white/95 text-sm md:text-base font-medium flex items-center gap-1">
-                        Coleira com GPS + Link exclusivo
+                        Nós colocamos GPS + Link exclusivo
                         <span className="hidden md:inline">🐾</span>
                       </span>
                     </div>
