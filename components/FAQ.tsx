@@ -28,7 +28,7 @@ export default function FAQ() {
     },
     {
       question: 'Qual o valor do serviço?',
-      answer: 'Nosso serviço completo varia de R$ 20.000 a R$ 40.000, incluindo passagem aérea do pet, acompanhamento profissional, toda documentação e assessoria jurídica. O cliente paga à parte: caixa de transporte IATA, taxas governamentais americanas e vacinas obrigatórias.',
+      answer: 'Nosso serviço completo varia de R$ 25.000 a R$ 45.000 (dependendo do porte do pet), incluindo passagem aérea, acompanhamento profissional, toda documentação e assessoria jurídica. O cliente paga à parte: caixa de transporte IATA, taxas governamentais americanas e vacinas obrigatórias.',
     },
     {
       question: 'O que está incluído no valor do serviço?',
