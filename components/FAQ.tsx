@@ -28,15 +28,15 @@ export default function FAQ() {
     },
     {
       question: 'Qual o valor do serviço?',
-      answer: 'Nosso serviço completo varia de R$ 25.000 a R$ 45.000 (dependendo do porte do pet). Esse valor JÁ INCLUI a passagem aérea do pet, acompanhamento da nossa psicóloga durante o voo, e toda documentação/assessoria jurídica. O cliente paga à parte apenas: caixa de transporte, vacinas e taxas governamentais.',
+      answer: 'Nosso serviço completo varia de R$ 25.000 a R$ 45.000 (dependendo do porte do pet). Esse valor JÁ INCLUI a passagem aérea do pet, acompanhamento da nossa psicóloga durante o voo, e toda documentação/assessoria jurídica. O cliente paga à parte apenas: caixa de transporte, vacinas e taxa de entrada nos EUA.',
     },
     {
       question: 'O que está incluído no valor do serviço?',
-      answer: 'Nosso serviço inclui: ✅ Passagem aérea do pet, ✅ Acompanhamento profissional durante o voo, ✅ Toda documentação e assessoria jurídica, ✅ Coordenação completa do processo, ✅ Fotos e vídeos em tempo real, ✅ Suporte 24h durante a viagem, ✅ Recepção e acompanhamento no aeroporto. ❌ NÃO INCLUI: Caixa de transporte (cada pet precisa ter a sua própria), taxas governamentais e vacinas.',
+      answer: 'Nosso serviço inclui: ✅ Passagem aérea do pet, ✅ Acompanhamento profissional durante o voo, ✅ Toda documentação e assessoria jurídica, ✅ Coordenação completa do processo, ✅ Fotos e vídeos em tempo real, ✅ Suporte 24h durante a viagem, ✅ Recepção e acompanhamento no aeroporto. ❌ NÃO INCLUI: Caixa de transporte (cada pet precisa ter a sua própria), taxa de entrada nos EUA e vacinas.',
     },
     {
       question: 'Quais custos adicionais o cliente deve pagar?',
-      answer: 'Além do nosso serviço, você investe em: 📦 Caixa de transporte especial para avião, 💉 Vacinas e exame de sangue (sorologia da raiva), 🏷️ Microchip com certificado, 📋 Taxas do governo americano, 🩺 Exames veterinários necessários, 💊 Vermífugo e antipulgas, 📍 Coleira GPS (opcional, mas super recomendado para sua tranquilidade!). Orientamos você em cada etapa e conferimos toda a documentação!',
+      answer: 'Além do nosso serviço, você investe em: 📦 Caixa de transporte especial para avião, 💉 Vacinas e exame de sangue (sorologia da raiva), 🏷️ Microchip com certificado, 📋 Taxa ARK do governo americano (cobrança alta do aeroporto para entrada do pet, mas obrigatória para todos), 🩺 Exames veterinários necessários, 💊 Vermífugo e antipulgas, 📍 Coleira GPS (opcional, mas super recomendado para sua tranquilidade!). Orientamos você em cada etapa e conferimos toda a documentação!',
     },
   ]
 
