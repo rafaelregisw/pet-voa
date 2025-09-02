@@ -32,8 +32,8 @@ export default function Services() {
     },
     {
       icon: FileText,
-      title: 'Documentação Completa',
-      description: 'Preparamos toda documentação oficial: CVI, CDC, USDA e formulários necessários.',
+      title: 'Rastreamento ao Vivo',
+      description: 'Acompanhe a viagem em tempo real. Pet viaja com coleira GPS rastreável 24h.',
       color: 'from-orange-500 to-amber-500',
     },
     {

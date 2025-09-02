@@ -16,7 +16,7 @@ export default function FAQ() {
     },
     {
       question: 'Quais documentos são necessários?',
-      answer: 'Fazemos TUDO JUNTO com você! Nosso jurídico prepara: ✅ Certificado Veterinário Internacional (CVI), ✅ CDC Dog Import Form, ✅ ARK CDC Agreement, ✅ POA Broker, ✅ Formulários USDA. Orientamos você em cada etapa: 📸 Fotos do pet (explicamos como tirar), 💉 Vacinas (indicamos onde fazer), 🏷️ Microchip (acompanhamos aplicação), 🩺 Exames e sorologia. Você não fica perdido em momento algum - fazemos tudo passo a passo juntos!',
+      answer: 'Relaxa, nós cuidamos da parte burocrática! 📋 Nossa equipe prepara TODA a documentação oficial dos governos americano e brasileiro. Você só precisa providenciar: fotos do seu pet (te ensinamos como tirar), carteirinha de vacinação atualizada, certificado do microchip (conferimos tudo), e exame de sangue para raiva. Organizamos tudo junto e você nunca fica perdido no processo.',
     },
     {
       question: 'Quanto tempo demora o processo?',
@@ -36,7 +36,7 @@ export default function FAQ() {
     },
     {
       question: 'Quais custos adicionais o cliente deve pagar?',
-      answer: 'Além do nosso serviço completo, o cliente é responsável por: 📦 Caixa de transporte aprovada pela IATA, 💉 Vacinas e sorologia da raiva, 🏷️ Microchip de identificação, 📋 Taxas governamentais americanas, 🩺 Exames veterinários solicitados, 💊 Tratamentos parasitários. Nós orientamos você sobre cada item, onde fazer e como pagar.',
+      answer: 'Além do nosso serviço, você investe em: 📦 Caixa de transporte especial para avião, 💉 Vacinas e exame de sangue (sorologia da raiva), 🏷️ Microchip com certificado, 📋 Taxas do governo americano, 🩺 Exames veterinários necessários, 💊 Vermífugo e antipulgas. Orientamos você em cada etapa e conferimos toda a documentação!',
     },
   ]
 
